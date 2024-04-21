@@ -18,7 +18,7 @@ class Model
 
   public function __construct()
   {
-    $this->Pdo = getConnect();
+    DATABASE_PERM === 1 ? $this->Pdo = getConnect() : null;
     $this->Debug = new Debug();
     $this->Mailer = new Mailer();
     $this->FileSaver = new FileSaver();

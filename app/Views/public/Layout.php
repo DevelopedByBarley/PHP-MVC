@@ -16,9 +16,7 @@
     <?php include 'app/Views/public/components/Cookie.php' ?>
   <?php endif ?>
 
-
-
-
+  <?php include 'app/Views/public/components/Toast.php' ?>
 
   <?= $params["content"] ?>
 
@@ -26,6 +24,8 @@
   <script src="/public/bootstrap/js/bootstrap.bundle.js"></script>
   <script src="/public/js/getCookie.js"></script>
   <script src="/public/js/validators.js"></script>
+
+  <script type="module" defer src="/public/js/toast.js?v=<?= time() ?>"></script>
 </body>
 
 </html>

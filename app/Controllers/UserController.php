@@ -79,7 +79,6 @@ class UserController extends Controller
   public function login()
   {
     $this->CSFRToken->check();
-    session_start();
 
 
     $userId = $this->User->loginUser($_POST);

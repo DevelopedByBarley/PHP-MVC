@@ -1,13 +1,6 @@
 
 const lang = getCookie('lang') ? getCookie('lang') : 'En';
 
-
-
-
-
-
-// Név input validálás
-
 function checkValidators(options, inputValue, targetElement) {
   let errors = [];
   Object.keys(options).forEach(key => {
@@ -28,6 +21,16 @@ function checkValidators(options, inputValue, targetElement) {
               requiredMessage[lang]
             );
             // Itt megteheted az egyéb teendőket, például hibaüzenet megjelenítése
+          }
+        }
+        break;
+      case "num":
+        if (typeof value === "boolean" && value === true) {
+          if (isNaN(parseInt(inputValue))) {
+            errors.push("A mező értéke csak szám lehet!");
+            targetElement.setCustomValidity("A mező értéke csak szám lehet!");
+          } else {
+            targetElement.setCustomValidity("");
           }
         }
         break;
@@ -74,7 +77,19 @@ function checkValidators(options, inputValue, targetElement) {
 
       case "hasUppercase":
         if (typeof value === 'boolean' && value === true) {
-          const hasUpperCase = /[A-Z]/.test(inputValue.trim());
+          console.log(inputValue);
+          let hasUpperCase = false;
+
+          for (let i = 0; i < inputValue.length; i++) {
+            if (inputValue[i] !== inputValue[i].toLowerCase()) {
+              hasUpperCase = true; // Ha talál nagybetűt, true értéket ad vissza
+            }
+          }
+
+          console.log(hasUpperCase);
+
+
+
 
           if (!hasUpperCase) {
             errors.push("A mezőnek tartalmaznia kell legalább egy nagybetűt!");
@@ -84,6 +99,7 @@ function checkValidators(options, inputValue, targetElement) {
           }
         }
         break;
+
       case "split":
 
         if (typeof value === "boolean" && value === true) {
