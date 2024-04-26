@@ -1,11 +1,14 @@
 .blur-load {
   position: relative;
   filter: blur(.5px);
+  border-radius: 16px;
+
 
   img {
     min-height: 250px;
     min-width: 250px;
     opacity: 0;
+    border-radius: 16px;
   }
 
   &::before {
@@ -13,7 +16,7 @@
     position: absolute;
     inset: 0;
     animation: pulse 2.5s infinite;
-    background-color: rgba(255, 255, 255, .7);
+    background-color: rgba(0, 0, 0, 0.1);
   }
 
   &.loaded {
@@ -36,7 +39,7 @@
   }
 
   50% {
-    background-color: rgba(255, 255, 255, .7);
+    background-color: rgba(0, 0, 0, 0.1);
   }
 
   100% {
