@@ -87,6 +87,44 @@
   color: #000;
 }
 
+.blur-load {
+  position: relative;
+  filter: blur(0.5px);
+}
+.blur-load img {
+  min-height: 250px;
+  min-width: 250px;
+  opacity: 0;
+}
+.blur-load::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  animation: pulse 2.5s infinite;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.blur-load.loaded {
+  filter: blur(0);
+}
+.blur-load.loaded::before {
+  content: none;
+  animation: none;
+}
+.blur-load.loaded img {
+  opacity: 1;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: rgba(255, 255, 255, 0);
+  }
+  50% {
+    background-color: rgba(255, 255, 255, 0.7);
+  }
+  100% {
+    background-color: rgba(255, 255, 255, 0);
+  }
+}
 #alert-modal {
   animation-name: alert;
   animation-duration: 6s;

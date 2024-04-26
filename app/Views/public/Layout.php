@@ -26,6 +26,7 @@
   <script src="/public/js/getCookie.js"></script>
   <script src="/public/js/validators.js"></script>
   <script src="/public/js/toast.js?v=<?= time() ?>"></script>
+  <script src="/public/js/imgLoader.js?v=<?= time() ?>"></script>
 
 </body>
 

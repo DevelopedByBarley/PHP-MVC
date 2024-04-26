@@ -21,8 +21,6 @@
 
     table {
       border-collapse: separate;
-      mso-table-lspace: 0pt;
-      mso-table-rspace: 0pt;
       width: 100%;
     }
 
@@ -222,7 +220,6 @@
       max-width: 0;
       opacity: 0;
       overflow: hidden;
-      mso-hide: all;
       visibility: hidden;
       width: 0;
     }
