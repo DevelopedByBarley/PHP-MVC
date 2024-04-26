@@ -1,8 +1,16 @@
 
 const toastBtn = document.querySelector('.toast-btn');
-console.log(toastBtn);
+const root = document.getElementById('toast-root');
 
-toastBtn.addEventListener('click', () => {
+
+if (root.children.length > 0) {
+  const toastData = JSON.parse(document.getElementById('toast-data').getAttribute('data-toast'));
+  console.log(toastData)
+
+  toast(toastData.content, toastData.style)
+}
+
+toastBtn?.addEventListener('click', () => {
   toast(
     {
       title: null,
@@ -10,15 +18,14 @@ toastBtn.addEventListener('click', () => {
       time: null
     },
     {
-      textColor: null,
-      background: null
+      textColor: 'white',
+      background: 'info'
     }
   );
 });
 
 
 function toast(content, style) {
-  const root = document.getElementById('toast-root');
   renderToasts(root, content, style);
 }
 
@@ -40,7 +47,7 @@ function renderToasts(root, content, style) {
     <div class="toast-body">
       ${content.message ? content.message : 'Please give message!'}
     </div>
-    <div class="timer-line  bg-${style.background ? style.background : 'dark'}" style="height: 2px; width: ${percent}"></div>
+    <div class="timer-line  bg-${style.background ? style.background : 'dark'}" style="height: 4px; width: ${percent}"></div>
   `;
 
   root.appendChild(toast);
@@ -118,7 +125,6 @@ function countDown() {
 
 }
 
-countDown();
 
 
 

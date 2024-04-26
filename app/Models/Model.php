@@ -24,6 +24,11 @@ class Model
     $this->FileSaver = new FileSaver();
   }
 
+  public function sendMail() {
+    $name = 'name';
+    $this->Mailer->renderAndSend('Test', ['name' => $name], 'arpadsz@max.hu', 'Test');
+  }
+
 
   public function show($table, $id)
   {

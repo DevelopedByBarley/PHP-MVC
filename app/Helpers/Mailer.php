@@ -5,8 +5,51 @@ namespace App\Helpers;
 use Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 
+
+/* Example:
+
+    $this->Mailer->renderAndSend(
+        'test', 
+        [
+            'name' => 'name',
+            'age' => 10
+        ],
+        'example@mail.hu',
+        'subject'
+    )
+
+*/
+
 class Mailer
 {
+    function renderAndSend($file, $data, $address, $subject)
+    {
+        ob_start();
+
+        $path = "app/Views/templates/$file.mt.php";
+
+        // Ellenőrizzük, hogy a fájl létezik-e
+        if (file_exists($path)) {
+            // Változók beállítása
+            foreach ($data as $key => $value) {
+                $$key = $value; // Dinamikusan létrehozunk változókat a $data tömb kulcsainak megfelelően
+            }
+
+            // Sablonfájl beolvasása
+            include($path);
+
+            // Sablonfájl tartalmának mentése a változóba
+            $body = ob_get_clean();
+
+            // E-mail elküldése
+            self::send($address, $body, $subject); // Feltehetően itt meghívnánk egy másik függvényt, ami elküldi az e-mailt
+        } else {
+            // Hibás fájlelérés esetén hibaüzenet kiírása
+            echo "Error: File $path not found";
+        }
+    }
+
+
     public function send($address, $body, $subject)
     {
 

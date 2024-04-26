@@ -20,12 +20,13 @@
 
   <?= $params["content"] ?>
 
+
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
   <script src="/public/bootstrap/js/bootstrap.bundle.js"></script>
   <script src="/public/js/getCookie.js"></script>
   <script src="/public/js/validators.js"></script>
+  <script src="/public/js/toast.js?v=<?= time() ?>"></script>
 
-  <script type="module" defer src="/public/js/toast.js?v=<?= time() ?>"></script>
 </body>
 
 </html>

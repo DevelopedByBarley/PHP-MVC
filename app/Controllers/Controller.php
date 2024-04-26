@@ -7,6 +7,7 @@ use App\Helpers\Authenticate;
 use App\Helpers\CSFRToken;
 use App\Helpers\Debug;
 use App\Helpers\Render;
+use App\Helpers\Toast;
 use App\Helpers\UUID;
 use App\Helpers\XLSX;
 use App\Models\Model;
@@ -21,6 +22,7 @@ class Controller
   protected $XLSX;
   protected $UUID;
   protected $Alert;
+  protected $Toast;
   protected $CSFRToken;
 
 
@@ -33,14 +35,15 @@ class Controller
     $this->XLSX = new XLSX();
     $this->UUID = new UUID();
     $this->Alert = new Alert();
+    $this->Toast = new Toast();
     $this->CSFRToken = new CSFRToken();
   }
 
 
 
-  public function test()
+  public function testMail()
   {
-    var_dump("Test post!");
+    $this->Model->sendMail();
   }
 
 

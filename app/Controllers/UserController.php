@@ -31,6 +31,7 @@ class UserController extends Controller
   public function registerPage()
   {
     session_start();
+    
 
     $user = $_SESSION["userId"] ?? null;
 
