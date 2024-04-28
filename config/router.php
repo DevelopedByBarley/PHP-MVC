@@ -12,10 +12,14 @@ function registerRoutes(FastRoute\RouteCollector $router)
     require_once 'routes/home.php';
   });
   $router->addGroup('/admin', function (FastRoute\RouteCollector $r) {
-    require_once 'routes/admin.php';
+    if (ADMIN_SERVICE_PERM) {
+      require_once 'routes/admin.php';
+    }
   });
   $router->addGroup('/user', function (FastRoute\RouteCollector $r) {
-    require_once 'routes/user.php';
+    if (USER_SERVICE_PERM) {
+      require_once 'routes/user.php';
+    }
   });
 }
 
@@ -35,7 +39,7 @@ $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
 switch ($routeInfo[0]) {
   case FastRoute\Dispatcher::NOT_FOUND:
     $Controller = new Controller();
-    
+
     header("HTTP/1.0 404 Not Found");
     $Controller->error();
     break;

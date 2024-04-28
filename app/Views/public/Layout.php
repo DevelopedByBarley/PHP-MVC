@@ -23,11 +23,19 @@
 
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
   <script src="/public/bootstrap/js/bootstrap.bundle.js"></script>
-  <script src="/public/js/getCookie.js"></script>
-  <script src="/public/js/validators.js"></script>
-  <script src="/public/js/toast.js?v=<?= time() ?>"></script>
-  <script src="/public/js/imgLoader.js?v=<?= time() ?>"></script>
-  <script src="/public/js/skeleton.js?v=<?= time() ?>"></script>
+  <!--   <script src="/public/js/getCookie.js"></script>-->
+  <?php if (VALIDATORS_PERM) : ?>
+    <script src="/public/js/validators.js"></script>
+  <?php endif ?>
+  <?php if (TOAST_PERM) : ?>
+    <script src="/public/js/toast.js?v=<?= time() ?>"></script>
+  <?php endif ?>
+  <?php if (IMG_LOADER_PERM) : ?>
+    <script src="/public/js/imgLoader.js?v=<?= time() ?>"></script>
+  <?php endif ?>
+  <?php if (SKELETON_PERM) : ?>
+    <script src="/public/js/skeleton.js?v=<?= time() ?>"></script>
+  <?php endif ?>
 
 </body>
 
