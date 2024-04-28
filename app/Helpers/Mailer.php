@@ -9,7 +9,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 /* Example:
 
     $this->Mailer->renderAndSend(
-        'test', 
+        'test',  >>> test.mt.php
         [
             'name' => 'name',
             'age' => 10
@@ -26,7 +26,7 @@ class Mailer
     {
         ob_start();
 
-        $path = "app/Views/templates/$file.mt.php";
+        $path = "app/Views/templates/mails/$file.mt.php";
 
         // Ellenőrizzük, hogy a fájl létezik-e
         if (file_exists($path)) {
