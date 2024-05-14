@@ -6,16 +6,16 @@ $toast = $_SESSION["toast"] ?? null;
   <div class="row">
     <div class="col-12">
       <div id="toast-root">
-        <?php if ($toast) : ?>
+        <?php if (isset($toast)) : ?>
           <div id="toast-data" data-toast='{
             "content": {
-              "title": null,
-              "message": null,
-              "time": null
+              "title": "<?= $toast['title'] ?? null ?>",
+              "message": "<?= $toast['message'] ?? null ?>",
+              "time": "<?= $toast['time'] ?? null ?>"
             },
             "style": {
-              "textColor": null,
-              "background": null
+              "textColor": "<?= $toast['color'] ?? null ?>",
+              "background": "<?= $toast['bg'] ?? null ?>"
             }
           }'>
           </div>

@@ -8,7 +8,7 @@ class CSFRToken
   public function __construct()
   {
     // A titkos kulcs inicializálása
-    $this->secretKey = $_SERVER["CSFR_SECRET_KEY"];
+    $this->secretKey = $_SERVER["CSFR_SECRET"];
   }
 
   public function generate()

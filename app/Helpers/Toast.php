@@ -18,7 +18,9 @@ class Toast
       $_SESSION["toast"] = [
         "message" => $message,
         "bg" => $bg,
-        "expires" => time() + 2
+        "color" => 'white',
+        "time" => 'most',
+        "expires" => time() + 2,
       ];
     } else if ($lang === "En") {
       $_SESSION["toast"] = [
