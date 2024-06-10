@@ -16,7 +16,6 @@
     <?php include 'app/Views/public/components/Cookie.php' ?>
   <?php endif ?>
 
-  <?php include 'app/Views/public/components/Toast.php' ?>
   <?php include 'app/Views/templates/skeletons/card.skeleton.php' ?>
 
 
@@ -30,6 +29,7 @@
     <script src="/public/js/validators.js"></script>
   <?php endif ?>
   <?php if (TOAST_PERM) : ?>
+    <?php include 'app/Views/public/components/Toast.php' ?>
     <script src="/public/js/toast.js?v=<?= time() ?>"></script>
   <?php endif ?>
   <?php if (IMG_LOADER_PERM) : ?>

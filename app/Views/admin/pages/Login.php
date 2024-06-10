@@ -1,4 +1,6 @@
-<?php $csfr = $params['csfr'] ?? null?>
+<?php
+  $csrf = $params['csrf'] ;
+?>
 
 <div class="container-fluid vh-100">
   <div class="row d-flex justify-content-center align-items-center h-100">
@@ -9,7 +11,7 @@
         </div>
         <div class="card-body">
           <form action="/admin/login" method="POST">
-            <?= $csfr->generate() ?>
+            <?= $csrf->generate() ?>
             <div class="form-group">
               <label class="small mb-1" for="inputEmailAddress">Email Address</label>
               <input class="form-control py-2" id="inputEmailAddress" type="text" placeholder="Enter email address" name="name">

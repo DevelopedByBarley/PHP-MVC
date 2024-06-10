@@ -5,9 +5,9 @@ namespace App\Helpers;
 class CSRFToken
 {
   private $secretKey;
-  private $tokenLifetime; // Token élettartama másodpercekben
+  private $tokenLifetime;
 
-  public function __construct($tokenLifetime = 10) // Alapértelmezett élettartam: 1 óra
+  public function __construct($tokenLifetime = 600) // 
   {
     $this->secretKey = $_SERVER["CSRF_SECRET"];
     $this->tokenLifetime = $tokenLifetime;
@@ -89,20 +89,23 @@ class CSRFToken
 
   public function check()
   {
+
+
     if (session_id() == '') {
       session_start();
     }
+    self::removeExpiredTokens();
+
 
     if (!isset($_POST['csrf'])) {
-      http_response_code(401);
-      echo 'Post csrf problem';
+      header($_SERVER['SERVER_PROTOCOL'] . ' 400 Bad Request');
+      header('X-E-Message:  Problem in CSRF Token POST');
       exit;
     }
 
     if (!isset($_SESSION['csrf'])) {
-      var_dump($_SESSION['csrf']);
-      http_response_code(401);
-      echo 'Session csrf problem';
+      header($_SERVER['SERVER_PROTOCOL'] . ' 400 Bad Request');
+      header('X-E-Message: SESSION problem in CSRF Token');
       exit;
     }
 
@@ -126,10 +129,12 @@ class CSRFToken
     }
 
     if (!$this->isSafeOrigin()) {
-      http_response_code(403);
-      exit('Unsafe origin.');
+      header($_SERVER['SERVER_PROTOCOL'] . ' 400 Bad Request');
+      header('X-E-Message: UNSAFE origin');
+      exit;
     }
 
+    unset($_SESSION['csrf']);
     return true;
   }
 
@@ -153,11 +158,11 @@ class CSRFToken
 
   private function removeExpiredTokens()
   {
-    $sessions = $_SESSION['csrf'];
+    $sessions = isset($_SESSION['csrf']) ?  $_SESSION['csrf'] : null;;
     if (isset($sessions)) {
       foreach ($sessions as $index => $session) {
         if ($session['expiry'] < time()) {
-          unset($_SESSION['csrf'][$index]);
+          unset($sessions[$index]);
           if (empty($sessions))   unset($_SESSION['csrf']);
         }
       }

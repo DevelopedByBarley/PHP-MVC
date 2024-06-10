@@ -10,7 +10,28 @@
 </head>
 
 <body>
-<?php include 'app/Views/public/components/Alert.php' ?>
+  <?php include 'app/Views/public/components/Alert.php' ?>
+
+  <?php if (VALIDATORS_PERM) : ?>
+    <script src="/public/js/validators.js"></script>
+  <?php endif ?>
+
+
+
+  <?php if (TOAST_PERM) : ?>
+    <?php include 'app/Views/public/components/Toast.php' ?>
+    <script src="/public/js/toast.js?v=<?= time() ?>"></script>
+  <?php endif ?>
+
+
+  <?php if (IMG_LOADER_PERM) : ?>
+    <script src="/public/js/imgLoader.js?v=<?= time() ?>"></script>
+  <?php endif ?>
+
+  
+  <?php if (SKELETON_PERM) : ?>
+    <script src="/public/js/skeleton.js?v=<?= time() ?>"></script>
+  <?php endif ?>
 
   <?= $params["content"] ?>
 

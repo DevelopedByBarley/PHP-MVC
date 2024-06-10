@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Model;
+use Exception;
 use PDO;
 use PDOException;
 
@@ -21,7 +22,7 @@ class Admin extends Model
       $stmt->bindParam(":password", $pw, PDO::PARAM_STR);
       $stmt->execute();
     } catch (PDOException $e) {
-      echo "An error occurred during the database operation: " . $e->getMessage();
+      throw new Exception("An error occurred during the database operation in storeAdmin: " . $e->getMessage());
       exit;
     }
   }
@@ -44,7 +45,7 @@ class Admin extends Model
       $_SESSION["adminId"] = $admin["adminId"];
       return true;
     } catch (PDOException $e) {
-      echo "An error occurred during the database operation: " . $e->getMessage();
+      throw new Exception("An error occurred during the database operation in LoginAdmin: " . $e->getMessage());
       exit;
     }
   }

@@ -20,7 +20,7 @@ class UserController extends Controller
     $userId = $this->Auth->checkUserIsLoggedInOrRedirect('userId', '/user/login');
     
     echo $this->Render->write("public/Layout.php", [
-      "csfr" => $this->CSFRToken,
+      "csfr" => $this->CSRFToken,
       "content" => $this->Render->write("public/pages/user/Dashboard.php", [
         "user" => $this->Model->show('users', $userId)
 
@@ -43,7 +43,7 @@ class UserController extends Controller
 
     echo $this->Render->write("public/Layout.php", [
       "content" => $this->Render->write("public/pages/user/Register.php", [
-        "csfr" => $this->CSFRToken
+        "csfr" => $this->CSRFToken
       ])
     ]);
   }
@@ -61,14 +61,14 @@ class UserController extends Controller
 
     echo $this->Render->write("public/Layout.php", [
       "content" => $this->Render->write("public/pages/user/Login.php", [
-        "csfr" => $this->CSFRToken
+        "csfr" => $this->CSRFToken
       ])
     ]);
   }
 
   public function store()
   {
-    $this->CSFRToken->check();
+    $this->CSRFToken->check();
     session_start();
 
     $alert = $this->User->storeUser($_POST, $_FILES);
@@ -79,7 +79,7 @@ class UserController extends Controller
 
   public function login()
   {
-    $this->CSFRToken->check();
+    $this->CSRFToken->check();
 
 
     $userId = $this->User->loginUser($_POST);
@@ -101,7 +101,7 @@ class UserController extends Controller
   public function logout()
   {
 
-    $token = $this->CSFRToken->check();
+    $token = $this->CSRFToken->check();
     session_start();
     session_destroy();
     session_regenerate_id(true);
