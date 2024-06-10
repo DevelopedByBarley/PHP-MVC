@@ -4,14 +4,13 @@ namespace App\Controllers;
 
 use App\Helpers\Alert;
 use App\Helpers\Authenticate;
-use App\Helpers\CSFRToken;
+use App\Helpers\CSRFToken;
 use App\Helpers\Debug;
 use App\Helpers\Render;
 use App\Helpers\Toast;
 use App\Helpers\UUID;
 use App\Helpers\XLSX;
 use App\Models\Model;
-use App\Services\LanguageService;
 
 class Controller
 {
@@ -23,7 +22,7 @@ class Controller
   protected $UUID;
   protected $Alert;
   protected $Toast;
-  protected $CSFRToken;
+  protected $CSRFToken;
 
 
   public function __construct()
@@ -36,7 +35,7 @@ class Controller
     $this->UUID = new UUID();
     $this->Alert = new Alert();
     $this->Toast = new Toast();
-    $this->CSFRToken = new CSFRToken();
+    $this->CSRFToken = new CSRFToken();
   }
 
 
@@ -44,6 +43,11 @@ class Controller
   public function testMail()
   {
     $this->Model->sendMail();
+  }
+  public function test()
+  {
+   $this->CSRFToken->check();
+    echo 'Hello';
   }
 
 
