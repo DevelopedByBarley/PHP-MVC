@@ -1,3 +1,4 @@
+import { uuid } from '/public/js/uuid.js';
 import { getCookie } from '/public/js/getCookie.js';
 
 /**

@@ -1,26 +1,37 @@
 <?php $csrf = $params['csrf'] ?? null ?>
 
-<div class="container vh-100">
-  <div class="row h-100 d-flex align-items-center justify-content-center flex-column">
-    <div class="col-12 col-lg-6">
-      <div class="card border-0 p-xl-5 rounded-lg">
-        <div class="title mb-4">
-          <h1 class="text-center pr-font">User Login</h1>
+
+<section class="vh-100 gradient-custom sc-bg">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+            <form action="/user/login" method="POST">
+              <?= $csrf->generate() ?>
+
+              <div class="mb-md-5 mt-md-4 pb-5">
+
+                <h2 class="fw-bold mb-2 text-uppercase">USER</h2>
+                <p class="text-white-50 mb-5">Please enter your login and password!</p>
+
+                <div data-mdb-input-init class="form-outline form-white mb-4">
+                  <input type="email" name="email" data-validator="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <label class="form-label" for="typeEmailX">Email</label>
+                </div>
+
+                <div data-mdb-input-init class="form-outline form-white mb-4">
+                  <input type="password" name="password" class="form-control" data-validator="password" id="exampleInputPassword1">
+                  <label class="form-label" for="typePasswordX">Password</label>
+                </div>
+
+                <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+
+              </div>
+            </form>
+          </div>
         </div>
-        <form action="/user/login" method="POST">
-          <div>
-            <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input type="email" name="email" data-validator="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" name="password" class="form-control" data-validator="password" id="exampleInputPassword1">
-          </div>
-          <?= $csrf->generate() ?>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
       </div>
     </div>
   </div>
-</div>
-</div>
+</section>
