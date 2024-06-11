@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Helpers\Debug;
 use App\Helpers\FileSaver;
 use App\Helpers\Mailer;
-use Exception;
 use PDO;
 use PDOException;
 
@@ -32,8 +31,8 @@ class Model
   }
 
 
-  
 
+  // KERESÉS MEGVALÓSÍTÁSA
   public function searchBySingleEntity($table, $entity, $searched, $searchDefault)
   {
     $search = $searched ?? $searchDefault;
@@ -46,61 +45,42 @@ class Model
 
       return $data;
     } catch (PDOException $e) {
-      throw new Exception("An error occurred during the database operation in the searchBySingleEntity method: " . $e->getMessage());
+      var_dump($e);
+      exit;
     }
   }
 
-
-  public function paginate($results, $limit, $search = '', $searchCondition = null)
+  public function paginate($results, $limit, $search, $searchConditionCallback)
   {
-    if (empty($results)) {
-      return [
-        "status" => true,
-        "pages" => [],
-        "numOfPage" => 0,
-        "limit" => 0
-      ];
-    }
-
+    // Lapozáshoz szükséges változók inicializálása
     $offset = isset($_GET["offset"]) ? max(1, intval($_GET["offset"])) : 1;
     $calculated = ($offset - 1) * $limit;
 
     // A lekérdezett eredmények számának meghatározása
     $countOfRecords = count($results);
-    if ($countOfRecords === 0) {
-      return [
-        "status" => false,
-        "message" => "No results found for the given search criteria.",
-        "pages" => [],
-        "numOfPage" => 0,
-        "limit" => $limit
-      ];
-    }
-
     $numOfPage = ceil($countOfRecords / $limit);
 
     // Lapozott eredmények kiválasztása a limit és offset alapján
     $pagedResults = array_slice($results, $calculated, $limit);
-    if (empty($pagedResults)) {
-      return [
-        "status" => false,
-        "message" => "No paginated results found for the given offset and limit.",
-        "pages" => [],
-        "numOfPage" => 0,
-        "limit" => $limit
-      ];
-    }
 
-    if ($searchCondition) $searchCondition($offset, $numOfPage, $search);
+    // A keresési feltétel callback függvényként történő kezelése
+    $searchConditionCallback($offset, $numOfPage, $search);
 
+
+    // Visszatérés a lapozott eredményekkel és egyéb adatokkal
     return [
-      "status" => true,
-      "pages" => $pagedResults,
+      "data" => $pagedResults,
       "numOfPage" => $numOfPage,
       "limit" => $limit
     ];
   }
 
+
+
+  /*  private function searchCondition($search, $offset, $numOfPage, $today)
+  {
+  
+  } */
 
   public function show($table, $id)
   {
@@ -130,23 +110,23 @@ class Model
       return $results;
     } catch (PDOException  $e) {
 
-      throw new Exception("An error occurred during the database operation in the all method: " . $e->getMessage());
+      echo "An error occurred during the database operation:" . $e->getMessage();
       return false;
     }
   }
 
-
-  public function selectByRecord($table, $column, $value, $param)
+  public function selectByRecord($table, $entity, $value, $param)
   {
+
     try {
-      $stmt = $this->Pdo->prepare("SELECT * FROM {$table} WHERE {$column} = :value");
-      $stmt->bindParam(':value', $value, $param);
+      $stmt = $this->Pdo->prepare("SELECT * FROM $table WHERE $entity = :entity");
+      $stmt->bindParam(':entity', $value, $param);
       $stmt->execute();
       $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
       return $result;
-    } catch (PDOException $e) {
-      throw new Exception("An error occurred during the database operation in the selectByRecord method: " . $e->getMessage());
+    } catch (\Throwable $th) {
+      var_dump($th);
     }
   }
 
@@ -158,23 +138,17 @@ class Model
       $stmt->execute();
       $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
       return $result;
-    } catch (PDOException $e) {
-      throw new Exception("An error occurred during the database operation in the selectAllByRecord method: " . $e->getMessage());
+    } catch (\Throwable $th) {
+      var_dump($th);
+      return false;
     }
   }
 
-
-  public function deleteRecordById($table, $id)
+  public function insert()
   {
-    try {
-      $stmt = $this->Pdo->prepare("DELETE FROM `$table` WHERE `id` = :id");
-      $stmt->bindParam(":id", $id, PDO::PARAM_INT);
-      $stmt->execute();
-    } catch (PDOException $e) {
-      throw new Exception("An error occurred during the database operation in the deleteRecordById method: " . $e->getMessage());
-    }
   }
 
-  
-  
+  public function join()
+  {
+  }
 }

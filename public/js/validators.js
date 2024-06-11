@@ -1,5 +1,13 @@
 import { getCookie } from '/public/js/getCookie.js';
 
+/**
+ * @example
+ *  <input class="form-control py-2" id="inputPassword" type="password" placeholder="Enter password" name="password" data-validators='{
+          "name": "password",
+          "required": true,
+          "password": true
+      }'
+ */
 
 const lang = getCookie('lang') ? getCookie('lang') : 'En';
 
