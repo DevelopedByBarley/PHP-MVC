@@ -24,9 +24,11 @@
 
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
   <script src="/public/bootstrap/js/bootstrap.bundle.js"></script>
-  <!--   <script src="/public/js/getCookie.js"></script>-->
+
+
+  <script type="module" src="/public/js/getCookie.js?v=<?= time() ?>"></script>
   <?php if (VALIDATORS_PERM) : ?>
-    <script src="/public/js/validators.js"></script>
+    <script type="module" src="/public/js/validators.js?v=<?= time() ?>"></script>
   <?php endif ?>
   <?php if (TOAST_PERM) : ?>
     <?php include 'app/Views/public/components/Toast.php' ?>

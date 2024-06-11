@@ -1,4 +1,4 @@
-<?php $csfr = $params['csfr'] ?? null ?>
+<?php $csrf = $params['csrf'] ?? null ?>
 
 
 <nav class="navbar navbar-expand-lg navbar-light sc-bg fixed-top pr-font" id="navbar">
@@ -33,7 +33,7 @@
       <?php if (isset($_SESSION['userId'])) : ?>
         <div class="btn-group">
           <form action="/user/logout" method="POST">
-            <?= $csfr->generate() ?>
+            <?= $csrf->generate() ?>
 
             <button class="btn btn-danger" type="submit">Logout</button>
           </form>

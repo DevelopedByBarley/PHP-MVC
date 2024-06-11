@@ -1,3 +1,5 @@
+import { getCookie } from '/public/js/getCookie.js';
+
 
 const lang = getCookie('lang') ? getCookie('lang') : 'En';
 

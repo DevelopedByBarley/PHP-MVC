@@ -1,4 +1,4 @@
-<?php $csfr = $params['csfr'] ?? null ?>
+<?php $csrf = $params['csrf'] ?? null ?>
 
 
 <div class="container vh-100">
@@ -34,7 +34,7 @@
 
 
 
-        <?= $csfr->generate() ?>
+        <?= $csrf->generate() ?>
 
 
 

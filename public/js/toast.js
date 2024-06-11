@@ -1,6 +1,7 @@
 
 const toastBtn = document.querySelector('.toast-btn');
 const root = document.getElementById('toast-root');
+const duration = 30;
 
 
 if (root.children.length > 0) {
@@ -80,16 +81,14 @@ function renderToasts(root, content, style) {
       root.removeChild(toast);
       clearInterval(autoRemoveId);
     }
-  }, 50);
+  }, duration);
 
   toast.addEventListener('mouseover', () => {
     isPaused = true;
-    console.log(isPaused);
   });
 
   toast.addEventListener('mouseleave', () => {
     isPaused = false;
-    console.log(isPaused);
   });
 
   toast.addEventListener('click', () => {
@@ -108,22 +107,6 @@ function renderToasts(root, content, style) {
   })
 }
 
-
-
-function countDown() {
-  let sec = 5;
-  const percent = 100 + '%';
-
-  const interval = setInterval(() => {
-    sec -= 0.05;
-
-    return
-    if (sec <= 0) {
-      clearInterval(interval)
-    }
-  }, 50)
-
-}
 
 
 

@@ -1,4 +1,4 @@
-<?php $csfr = $params['csfr'] ?? null ?>
+<?php $csrf = $params['csrf'] ?? null ?>
 
 <div class="container vh-100">
   <div class="row h-100 d-flex align-items-center justify-content-center flex-column">
@@ -16,7 +16,7 @@
             <label for="exampleInputPassword1" class="form-label">Password</label>
             <input type="password" name="password" class="form-control" data-validator="password" id="exampleInputPassword1">
           </div>
-          <?= $csfr->generate() ?>
+          <?= $csrf->generate() ?>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>

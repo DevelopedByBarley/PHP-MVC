@@ -48,15 +48,17 @@ class AdminController extends Controller
     session_start();
     $this->CSRFToken->check();
     try {
-      $isSuccess = $this->Admin->loginAdmin($_POST);
+      $adminId = $this->Admin->loginAdmin($_POST);
 
-      if ($isSuccess) {
+      if ($adminId) {
         session_write_close(); // Bezárjuk a sessiont
-        $session_timeout = 5;
+        $session_timeout = 6000;
         session_set_cookie_params($session_timeout, '/', '', true, true); // secure és httponly flag beállítása
         session_start();
         session_regenerate_id(true);
+        $_SESSION['adminId'] = $adminId;
         header('Location: /admin/dashboard');
+        exit;
       } else {
         $this->Toast->set('Sikertelen belépés, hibás felhasználónév vagy jelszó', 'danger', '/admin', null);
       }

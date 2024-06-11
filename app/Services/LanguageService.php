@@ -24,7 +24,7 @@ class LanguageService
     // Biztonságos sütikezelés
     $cookie_name = "lang";
     $cookie_value = ($ret === "Hu" || $ret === "En") ? $ret : "En"; // Csak engedélyezett értékek
-    setcookie($cookie_name, $cookie_value, $expiration_date, "/", "", true, true); // HttpOnly és Secure opciók
+    setcookie($cookie_name, $cookie_value, $expiration_date, "/", "", false, false); // HttpOnly és Secure opciók
   }
 
   // NYELV VÁLTÁSA
@@ -39,7 +39,7 @@ class LanguageService
     $cookie_value = ($lang === "Hu" || $lang === "En") ? $lang : "En";
 
     // Biztonságos sütikezelés
-    setcookie($cookie_name, $cookie_value, $expiration_date, "/", "", true, true); // HttpOnly és Secure opciók
+    setcookie($cookie_name, $cookie_value, $expiration_date, "/", "", false, false); // HttpOnly és Secure opciók
 
     // Visszatérés a referer URL-re
     header("Location: $referer");

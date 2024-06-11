@@ -1,5 +1,5 @@
 <?php
-  $csrf = $params['csrf'] ;
+$csrf = $params['csrf'];
 ?>
 
 <div class="container-fluid vh-100">
@@ -18,7 +18,11 @@
             </div>
             <div class="form-group">
               <label class="small mb-1" for="inputPassword">Password</label>
-              <input class="form-control py-2" id="inputPassword" type="password" placeholder="Enter password" name="password">
+              <input class="form-control py-2" id="inputPassword" type="password" placeholder="Enter password" name="password" data-validators='{
+          "name": "password",
+          "required": true,
+          "password": true
+          }'>
             </div>
             <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
               <button type="submit" class="btn btn-outline-dark">Login</button>

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Model;
+use Exception;
 use PDO;
 use PDOException;
 
@@ -17,14 +18,7 @@ class User extends Model
 
     $isUserExist = $this->selectByRecord('users', 'email', $email, PDO::PARAM_STR);
 
-    if ($isUserExist) {
-      return [
-        "bg" => 'danger',
-        "hu" => "Ezekkel az adatokkal sajnos nem lehet már regisztrálni, kérjük jelentkezzen be.",
-        "en" => "Unfortunately, it is no longer possible to register with these data, please register.",
-        'redirect' => '/user/register'
-      ];
-    }
+    if ($isUserExist) return false;
 
     try {
 
@@ -34,14 +28,10 @@ class User extends Model
       $stmt->bindParam(":fileName", $fileName, PDO::PARAM_STR);
       $stmt->execute();
 
-      return [
-        "bg" => 'success',
-        "hu" => "Regisztráció sikeres!",
-        "en" => "Registration successfully!",
-        'redirect' => '/user/register'
-      ];
+      return true;
+
     } catch (PDOException $e) {
-      echo "An error occurred during the database operation: " . $e->getMessage();
+      throw new  Exception("An error occurred during the database operation in storeUser method: " . $e->getMessage(), 1);
       exit;
     }
   }
@@ -53,7 +43,7 @@ class User extends Model
       $email = filter_var($body["email"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
       $pw = filter_var($body["password"] ?? '', FILTER_SANITIZE_EMAIL);
 
-     
+
 
       $stmt = $this->Pdo->prepare("SELECT * FROM `users` WHERE `email` = :email");
       $stmt->bindParam(":email", $email, PDO::PARAM_STR);
@@ -65,10 +55,11 @@ class User extends Model
         return false;
       }
 
-     
+
       return $user['id'];
+
     } catch (PDOException $e) {
-      echo "An error occurred during the database operation: " . $e->getMessage();
+      throw new  Exception("An error occurred during the database operation in loginUser method: " . $e->getMessage(), 1);
       exit;
     }
   }
