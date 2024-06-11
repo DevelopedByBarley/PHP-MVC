@@ -40,6 +40,10 @@
   letter-spacing:  1.4px;
 }
 
+.min-vh-75 {
+  min-height: 75vh;
+}
+
 
 .skeleton {
   animation: skeleton-loading 1s linear infinite alternate;

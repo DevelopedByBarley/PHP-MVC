@@ -24,7 +24,9 @@ blurDivs.forEach(div => {
   }
 
   if (img.complete) {
-    loaded();
+    setTimeout(() => {
+      loaded();
+    }, 2000);
   } else {
     img.addEventListener('load', loaded);
   }
