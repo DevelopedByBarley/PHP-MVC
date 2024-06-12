@@ -66,3 +66,29 @@
     background-color: hsl(200, 20%, 95%);
   }
 }
+
+
+[data-bs-theme=dark] nav {
+  color: var(--bs-dark);
+  background-color: var(--bs-dark);
+}
+[data-bs-theme=light] nav {
+  color: var(--bs-dark);
+  background-color: var(--bs-light);
+}
+[data-bs-theme=dark] .btn {
+  color: var(--bs-light);
+  background-color: var(--bs-dark);
+}
+[data-bs-theme=light] .btn {
+  color: var(--bs-dark);
+  background-color: var(--bs-light);
+  }
+    [data-bs-theme=dark] .btn:hover {
+      color: var(--bs-dark);
+      background-color: var(--bs-light);
+    }
+[data-bs-theme=light] .btn:hover {
+  color: var(--bs-light);
+  background-color: var(--bs-dark);
+}

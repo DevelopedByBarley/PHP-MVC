@@ -1,8 +1,8 @@
 <?php $csrf = $params['csrf'] ?? null ?>
 
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark  fixed-top pr-font" id="navbar">
-  <div class="container-fluid">
+<nav class="navbar navbar-expand-lg border-bottom fixed-top pr-font" id="navbar">
+  <div class="container-fluid ">
     <a class="navbar-brand " href="/">Brand</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -53,8 +53,11 @@
 
         </div>
       <?php else : ?>
-        <a href="/user/register" class="btn btn-dark m-1" type="submit">Register</a>
-        <a href="/user/login" class="btn btn-dark m-1" type="submit">Login</a>
+        <div class="form-check form-switch mt-2">
+          <input class="form-check-input" type="checkbox" role="switch" id="theme-toggle">
+        </div> 
+        <a href="/user/register" class="btn btn-dark m-1 border-0" type="submit">Register</a>
+        <a href="/user/login" class="btn btn-dark m-1 border-0" type="submit">Login</a>
       <?php endif ?>
     </div>
   </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 
 <head>
   <meta charset="UTF-8">
@@ -17,6 +17,8 @@
   <script src="/public/bootstrap/js/bootstrap.bundle.js"></script>
   <script type="module" src="/public/js/getCookie.js?v=<?= time() ?>"></script>
   <script type="module" src="/public/js/uuid.js?v=<?= time() ?>"></script>
+  <script src="/public/js/colorTheme.js?v=<?= time() ?>"></script>
+
 
   <?php if (VALIDATORS_PERM) : ?><script type="module" src="/public/js/validators.js?v=<?= time() ?>"></script><?php endif ?>
   <?php if (TOAST_PERM) : ?>

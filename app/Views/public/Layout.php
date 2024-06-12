@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" data-bs-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +8,7 @@
   <title><?php APP_NAME ?></title>
 </head>
 
-<body class="pr-bg">
+<body>
   <?php include 'app/Views/public/components/Navbar.php' ?>
   <?php include 'app/Views/public/components/Alert.php' ?>
   
@@ -24,6 +23,8 @@
 
   <script type="module" src="/public/js/uuid.js?v=<?= time() ?>"></script>
   <script type="module" src="/public/js/getCookie.js?v=<?= time() ?>"></script>
+  <script src="/public/js/colorTheme.js?v=<?= time() ?>"></script>
+
 
 
   <?php if (VALIDATORS_PERM) : ?><script type="module" src="/public/js/validators.js?v=<?= time() ?>"></script><?php endif ?>
