@@ -7,29 +7,152 @@
 }
 
 
-.mt-6 {
-  margin-top: 6rem;
+
+// SET background color by $colors IN _vars.scss
+@each $name, $color in $colors {
+  .bg-#{$name} {
+    background-color: $color;
+  }
 }
 
-.mt-7 {
-  margin-top: 7rem;
+
+// SET border-color  by $colors IN _vars.scss
+
+@each $name, $color in $colors {
+  .border-#{$name} {
+    border-color: $color;
+  }
 }
 
-.mt-8 {
-  margin-top: 8rem;
+
+// SET color  by $colors IN _vars.scss
+
+@each $name, $color in $colors {
+  .#{$name} {
+    color: $color;
+  }
 }
 
-.mt-9 {
-  margin-top: 9rem;
+
+
+// SET hover-bg  by $colors IN _vars.scss
+
+@each $name, $color in $colors {
+  .hover-bg-#{$name} {
+    &:hover {
+      background-color: $color; // Vagy más hover effektus
+    }
+  }
 }
 
-.mt-10 {
-  margin-top: 10rem;
+
+// SET hover-color  by $colors IN _vars.scss
+
+@each $name, $color in $colors {
+  .hover-#{$name} {
+    &:hover {
+      color: $color; // Vagy más hover effektus
+    }
+  }
 }
 
-.mb-10 {
-  margin-bottom: 350px;
+
+
+
+// SET hover-border-color  by $colors IN _vars.scss
+
+@each $name, $color in $colors {
+  .hover-border-#{$name} {
+    &:hover {
+      border-color: $color; // Vagy más hover effektus
+    }
+  }
 }
+
+// SET transitions  by $transitions IN _vars.scss
+
+@each $name, $transition in $transitions {
+  .transition-#{$name} {
+
+    transition: $transition; // Vagy más hover effektus
+
+  }
+}
+
+
+// SET margins by $margins
+@each $type, $values in $margins {
+  @each $suffix, $size in $values {
+    .#{$type}-#{$suffix} {
+      @if ($type =="m") {
+        margin: $size;
+      }
+
+      @else if ($type =="mt") {
+        margin-top: $size;
+      }
+
+      @else if ($type =="mb") {
+        margin-bottom: $size;
+      }
+
+      @else if ($type =="mr") {
+        margin-right: $size;
+      }
+
+      @else if ($type =="ml") {
+        margin-left: $size;
+      }
+
+      @else if ($type =="my") {
+        margin-block: $size;
+      }
+
+      @else if ($type =="mx") {
+        margin-inline: $size;
+      }
+    }
+  }
+}
+
+
+// SET paddings by $paddings
+
+@each $type, $values in $paddingValues {
+  @each $suffix, $size in $values {
+    .#{$type}-#{$suffix} {
+      @if ($type =="p") {
+        padding: $size;
+      }
+
+      @else if ($type =="pt") {
+        padding-top: $size;
+      }
+
+      @else if ($type =="pb") {
+        padding-bottom: $size;
+      }
+
+      @else if ($type =="pr") {
+        padding-right: $size;
+      }
+
+      @else if ($type =="pl") {
+        padding-left: $size;
+      }
+
+      @else if ($type =="py") {
+        padding-block: $size;
+      }
+
+      @else if ($type =="px") {
+        padding-inline: $size;
+      }
+    }
+  }
+}
+
+
 
 .pr-font {
   font-family: $pr-font;
@@ -37,11 +160,7 @@
 
 .sc-font {
   font-family: $sc-font;
-  letter-spacing:  1.4px;
-}
-
-.min-vh-75 {
-  min-height: 75vh;
+  letter-spacing: 1.4px;
 }
 
 
@@ -70,25 +189,10 @@
 
 [data-bs-theme=dark] nav {
   color: var(--bs-dark);
-  background-color: var(--bs-dark);
+  background-color: map-get($colors, 'slate-500');
 }
+
 [data-bs-theme=light] nav {
   color: var(--bs-dark);
-  background-color: var(--bs-light);
-}
-[data-bs-theme=dark] .btn {
-  color: var(--bs-light);
-  background-color: var(--bs-dark);
-}
-[data-bs-theme=light] .btn {
-  color: var(--bs-dark);
-  background-color: var(--bs-light);
-  }
-    [data-bs-theme=dark] .btn:hover {
-      color: var(--bs-dark);
-      background-color: var(--bs-light);
-    }
-[data-bs-theme=light] .btn:hover {
-  color: var(--bs-light);
-  background-color: var(--bs-dark);
+  background-color: map-get($colors, 'slate-100');
 }
