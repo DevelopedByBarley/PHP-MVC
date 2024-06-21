@@ -1,9 +1,29 @@
 .pr-bg {
-  background-color: $pr-bg;
+  background-color: map-get($colors, 'teal-500');
 }
 
 .sc-bg {
-  background-color: $sc-bg;
+  background-color: map-get($colors, 'cyan-500');
+}
+
+// SET height, width, min-h, min-w by $sizes
+
+@each $size, $value in $sizes {
+  .h-#{$size} {
+    height: $value;
+  }
+
+  .w-#{$size} {
+    width: $value;
+  }
+
+  .min-h-#{$size} {
+    min-height: $value;
+  }
+
+  .min-w-#{$size} {
+    min-width: $value;
+  }
 }
 
 
