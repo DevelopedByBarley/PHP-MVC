@@ -4,6 +4,31 @@ $pr-bg: #ffff;
 $sc-bg: #4c0b97;
 
 
+// Font size and line height variables
+$font-sizes: (
+    xs: 0.75rem,    // 12px
+    sm: 0.875rem,   // 14px
+    base: 1rem,     // 16px
+    lg: 1.125rem,   // 18px
+    xl: 1.25rem,    // 20px
+    '2xl': 1.5rem,  // 24px
+    '3xl': 1.875rem, // 30px
+    '4xl': 2.25rem, // 36px
+    '5xl': 3rem,    // 48px
+    '6xl': 3.75rem, // 60px
+    '7xl': 4.5rem,  // 72px
+    '8xl': 6rem,    // 96px
+    '9xl': 8rem     // 128px
+);
+
+$line-heights: (
+    xs: 1rem,       // 16px
+    sm: 1.25rem,    // 20px
+    base: 1.5rem,   // 24px
+    lg: 1.75rem,    // 28px
+    xl: 1.75rem,    // 28px
+);
+
 
 
 $colors: (
@@ -377,7 +402,7 @@ $paddingValues: (
 );
 
 
-$sizes: (
+$heights: (
   5: 5vh,
   10: 10vh,
   15: 15vh,
@@ -389,10 +414,7 @@ $sizes: (
   70: 70vh,
   80: 80vh,
   90: 90vh,
-  'screen': 100vh,
-
-
-  100: 100px,
+  95: 95vh,
   150: 150px,
   200: 200px,
   250: 250px,
@@ -404,5 +426,35 @@ $sizes: (
   800: 800px,
   900: 900px,
   1000: 1000px,
+
+);
+
+$widths: (
+  5: 5vw,
+  10: 10vw,
+  15: 15vw,
+  20: 20vw,
+  30: 30vw,
+  40: 40vw,
+  50: 50vw,
+  60: 60vw,
+  70: 70vw,
+  80: 80vw,
+  90: 90vw,
+  95: 95vw,
+  150: 150px,
+  200: 200px,
+  250: 250px,
+  300: 300px,
+  400: 400px,
+  500: 500px,
+  600: 600px,
+  700: 700px,
+  800: 800px,
+  900: 900px,
+  1000: 1000px,
+);
+
+$fonts: (
 
   )

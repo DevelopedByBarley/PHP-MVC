@@ -6,23 +6,127 @@
   background-color: map-get($colors, 'cyan-500');
 }
 
-// SET height, width, min-h, min-w by $sizes
+.pr-font {
+  font-family: $pr-font;
+}
 
-@each $size, $value in $sizes {
-  .h-#{$size} {
-    height: $value;
+.sc-font {
+  font-family: $sc-font;
+  letter-spacing: 1.4px;
+}
+
+
+.skeleton {
+  animation: skeleton-loading 1s linear infinite alternate;
+  opacity: 0.7;
+
+  &-text {
+    width: 100%;
+    height: 0.5rem;
+    margin-bottom: 0.25rem;
+    border-radius: 0.125rem;
+  }
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: hsl(200, 20%, 70%);
   }
 
-  .w-#{$size} {
-    width: $value;
+  100% {
+    background-color: hsl(200, 20%, 95%);
+  }
+}
+
+
+
+
+
+
+// Dark theme settings
+[data-bs-theme=dark] {
+  @each $name, $color in $colors {
+    .dark-bg-#{$name} {
+      background-color: map-get($colors, $name);
+    }
+
+    .dark-text-#{$name} {
+      color: map-get($colors, $name);
+    }
+
+    .dark-border-#{$name} {
+      border-color: map-get($colors, $name) !important;
+    }
+  }
+}
+
+// Light theme settings
+[data-bs-theme=light] {
+  @each $name, $color in $colors {
+    .light-bg-#{$name} {
+      background-color: map-get($colors, $name);
+    }
+
+    .light-text-#{$name} {
+      color: map-get($colors, $name);
+    }
+
+    .light-border-#{$name} {
+      border-color: map-get($colors, $name) !important;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+// Generate utility classes
+@each $size, $value in $font-sizes {
+  .text-#{$size} {
+    font-size: $value;
+  }
+}
+
+@each $size, $value in $line-heights {
+  .leading-#{$size} {
+    line-height: $value;
+  }
+}
+
+
+// SET height, width, min-h, min-w, max-h, max-w by $sizes
+// Generate utility classes
+// Generate utility classes for heights
+@each $size, $value in $heights {
+  .h-#{$size} {
+    height: $value;
   }
 
   .min-h-#{$size} {
     min-height: $value;
   }
 
+  .max-h-#{$size} {
+    max-height: $value;
+  }
+}
+
+// Generate utility classes for widths
+@each $size, $value in $widths {
+  .w-#{$size} {
+    width: $value;
+  }
+
   .min-w-#{$size} {
     min-width: $value;
+  }
+
+  .max-w-#{$size} {
+    max-width: $value;
   }
 }
 
@@ -40,7 +144,7 @@
 
 @each $name, $color in $colors {
   .border-#{$name} {
-    border-color: $color;
+    border-color: $color !important;
   }
 }
 
@@ -84,7 +188,7 @@
 @each $name, $color in $colors {
   .hover-border-#{$name} {
     &:hover {
-      border-color: $color; // Vagy más hover effektus
+      border-color: $color !important; // Vagy más hover effektus
     }
   }
 }
@@ -170,49 +274,4 @@
       }
     }
   }
-}
-
-
-
-.pr-font {
-  font-family: $pr-font;
-}
-
-.sc-font {
-  font-family: $sc-font;
-  letter-spacing: 1.4px;
-}
-
-
-.skeleton {
-  animation: skeleton-loading 1s linear infinite alternate;
-  opacity: 0.7;
-
-  &-text {
-    width: 100%;
-    height: 0.5rem;
-    margin-bottom: 0.25rem;
-    border-radius: 0.125rem;
-  }
-}
-
-@keyframes skeleton-loading {
-  0% {
-    background-color: hsl(200, 20%, 70%);
-  }
-
-  100% {
-    background-color: hsl(200, 20%, 95%);
-  }
-}
-
-
-[data-bs-theme=dark] nav {
-  color: var(--bs-dark);
-  background-color: map-get($colors, 'slate-500');
-}
-
-[data-bs-theme=light] nav {
-  color: var(--bs-dark);
-  background-color: map-get($colors, 'slate-100');
 }

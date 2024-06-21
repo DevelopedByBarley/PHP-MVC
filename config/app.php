@@ -6,7 +6,7 @@ define('UUID_PERM', 0);
 define('TOAST_PERM', 0);
 define('IMG_LOADER_PERM', 1);
 define('SKELETON_PERM', 0);
-define('ADMIN_SERVICE_PERM', 0);
+define('ADMIN_SERVICE_PERM', 1);
 define('USER_SERVICE_PERM', 0);
 
 
