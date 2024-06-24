@@ -134,13 +134,12 @@
           </ol>
         </div>
       </div>
-      <div class="col-12 col-md-6 col-lg-4 col-xl-3 min-h-400 border bg-gray-50 dark-bg-gray-900 shadow-lg rounded">
-        <div class="bg-gray-50 dark-bg-gray-800">
-          <h4 class="p-3">Admin</h4>
-        </div>
-        <div class="admin-settings min-h-300 d-flex align-items-center justify-content-center flex-column">
-          <span><img style="height: 100px; width: 100px;" class="rounded-circle mx-2" src="https://fakeimg.pl/300/" /> </span>
-          <div class="text-center my-3">
+      <div class="col-12 col-md-6 col-lg-4 col-xl-3 min-h-400 border bg-gray-50 dark-bg-gray-900 shadow-lg rounded d-flex align-items-center justify-content-center">
+        <div class="admin-settings min-h-300 h-100 d-flex align-items-center justify-content-center mx-3">
+          <span>
+            <img  src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 90px; height: 90px" class="rounded-circle mx-3" />
+            </span>
+          <div >
             <p class="mb-0"><span class="fw-bolder text-3xl">Barley</span> <span>(Level 3)</span></p>
             <p>developedbybarley@gmail.com</p>
             <button class="btn bg-purple-600 hover-bg-purple-700 px-4">
@@ -210,11 +209,3 @@
 
 
 </main>
-
-
-
-
-
-
-
-

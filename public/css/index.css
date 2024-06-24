@@ -8582,883 +8582,883 @@
 }
 
 .hover-bg-blue-50:hover {
-  background-color: #eff6ff;
+  background-color: #eff6ff !important;
 }
 
 .hover-bg-blue-100:hover {
-  background-color: #dbeafe;
+  background-color: #dbeafe !important;
 }
 
 .hover-bg-blue-200:hover {
-  background-color: #bfdbfe;
+  background-color: #bfdbfe !important;
 }
 
 .hover-bg-blue-300:hover {
-  background-color: #93c5fd;
+  background-color: #93c5fd !important;
 }
 
 .hover-bg-blue-400:hover {
-  background-color: #60a5fa;
+  background-color: #60a5fa !important;
 }
 
 .hover-bg-blue-500:hover {
-  background-color: #3b82f6;
+  background-color: #3b82f6 !important;
 }
 
 .hover-bg-blue-600:hover {
-  background-color: #2563eb;
+  background-color: #2563eb !important;
 }
 
 .hover-bg-blue-700:hover {
-  background-color: #1d4ed8;
+  background-color: #1d4ed8 !important;
 }
 
 .hover-bg-blue-800:hover {
-  background-color: #1e40af;
+  background-color: #1e40af !important;
 }
 
 .hover-bg-blue-900:hover {
-  background-color: #1e3a8a;
+  background-color: #1e3a8a !important;
 }
 
 .hover-bg-slate-50:hover {
-  background-color: #f8fafc;
+  background-color: #f8fafc !important;
 }
 
 .hover-bg-slate-100:hover {
-  background-color: #f1f5f9;
+  background-color: #f1f5f9 !important;
 }
 
 .hover-bg-slate-200:hover {
-  background-color: #e2e8f0;
+  background-color: #e2e8f0 !important;
 }
 
 .hover-bg-slate-300:hover {
-  background-color: #cbd5e1;
+  background-color: #cbd5e1 !important;
 }
 
 .hover-bg-slate-400:hover {
-  background-color: #94a3b8;
+  background-color: #94a3b8 !important;
 }
 
 .hover-bg-slate-500:hover {
-  background-color: #64748b;
+  background-color: #64748b !important;
 }
 
 .hover-bg-slate-600:hover {
-  background-color: #475569;
+  background-color: #475569 !important;
 }
 
 .hover-bg-slate-700:hover {
-  background-color: #334155;
+  background-color: #334155 !important;
 }
 
 .hover-bg-slate-800:hover {
-  background-color: #1e293b;
+  background-color: #1e293b !important;
 }
 
 .hover-bg-slate-900:hover {
-  background-color: #0f172a;
+  background-color: #0f172a !important;
 }
 
 .hover-bg-gray-50:hover {
-  background-color: #f9fafb;
+  background-color: #f9fafb !important;
 }
 
 .hover-bg-gray-100:hover {
-  background-color: #f3f4f6;
+  background-color: #f3f4f6 !important;
 }
 
 .hover-bg-gray-200:hover {
-  background-color: #e5e7eb;
+  background-color: #e5e7eb !important;
 }
 
 .hover-bg-gray-300:hover {
-  background-color: #d1d5db;
+  background-color: #d1d5db !important;
 }
 
 .hover-bg-gray-400:hover {
-  background-color: #9ca3af;
+  background-color: #9ca3af !important;
 }
 
 .hover-bg-gray-500:hover {
-  background-color: #6b7280;
+  background-color: #6b7280 !important;
 }
 
 .hover-bg-gray-600:hover {
-  background-color: #4b5563;
+  background-color: #4b5563 !important;
 }
 
 .hover-bg-gray-700:hover {
-  background-color: #374151;
+  background-color: #374151 !important;
 }
 
 .hover-bg-gray-800:hover {
-  background-color: #1f2937;
+  background-color: #1f2937 !important;
 }
 
 .hover-bg-gray-900:hover {
-  background-color: #111827;
+  background-color: #111827 !important;
 }
 
 .hover-bg-zinc-50:hover {
-  background-color: #fafafa;
+  background-color: #fafafa !important;
 }
 
 .hover-bg-zinc-100:hover {
-  background-color: #f4f4f5;
+  background-color: #f4f4f5 !important;
 }
 
 .hover-bg-zinc-200:hover {
-  background-color: #e4e4e7;
+  background-color: #e4e4e7 !important;
 }
 
 .hover-bg-zinc-300:hover {
-  background-color: #d4d4d8;
+  background-color: #d4d4d8 !important;
 }
 
 .hover-bg-zinc-400:hover {
-  background-color: #a1a1aa;
+  background-color: #a1a1aa !important;
 }
 
 .hover-bg-zinc-500:hover {
-  background-color: #71717a;
+  background-color: #71717a !important;
 }
 
 .hover-bg-zinc-600:hover {
-  background-color: #52525b;
+  background-color: #52525b !important;
 }
 
 .hover-bg-zinc-700:hover {
-  background-color: #3f3f46;
+  background-color: #3f3f46 !important;
 }
 
 .hover-bg-zinc-800:hover {
-  background-color: #27272a;
+  background-color: #27272a !important;
 }
 
 .hover-bg-zinc-900:hover {
-  background-color: #18181b;
+  background-color: #18181b !important;
 }
 
 .hover-bg-neutral-50:hover {
-  background-color: #fafafa;
+  background-color: #fafafa !important;
 }
 
 .hover-bg-neutral-100:hover {
-  background-color: #f5f5f5;
+  background-color: #f5f5f5 !important;
 }
 
 .hover-bg-neutral-200:hover {
-  background-color: #e5e5e5;
+  background-color: #e5e5e5 !important;
 }
 
 .hover-bg-neutral-300:hover {
-  background-color: #d4d4d4;
+  background-color: #d4d4d4 !important;
 }
 
 .hover-bg-neutral-400:hover {
-  background-color: #a3a3a3;
+  background-color: #a3a3a3 !important;
 }
 
 .hover-bg-neutral-500:hover {
-  background-color: #737373;
+  background-color: #737373 !important;
 }
 
 .hover-bg-neutral-600:hover {
-  background-color: #525252;
+  background-color: #525252 !important;
 }
 
 .hover-bg-neutral-700:hover {
-  background-color: #404040;
+  background-color: #404040 !important;
 }
 
 .hover-bg-neutral-800:hover {
-  background-color: #262626;
+  background-color: #262626 !important;
 }
 
 .hover-bg-neutral-900:hover {
-  background-color: #171717;
+  background-color: #171717 !important;
 }
 
 .hover-bg-stone-50:hover {
-  background-color: #fafaf9;
+  background-color: #fafaf9 !important;
 }
 
 .hover-bg-stone-100:hover {
-  background-color: #f5f5f4;
+  background-color: #f5f5f4 !important;
 }
 
 .hover-bg-stone-200:hover {
-  background-color: #e7e5e4;
+  background-color: #e7e5e4 !important;
 }
 
 .hover-bg-stone-300:hover {
-  background-color: #d6d3d1;
+  background-color: #d6d3d1 !important;
 }
 
 .hover-bg-stone-400:hover {
-  background-color: #a8a29e;
+  background-color: #a8a29e !important;
 }
 
 .hover-bg-stone-500:hover {
-  background-color: #78716c;
+  background-color: #78716c !important;
 }
 
 .hover-bg-stone-600:hover {
-  background-color: #57534e;
+  background-color: #57534e !important;
 }
 
 .hover-bg-stone-700:hover {
-  background-color: #44403c;
+  background-color: #44403c !important;
 }
 
 .hover-bg-stone-800:hover {
-  background-color: #292524;
+  background-color: #292524 !important;
 }
 
 .hover-bg-stone-900:hover {
-  background-color: #1c1917;
+  background-color: #1c1917 !important;
 }
 
 .hover-bg-red-50:hover {
-  background-color: #fef2f2;
+  background-color: #fef2f2 !important;
 }
 
 .hover-bg-red-100:hover {
-  background-color: #fee2e2;
+  background-color: #fee2e2 !important;
 }
 
 .hover-bg-red-200:hover {
-  background-color: #fecaca;
+  background-color: #fecaca !important;
 }
 
 .hover-bg-red-300:hover {
-  background-color: #fca5a5;
+  background-color: #fca5a5 !important;
 }
 
 .hover-bg-red-400:hover {
-  background-color: #f87171;
+  background-color: #f87171 !important;
 }
 
 .hover-bg-red-500:hover {
-  background-color: #ef4444;
+  background-color: #ef4444 !important;
 }
 
 .hover-bg-red-600:hover {
-  background-color: #dc2626;
+  background-color: #dc2626 !important;
 }
 
 .hover-bg-red-700:hover {
-  background-color: #b91c1c;
+  background-color: #b91c1c !important;
 }
 
 .hover-bg-red-800:hover {
-  background-color: #991b1b;
+  background-color: #991b1b !important;
 }
 
 .hover-bg-red-900:hover {
-  background-color: #7f1d1d;
+  background-color: #7f1d1d !important;
 }
 
 .hover-bg-orange-50:hover {
-  background-color: #fff7ed;
+  background-color: #fff7ed !important;
 }
 
 .hover-bg-orange-100:hover {
-  background-color: #ffedd5;
+  background-color: #ffedd5 !important;
 }
 
 .hover-bg-orange-200:hover {
-  background-color: #fed7aa;
+  background-color: #fed7aa !important;
 }
 
 .hover-bg-orange-300:hover {
-  background-color: #fdba74;
+  background-color: #fdba74 !important;
 }
 
 .hover-bg-orange-400:hover {
-  background-color: #fb923c;
+  background-color: #fb923c !important;
 }
 
 .hover-bg-orange-500:hover {
-  background-color: #f97316;
+  background-color: #f97316 !important;
 }
 
 .hover-bg-orange-600:hover {
-  background-color: #ea580c;
+  background-color: #ea580c !important;
 }
 
 .hover-bg-orange-700:hover {
-  background-color: #c2410c;
+  background-color: #c2410c !important;
 }
 
 .hover-bg-orange-800:hover {
-  background-color: #9a3412;
+  background-color: #9a3412 !important;
 }
 
 .hover-bg-orange-900:hover {
-  background-color: #7c2d12;
+  background-color: #7c2d12 !important;
 }
 
 .hover-bg-amber-50:hover {
-  background-color: #fffbeb;
+  background-color: #fffbeb !important;
 }
 
 .hover-bg-amber-100:hover {
-  background-color: #fef3c7;
+  background-color: #fef3c7 !important;
 }
 
 .hover-bg-amber-200:hover {
-  background-color: #fde68a;
+  background-color: #fde68a !important;
 }
 
 .hover-bg-amber-300:hover {
-  background-color: #fcd34d;
+  background-color: #fcd34d !important;
 }
 
 .hover-bg-amber-400:hover {
-  background-color: #fbbf24;
+  background-color: #fbbf24 !important;
 }
 
 .hover-bg-amber-500:hover {
-  background-color: #f59e0b;
+  background-color: #f59e0b !important;
 }
 
 .hover-bg-amber-600:hover {
-  background-color: #d97706;
+  background-color: #d97706 !important;
 }
 
 .hover-bg-amber-700:hover {
-  background-color: #b45309;
+  background-color: #b45309 !important;
 }
 
 .hover-bg-amber-800:hover {
-  background-color: #92400e;
+  background-color: #92400e !important;
 }
 
 .hover-bg-amber-900:hover {
-  background-color: #78350f;
+  background-color: #78350f !important;
 }
 
 .hover-bg-yellow-50:hover {
-  background-color: #fefce8;
+  background-color: #fefce8 !important;
 }
 
 .hover-bg-yellow-100:hover {
-  background-color: #fef9c3;
+  background-color: #fef9c3 !important;
 }
 
 .hover-bg-yellow-200:hover {
-  background-color: #fef08a;
+  background-color: #fef08a !important;
 }
 
 .hover-bg-yellow-300:hover {
-  background-color: #fde047;
+  background-color: #fde047 !important;
 }
 
 .hover-bg-yellow-400:hover {
-  background-color: #facc15;
+  background-color: #facc15 !important;
 }
 
 .hover-bg-yellow-500:hover {
-  background-color: #eab308;
+  background-color: #eab308 !important;
 }
 
 .hover-bg-yellow-600:hover {
-  background-color: #ca8a04;
+  background-color: #ca8a04 !important;
 }
 
 .hover-bg-yellow-700:hover {
-  background-color: #a16207;
+  background-color: #a16207 !important;
 }
 
 .hover-bg-yellow-800:hover {
-  background-color: #854d0e;
+  background-color: #854d0e !important;
 }
 
 .hover-bg-yellow-900:hover {
-  background-color: #713f12;
+  background-color: #713f12 !important;
 }
 
 .hover-bg-lime-50:hover {
-  background-color: #f7fee7;
+  background-color: #f7fee7 !important;
 }
 
 .hover-bg-lime-100:hover {
-  background-color: #ecfccb;
+  background-color: #ecfccb !important;
 }
 
 .hover-bg-lime-200:hover {
-  background-color: #d9f99d;
+  background-color: #d9f99d !important;
 }
 
 .hover-bg-lime-300:hover {
-  background-color: #bef264;
+  background-color: #bef264 !important;
 }
 
 .hover-bg-lime-400:hover {
-  background-color: #a3e635;
+  background-color: #a3e635 !important;
 }
 
 .hover-bg-lime-500:hover {
-  background-color: #84cc16;
+  background-color: #84cc16 !important;
 }
 
 .hover-bg-lime-600:hover {
-  background-color: #65a30d;
+  background-color: #65a30d !important;
 }
 
 .hover-bg-lime-700:hover {
-  background-color: #4d7c0f;
+  background-color: #4d7c0f !important;
 }
 
 .hover-bg-lime-800:hover {
-  background-color: #3f6212;
+  background-color: #3f6212 !important;
 }
 
 .hover-bg-lime-900:hover {
-  background-color: #365314;
+  background-color: #365314 !important;
 }
 
 .hover-bg-green-50:hover {
-  background-color: #f0fdf4;
+  background-color: #f0fdf4 !important;
 }
 
 .hover-bg-green-100:hover {
-  background-color: #dcfce7;
+  background-color: #dcfce7 !important;
 }
 
 .hover-bg-green-200:hover {
-  background-color: #bbf7d0;
+  background-color: #bbf7d0 !important;
 }
 
 .hover-bg-green-300:hover {
-  background-color: #86efac;
+  background-color: #86efac !important;
 }
 
 .hover-bg-green-400:hover {
-  background-color: #4ade80;
+  background-color: #4ade80 !important;
 }
 
 .hover-bg-green-500:hover {
-  background-color: #22c55e;
+  background-color: #22c55e !important;
 }
 
 .hover-bg-green-600:hover {
-  background-color: #16a34a;
+  background-color: #16a34a !important;
 }
 
 .hover-bg-green-700:hover {
-  background-color: #15803d;
+  background-color: #15803d !important;
 }
 
 .hover-bg-green-800:hover {
-  background-color: #166534;
+  background-color: #166534 !important;
 }
 
 .hover-bg-green-900:hover {
-  background-color: #14532d;
+  background-color: #14532d !important;
 }
 
 .hover-bg-emerald-50:hover {
-  background-color: #ecfdf5;
+  background-color: #ecfdf5 !important;
 }
 
 .hover-bg-emerald-100:hover {
-  background-color: #d1fae5;
+  background-color: #d1fae5 !important;
 }
 
 .hover-bg-emerald-200:hover {
-  background-color: #a7f3d0;
+  background-color: #a7f3d0 !important;
 }
 
 .hover-bg-emerald-300:hover {
-  background-color: #6ee7b7;
+  background-color: #6ee7b7 !important;
 }
 
 .hover-bg-emerald-400:hover {
-  background-color: #34d399;
+  background-color: #34d399 !important;
 }
 
 .hover-bg-emerald-500:hover {
-  background-color: #10b981;
+  background-color: #10b981 !important;
 }
 
 .hover-bg-emerald-600:hover {
-  background-color: #059669;
+  background-color: #059669 !important;
 }
 
 .hover-bg-emerald-700:hover {
-  background-color: #047857;
+  background-color: #047857 !important;
 }
 
 .hover-bg-emerald-800:hover {
-  background-color: #065f46;
+  background-color: #065f46 !important;
 }
 
 .hover-bg-emerald-900:hover {
-  background-color: #064e3b;
+  background-color: #064e3b !important;
 }
 
 .hover-bg-teal-50:hover {
-  background-color: #f0fdfa;
+  background-color: #f0fdfa !important;
 }
 
 .hover-bg-teal-100:hover {
-  background-color: #ccfbf1;
+  background-color: #ccfbf1 !important;
 }
 
 .hover-bg-teal-200:hover {
-  background-color: #99f6e4;
+  background-color: #99f6e4 !important;
 }
 
 .hover-bg-teal-300:hover {
-  background-color: #5eead4;
+  background-color: #5eead4 !important;
 }
 
 .hover-bg-teal-400:hover {
-  background-color: #2dd4bf;
+  background-color: #2dd4bf !important;
 }
 
 .hover-bg-teal-500:hover {
-  background-color: #14b8a6;
+  background-color: #14b8a6 !important;
 }
 
 .hover-bg-teal-600:hover {
-  background-color: #0d9488;
+  background-color: #0d9488 !important;
 }
 
 .hover-bg-teal-700:hover {
-  background-color: #0f766e;
+  background-color: #0f766e !important;
 }
 
 .hover-bg-teal-800:hover {
-  background-color: #115e59;
+  background-color: #115e59 !important;
 }
 
 .hover-bg-teal-900:hover {
-  background-color: #134e4a;
+  background-color: #134e4a !important;
 }
 
 .hover-bg-cyan-50:hover {
-  background-color: #ecfeff;
+  background-color: #ecfeff !important;
 }
 
 .hover-bg-cyan-100:hover {
-  background-color: #cffafe;
+  background-color: #cffafe !important;
 }
 
 .hover-bg-cyan-200:hover {
-  background-color: #a5f3fc;
+  background-color: #a5f3fc !important;
 }
 
 .hover-bg-cyan-300:hover {
-  background-color: #67e8f9;
+  background-color: #67e8f9 !important;
 }
 
 .hover-bg-cyan-400:hover {
-  background-color: #22d3ee;
+  background-color: #22d3ee !important;
 }
 
 .hover-bg-cyan-500:hover {
-  background-color: #06b6d4;
+  background-color: #06b6d4 !important;
 }
 
 .hover-bg-cyan-600:hover {
-  background-color: #0891b2;
+  background-color: #0891b2 !important;
 }
 
 .hover-bg-cyan-700:hover {
-  background-color: #0e7490;
+  background-color: #0e7490 !important;
 }
 
 .hover-bg-cyan-800:hover {
-  background-color: #155e75;
+  background-color: #155e75 !important;
 }
 
 .hover-bg-cyan-900:hover {
-  background-color: #164e63;
+  background-color: #164e63 !important;
 }
 
 .hover-bg-sky-50:hover {
-  background-color: #f0f9ff;
+  background-color: #f0f9ff !important;
 }
 
 .hover-bg-sky-100:hover {
-  background-color: #e0f2fe;
+  background-color: #e0f2fe !important;
 }
 
 .hover-bg-sky-200:hover {
-  background-color: #bae6fd;
+  background-color: #bae6fd !important;
 }
 
 .hover-bg-sky-300:hover {
-  background-color: #7dd3fc;
+  background-color: #7dd3fc !important;
 }
 
 .hover-bg-sky-400:hover {
-  background-color: #38bdf8;
+  background-color: #38bdf8 !important;
 }
 
 .hover-bg-sky-500:hover {
-  background-color: #0ea5e9;
+  background-color: #0ea5e9 !important;
 }
 
 .hover-bg-sky-600:hover {
-  background-color: #0284c7;
+  background-color: #0284c7 !important;
 }
 
 .hover-bg-sky-700:hover {
-  background-color: #0369a1;
+  background-color: #0369a1 !important;
 }
 
 .hover-bg-sky-800:hover {
-  background-color: #075985;
+  background-color: #075985 !important;
 }
 
 .hover-bg-sky-900:hover {
-  background-color: #0c4a6e;
+  background-color: #0c4a6e !important;
 }
 
 .hover-bg-indigo-50:hover {
-  background-color: #eef2ff;
+  background-color: #eef2ff !important;
 }
 
 .hover-bg-indigo-100:hover {
-  background-color: #e0e7ff;
+  background-color: #e0e7ff !important;
 }
 
 .hover-bg-indigo-200:hover {
-  background-color: #c7d2fe;
+  background-color: #c7d2fe !important;
 }
 
 .hover-bg-indigo-300:hover {
-  background-color: #a5b4fc;
+  background-color: #a5b4fc !important;
 }
 
 .hover-bg-indigo-400:hover {
-  background-color: #818cf8;
+  background-color: #818cf8 !important;
 }
 
 .hover-bg-indigo-500:hover {
-  background-color: #6366f1;
+  background-color: #6366f1 !important;
 }
 
 .hover-bg-indigo-600:hover {
-  background-color: #4f46e5;
+  background-color: #4f46e5 !important;
 }
 
 .hover-bg-indigo-700:hover {
-  background-color: #4338ca;
+  background-color: #4338ca !important;
 }
 
 .hover-bg-indigo-800:hover {
-  background-color: #3730a3;
+  background-color: #3730a3 !important;
 }
 
 .hover-bg-indigo-900:hover {
-  background-color: #312e81;
+  background-color: #312e81 !important;
 }
 
 .hover-bg-violet-50:hover {
-  background-color: #f5f3ff;
+  background-color: #f5f3ff !important;
 }
 
 .hover-bg-violet-100:hover {
-  background-color: #ede9fe;
+  background-color: #ede9fe !important;
 }
 
 .hover-bg-violet-200:hover {
-  background-color: #ddd6fe;
+  background-color: #ddd6fe !important;
 }
 
 .hover-bg-violet-300:hover {
-  background-color: #c4b5fd;
+  background-color: #c4b5fd !important;
 }
 
 .hover-bg-violet-400:hover {
-  background-color: #a78bfa;
+  background-color: #a78bfa !important;
 }
 
 .hover-bg-violet-500:hover {
-  background-color: #8b5cf6;
+  background-color: #8b5cf6 !important;
 }
 
 .hover-bg-violet-600:hover {
-  background-color: #7c3aed;
+  background-color: #7c3aed !important;
 }
 
 .hover-bg-violet-700:hover {
-  background-color: #6d28d9;
+  background-color: #6d28d9 !important;
 }
 
 .hover-bg-violet-800:hover {
-  background-color: #5b21b6;
+  background-color: #5b21b6 !important;
 }
 
 .hover-bg-violet-900:hover {
-  background-color: #4c1d95;
+  background-color: #4c1d95 !important;
 }
 
 .hover-bg-purple-50:hover {
-  background-color: #faf5ff;
+  background-color: #faf5ff !important;
 }
 
 .hover-bg-purple-100:hover {
-  background-color: #f3e8ff;
+  background-color: #f3e8ff !important;
 }
 
 .hover-bg-purple-200:hover {
-  background-color: #e9d5ff;
+  background-color: #e9d5ff !important;
 }
 
 .hover-bg-purple-300:hover {
-  background-color: #d8b4fe;
+  background-color: #d8b4fe !important;
 }
 
 .hover-bg-purple-400:hover {
-  background-color: #c084fc;
+  background-color: #c084fc !important;
 }
 
 .hover-bg-purple-500:hover {
-  background-color: #a855f7;
+  background-color: #a855f7 !important;
 }
 
 .hover-bg-purple-600:hover {
-  background-color: #9333ea;
+  background-color: #9333ea !important;
 }
 
 .hover-bg-purple-700:hover {
-  background-color: #7e22ce;
+  background-color: #7e22ce !important;
 }
 
 .hover-bg-purple-800:hover {
-  background-color: #6b21a8;
+  background-color: #6b21a8 !important;
 }
 
 .hover-bg-purple-900:hover {
-  background-color: #581c87;
+  background-color: #581c87 !important;
 }
 
 .hover-bg-fuchsia-50:hover {
-  background-color: #fdf4ff;
+  background-color: #fdf4ff !important;
 }
 
 .hover-bg-fuchsia-100:hover {
-  background-color: #fae8ff;
+  background-color: #fae8ff !important;
 }
 
 .hover-bg-fuchsia-200:hover {
-  background-color: #f5d0fe;
+  background-color: #f5d0fe !important;
 }
 
 .hover-bg-fuchsia-300:hover {
-  background-color: #f0abfc;
+  background-color: #f0abfc !important;
 }
 
 .hover-bg-fuchsia-400:hover {
-  background-color: #e879f9;
+  background-color: #e879f9 !important;
 }
 
 .hover-bg-fuchsia-500:hover {
-  background-color: #d946ef;
+  background-color: #d946ef !important;
 }
 
 .hover-bg-fuchsia-600:hover {
-  background-color: #c026d3;
+  background-color: #c026d3 !important;
 }
 
 .hover-bg-fuchsia-700:hover {
-  background-color: #a21caf;
+  background-color: #a21caf !important;
 }
 
 .hover-bg-fuchsia-800:hover {
-  background-color: #86198f;
+  background-color: #86198f !important;
 }
 
 .hover-bg-fuchsia-900:hover {
-  background-color: #701a75;
+  background-color: #701a75 !important;
 }
 
 .hover-bg-pink-50:hover {
-  background-color: #fdf2f8;
+  background-color: #fdf2f8 !important;
 }
 
 .hover-bg-pink-100:hover {
-  background-color: #fce7f3;
+  background-color: #fce7f3 !important;
 }
 
 .hover-bg-pink-200:hover {
-  background-color: #fbcfe8;
+  background-color: #fbcfe8 !important;
 }
 
 .hover-bg-pink-300:hover {
-  background-color: #f9a8d4;
+  background-color: #f9a8d4 !important;
 }
 
 .hover-bg-pink-400:hover {
-  background-color: #f472b6;
+  background-color: #f472b6 !important;
 }
 
 .hover-bg-pink-500:hover {
-  background-color: #ec4899;
+  background-color: #ec4899 !important;
 }
 
 .hover-bg-pink-600:hover {
-  background-color: #db2777;
+  background-color: #db2777 !important;
 }
 
 .hover-bg-pink-700:hover {
-  background-color: #be185d;
+  background-color: #be185d !important;
 }
 
 .hover-bg-pink-800:hover {
-  background-color: #9d174d;
+  background-color: #9d174d !important;
 }
 
 .hover-bg-pink-900:hover {
-  background-color: #831843;
+  background-color: #831843 !important;
 }
 
 .hover-bg-rose-50:hover {
-  background-color: #fff1f2;
+  background-color: #fff1f2 !important;
 }
 
 .hover-bg-rose-100:hover {
-  background-color: #ffe4e6;
+  background-color: #ffe4e6 !important;
 }
 
 .hover-bg-rose-200:hover {
-  background-color: #fecdd3;
+  background-color: #fecdd3 !important;
 }
 
 .hover-bg-rose-300:hover {
-  background-color: #fda4af;
+  background-color: #fda4af !important;
 }
 
 .hover-bg-rose-400:hover {
-  background-color: #fb7185;
+  background-color: #fb7185 !important;
 }
 
 .hover-bg-rose-500:hover {
-  background-color: #f43f5e;
+  background-color: #f43f5e !important;
 }
 
 .hover-bg-rose-600:hover {
-  background-color: #e11d48;
+  background-color: #e11d48 !important;
 }
 
 .hover-bg-rose-700:hover {
-  background-color: #be123c;
+  background-color: #be123c !important;
 }
 
 .hover-bg-rose-800:hover {
-  background-color: #9f1239;
+  background-color: #9f1239 !important;
 }
 
 .hover-bg-rose-900:hover {
-  background-color: #881337;
+  background-color: #881337 !important;
 }
 
 .hover-blue-50:hover {

@@ -14,7 +14,7 @@
                 <h2 class="fw-bold mb-2 text-uppercase">USER REGISTER</h2>
                 <p class="mb-5">Please enter your login and password!</p>
 
-                <div data-mdb-input-init class="form-outline form-white mb-4">
+                <div class="form-outline form-white mb-4">
                   <input type="email" name="email" class="form-control" id="exampleInputEmail1" data-validators='{
                     "name": "email",
                     "required": true,
@@ -25,7 +25,7 @@
                   <label class="form-label" for="typeEmailX">Email</label>
                 </div>
 
-                <div data-mdb-input-init class="form-outline form-white mb-4">
+                <div class="form-outline form-white mb-4">
                   <input type="password" name="password" data-validators='{
                     "name": "password",
                     "required": true,

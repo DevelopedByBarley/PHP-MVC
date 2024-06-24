@@ -123,4 +123,34 @@ class AdminController extends Controller
       ])
     ]);
   }
+  public function form()
+  {
+    $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
+
+    $data = [
+      'numOfPage' => 10,
+    ];
+
+    echo $this->Render->write("admin/Layout.php", [
+      "csrf" => $this->CSRFToken,
+      "content" => $this->Render->write("admin/pages/Form.php", [
+        'data' => $data
+      ])
+    ]);
+  }
+  public function settings()
+  {
+    $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
+
+    $data = [
+      'numOfPage' => 10,
+    ];
+
+    echo $this->Render->write("admin/Layout.php", [
+      "csrf" => $this->CSRFToken,
+      "content" => $this->Render->write("admin/pages/Settings.php", [
+        'data' => $data
+      ])
+    ]);
+  }
 }

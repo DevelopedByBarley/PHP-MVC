@@ -25,6 +25,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script type="module" src="/public/js/charts.js?v=<?= time() ?>"></script>
 
+  <?php if (PW_GENERATOR_PERM) : ?><script type="module" src="/public/js/pwGenerator.js?v=<?= time() ?>"></script><?php endif ?>
   <?php if (VALIDATORS_PERM) : ?><script type="module" src="/public/js/validators.js?v=<?= time() ?>"></script><?php endif ?>
   <?php if (TOAST_PERM) : ?>
     <?php include 'app/Views/public/components/Toast.php' ?>

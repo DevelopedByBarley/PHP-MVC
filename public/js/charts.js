@@ -1,7 +1,9 @@
 
 
-    const ctx = document.getElementById('myChart').getContext('2d');
-    const myChart = new Chart(ctx, {
+const ctx = document.getElementById('myChart') ? document.getElementById('myChart').getContext('2d') : null;
+
+if (ctx) {
+    new Chart(ctx, {
         type: 'line',
         data: {
             labels: ['January', 'February', 'March', 'April', 'May', 'June'],
@@ -36,9 +38,13 @@
         }
     });
 
+}
 
-    const ctx2 = document.getElementById('myChart_2').getContext('2d');
-    const myChart_2 = new Chart(ctx2, {
+
+const ctx2 = document.getElementById('myChart_2') ? document.getElementById('myChart_2').getContext('2d') : null;
+
+if (ctx2) {
+    new Chart(ctx2, {
         type: 'doughnut',
         data: {
             labels: ['January', 'February', 'March', 'April', 'May', 'June'],
@@ -72,3 +78,5 @@
             }
         }
     });
+
+}

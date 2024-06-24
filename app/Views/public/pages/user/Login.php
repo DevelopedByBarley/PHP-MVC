@@ -15,17 +15,17 @@
                 <h2 class="fw-bold mb-2 text-uppercase">USER</h2>
                 <p class="-50 mb-5">Please enter your login and password!</p>
 
-                <div data-mdb-input-init class="form-outline form-white mb-4">
+                <div class="form-outline form-white mb-4">
                   <input type="email" name="email" data-validator="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                   <label class="form-label" for="typeEmailX">Email</label>
                 </div>
 
-                <div data-mdb-input-init class="form-outline form-white mb-4">
+                <div class="form-outline form-white mb-4">
                   <input type="password" name="password" class="form-control" data-validator="password" id="exampleInputPassword1">
                   <label class="form-label" for="typePasswordX">Password</label>
                 </div>
 
-                <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+                <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
 
               </div>
             </form>

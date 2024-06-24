@@ -8,6 +8,8 @@ use App\Controllers\AdminController;
 $r->addRoute('GET', '', [AdminController::class, 'loginPage']);
 $r->addRoute('GET', '/dashboard', [AdminController::class, 'index']);
 $r->addRoute('GET', '/table', [AdminController::class, 'table']);
+$r->addRoute('GET', '/form', [AdminController::class, 'form']);
+$r->addRoute('GET', '/settings', [AdminController::class, 'settings']);
 
 $r->addRoute('POST', '/login', [AdminController::class, 'login']);
 $r->addRoute('POST', '/store', [AdminController::class, 'store']);

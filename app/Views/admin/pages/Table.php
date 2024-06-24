@@ -1,4 +1,4 @@
-<div class="container-fluid min-h-95 d-flex p-5 my-5 align-items-start justify-content-center flex-column-reverse gap-5">
+<div class="container-fluid min-h-95 d-flex p-5 my-5 align-items-start justify-content-center flex-column-reverse gap-5 table-responsive">
   <table class="table align-middle mb-0 rounded rounded-lg shadow">
     <thead class="bg-teal-500">
       <tr>
