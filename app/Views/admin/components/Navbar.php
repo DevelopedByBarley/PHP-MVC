@@ -47,11 +47,11 @@ $currentUrl = $_SERVER['REQUEST_URI'];
                 <a href="/admin/form" class="text-decoration-none">
                     <li class="list-group-item <?= $currentUrl == '/admin/form' ? 'active' : '' ?> border-0 rounded-0 py-3">Form</li>
                 </a>
-                <a href="/admin/messages" class="text-decoration-none">
-                    <li class="list-group-item <?= $currentUrl == '/admin/messages' ? 'active' : '' ?> border-0 rounded-0 py-3">Messages</li>
+                <a href="/admin/mailbox" class="text-decoration-none">
+                    <li class="list-group-item <?= $currentUrl == '/admin/mailbox' ? 'active' : '' ?> border-0 rounded-0 py-3">Mail box</li>
                 </a>
-                <a href="/admin/calendar" class="text-decoration-none">
-                    <li class="list-group-item <?= $currentUrl == '/admin/calendar' ? 'active' : '' ?> border-0 rounded-0 py-3">Calendar</li>
+                <a href="#" class="text-decoration-none">
+                    <li class="list-group-item <?= $currentUrl == '/admin/calendar' ? 'active' : '' ?> border-0 rounded-0 py-3  bg-red-400 ">Calendar</li>
                 </a>
             </ul>
         </div>

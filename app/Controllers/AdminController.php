@@ -153,4 +153,19 @@ class AdminController extends Controller
       ])
     ]);
   }
+  public function mailbox()
+  {
+    $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
+
+    $data = [
+      'numOfPage' => 10,
+    ];
+
+    echo $this->Render->write("admin/Layout.php", [
+      "csrf" => $this->CSRFToken,
+      "content" => $this->Render->write("admin/pages/MailBox.php", [
+        'data' => $data
+      ])
+    ]);
+  }
 }
