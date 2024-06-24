@@ -47,11 +47,17 @@
 [data-bs-theme=dark] {
   @each $name, $color in $colors {
     .dark-bg-#{$name} {
-      background-color: map-get($colors, $name);
+      background-color: map-get($colors, $name) !important;
+    }
+
+    .dark-bg-hover-#{$name} {
+      &:hover {
+        background-color: map-get($colors, $name) !important;
+      }
     }
 
     .dark-text-#{$name} {
-      color: map-get($colors, $name);
+      color: map-get($colors, $name) !important;
     }
 
     .dark-border-#{$name} {
@@ -64,12 +70,21 @@
 [data-bs-theme=light] {
   @each $name, $color in $colors {
     .light-bg-#{$name} {
-      background-color: map-get($colors, $name);
+      background-color: map-get($colors, $name) !important;
+    }
+
+    .light-bg-hover-#{$name} {
+      &:hover {
+        background-color: map-get($colors, $name) !important;
+      }
+
     }
 
     .light-text-#{$name} {
-      color: map-get($colors, $name);
+      color: map-get($colors, $name) !important;
     }
+
+
 
     .light-border-#{$name} {
       border-color: map-get($colors, $name) !important;
@@ -135,7 +150,7 @@
 // SET background color by $colors IN _vars.scss
 @each $name, $color in $colors {
   .bg-#{$name} {
-    background-color: $color;
+    background-color: $color !important;
   }
 }
 

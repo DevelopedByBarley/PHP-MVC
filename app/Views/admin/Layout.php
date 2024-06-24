@@ -10,8 +10,9 @@
   <title><?php APP_ADMIN_NAME ?></title>
 </head>
 
-<body>
+<body class="bg-gray-50 dark-bg-gray-800">
   <?php include 'app/Views/public/components/Alert.php' ?>
+  <?php include('app/Views/admin/components/Navbar.php') ?>
 
   <?= $params["content"] ?>
 
@@ -20,6 +21,9 @@
   <script type="module" src="/public/js/uuid.js?v=<?= time() ?>"></script>
   <script src="/public/js/colorTheme.js?v=<?= time() ?>"></script>
 
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="/public/js/charts.js?v=<?= time() ?>"></script>
 
   <?php if (VALIDATORS_PERM) : ?><script type="module" src="/public/js/validators.js?v=<?= time() ?>"></script><?php endif ?>
   <?php if (TOAST_PERM) : ?>

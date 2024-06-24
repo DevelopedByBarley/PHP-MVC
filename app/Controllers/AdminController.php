@@ -30,6 +30,7 @@ class AdminController extends Controller
 
 
     echo $this->Render->write("admin/Layout.php", [
+      "csrf" => $this->CSRFToken,
       "content" => $this->Render->write("admin/pages/Login.php", [
         "csrf" => $this->CSRFToken
       ])
@@ -95,9 +96,30 @@ class AdminController extends Controller
   {
     $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
 
+    $data = [
+      'numOfPage' => 10,
+    ];
+
     echo $this->Render->write("admin/Layout.php", [
+      "csrf" => $this->CSRFToken,
       "content" => $this->Render->write("admin/pages/Dashboard.php", [
-        "csrf" => $this->CSRFToken
+        'data' => $data
+      ])
+    ]);
+  }
+
+  public function table()
+  {
+    $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
+
+    $data = [
+      'numOfPage' => 10,
+    ];
+
+    echo $this->Render->write("admin/Layout.php", [
+      "csrf" => $this->CSRFToken,
+      "content" => $this->Render->write("admin/pages/Table.php", [
+        'data' => $data
       ])
     ]);
   }
