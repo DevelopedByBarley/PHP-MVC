@@ -1,6 +1,3 @@
-
-
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-12  dark-bg-gray-900">
@@ -30,8 +27,8 @@
                                         <!-- 2 column grid layout with text inputs for the first and last names -->
                                         <div class="row">
                                             <div class="col-md-6 mb-4">
-                                                <label class="form-label" for="form3Example1">First name</label>
                                                 <div class="form-outline">
+                                                    <label class="form-label" for="form3Example1">First name</label>
                                                     <input name="first_name" type="text" id="form3Example1" class="form-control" data-validators='{
                                                         "name": "first_name",
                                                         "required": true,
@@ -106,7 +103,7 @@
 <section class="pr-font dark-bg-gray-900">
     <div class="container py-5">
         <div class="text-center">
-            <h3 >Login Form example</h3>
+            <h3>Login Form example</h3>
         </div>
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
