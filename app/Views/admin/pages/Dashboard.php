@@ -120,7 +120,7 @@
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
               <span class="mx-2">
-                <img style="height: 40px; width: 40px;" class="rounded-circle mx-2" src="https://fakeimg.pl/300/" />
+                <img src="https://mdbootstrap.com/img/new/avatars/7.jpg" class="rounded-circle" alt="" style="width: 45px; height: 45px" />
               </span>
               <div class="ms-2 me-auto">
                 <div class="fw-bold">Jon Doe</div>
@@ -137,14 +137,14 @@
       <div class="col-12 col-md-6 col-lg-4 col-xl-3 min-h-400 border bg-gray-50 dark-bg-gray-900 shadow-lg rounded d-flex align-items-center justify-content-center">
         <div class="admin-settings min-h-300 h-100 d-flex align-items-center justify-content-center mx-3">
           <span>
-            <img  src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 90px; height: 90px" class="rounded-circle mx-3" />
-            </span>
-          <div >
+            <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 90px; height: 90px" class="rounded-circle mx-3" />
+          </span>
+          <div>
             <p class="mb-0"><span class="fw-bolder text-3xl">Barley</span> <span>(Level 3)</span></p>
             <p>developedbybarley@gmail.com</p>
-            <button class="btn bg-purple-600 hover-bg-purple-700 px-4">
+            <a href="/admin/settings" class="btn bg-purple-600 hover-bg-purple-700 px-4">
               <span><i class="fa-solid fa-gears text-2xl gray-50"></i>
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -209,6 +209,3 @@
 
 
 </main>
-
-
-

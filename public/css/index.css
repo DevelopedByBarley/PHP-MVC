@@ -11747,20 +11747,45 @@
   flex-grow: 1;
 }
 
+/* #admin-dashboard-header {
+  .timeline {
+    border-left: 1px solid hsl(0, 0%, 90%);
+    position: relative;
+    list-style: none;
+
+    .timeline-item {
+      position: relative;
+
+      &:after {
+        position: absolute;
+        display: block;
+        top: 0;
+        background-color: hsl(0, 0%, 90%);
+        left: -38px;
+        border-radius: 50%;
+        height: 11px;
+        width: 11px;
+        content: "";
+      }
+    }
+  }
+
+} */
 #admin-dashboard-header .timeline {
   border-left: 1px solid hsl(0, 0%, 90%);
   position: relative;
   list-style: none;
+  left: 20px;
 }
 #admin-dashboard-header .timeline .timeline-item {
   position: relative;
+  right: 48px;
 }
 #admin-dashboard-header .timeline .timeline-item:after {
   position: absolute;
   display: block;
-  top: 0;
-  background-color: hsl(0, 0%, 90%);
-  left: -38px;
+  top: 8px;
+  left: 0px;
   border-radius: 50%;
   height: 11px;
   width: 11px;
