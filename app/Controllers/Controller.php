@@ -46,8 +46,9 @@ class Controller
   }
   public function test()
   {
-   $this->CSRFToken->check();
-    echo 'Hello';
+    echo $this->Render->write("public/Layout.php", [
+      "content" => $this->Render->write("public/pages/Test.php", [])
+    ]);
   }
 
 

@@ -7,4 +7,4 @@ use App\Controllers\Controller;
 
 $r->addRoute('GET', '', [Controller::class, 'index']);
 $r->addRoute('GET', 'cookie-info', [Controller::class, 'cookie']);
-$r->addRoute('POST', 'test', [Controller::class, 'test']);
+$r->addRoute('GET', 'test', [Controller::class, 'test']);

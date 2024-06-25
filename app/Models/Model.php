@@ -32,7 +32,7 @@ class Model
   }
 
 
-  
+
 
   public function searchBySingleEntity($table, $entity, $searched, $searchDefault)
   {
@@ -62,11 +62,19 @@ class Model
       ];
     }
 
-    $offset = isset($_GET["offset"]) ? max(1, intval($_GET["offset"])) : 1;
-    $calculated = ($offset - 1) * $limit;
 
-    // A lekérdezett eredmények számának meghatározása
+
+
+    $offset = isset($_GET["offset"]) ? (int)$_GET["offset"] : null;
+
+
+    $calculated = ($offset - 1) * $limit;
     $countOfRecords = count($results);
+    $numOfPage = ceil($countOfRecords / $limit);
+
+    if ($searchCondition) $searchCondition($offset, $numOfPage, $search);
+
+
     if ($countOfRecords === 0) {
       return [
         "status" => false,
@@ -77,7 +85,6 @@ class Model
       ];
     }
 
-    $numOfPage = ceil($countOfRecords / $limit);
 
     // Lapozott eredmények kiválasztása a limit és offset alapján
     $pagedResults = array_slice($results, $calculated, $limit);
@@ -91,7 +98,6 @@ class Model
       ];
     }
 
-    if ($searchCondition) $searchCondition($offset, $numOfPage, $search);
 
     return [
       "status" => true,
@@ -174,7 +180,4 @@ class Model
       throw new Exception("An error occurred during the database operation in the deleteRecordById method: " . $e->getMessage());
     }
   }
-
-  
-  
 }

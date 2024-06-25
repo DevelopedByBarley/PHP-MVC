@@ -32,7 +32,7 @@ class AdminRender extends AdminController
       ])
     ]);
   }
-  
+
 
   public function loginPage()
   {
@@ -89,18 +89,30 @@ class AdminRender extends AdminController
     $adminId = $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
 
     $admin = $this->Model->selectByRecord('admins', 'adminId', $adminId, PDO::PARAM_STR);
+    $admin_list = $this->Model->all('admins', $adminId, PDO::PARAM_STR);
 
-    $data = [
-      'numOfPage' => 10,
-    ];
+    $data = $this->Model->paginate($admin_list, 2, '',  function ($offset, $numOfPages) {
+      if($offset === 0) {
+        header("Location: /admin/settings");
+        exit;
+      }
 
-    
+      if ((int)$offset > (int)$numOfPages) {
+        header("Location: /admin/settings?offset=$numOfPages");
+        exit;
+      }  
+    });
+
+
+
+
 
     echo $this->Render->write("admin/Layout.php", [
       "csrf" => $this->CSRFToken,
       "content" => $this->Render->write("admin/pages/Settings.php", [
         'data' => $data,
-        'admin' => $admin
+        'admin' => $admin,
+        'data' => $data
       ])
     ]);
   }

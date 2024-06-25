@@ -7,7 +7,7 @@ $searchParameter = isset($_GET['date']) ? '?date=' . $_GET['date'] : '';
 
 ?>
 
-<nav aria-label="...">
+<nav>
   <ul class="pagination">
     <li class="page-item <?php echo $currentPage <= 1 ? 'disabled' : ''; ?>">
       <a class="page-link" href="<?php echo $searchParameter . (empty($searchParameter) ? '?' : '&') . 'offset=' . max(1, $currentPage - 1); ?>" aria-label="Previous">
