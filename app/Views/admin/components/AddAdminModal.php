@@ -13,11 +13,11 @@
                     <div class="form-group my-2">
                         <label for="exampleInputEmail1">Name</label>
                         <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name " required data-validators='{
-                                            "name": "name",
-                                            "required": true,
-                                            "minLength": 12,
-                                            "maxLength": 50
-                                        }'>
+                            "name": "name",
+                            "required": true,
+                            "minLength": 12,
+                            "maxLength": 50
+                        }'>
                     </div>
                     <div class="form-group my-2">
                         <label for="exampleInputEmail1">Password</label>
@@ -37,15 +37,31 @@
                             <option value="3">3</option>
                         </select>
                     </div>
+                    <div class="avatars">
+                        <div class="row">
+                            <label for="avatars" class="my-3">Avatar kiválasztása</label>
+                            <?php foreach (AVATARS as $avatar) : ?>
+                                <div class="col-2 d-flex align-items-center justify-content-center mb-2">
+                                    <div class="form-check form-check-inline image-radio">
+                                        <input required class="form-check-input" type="radio" name="image-radio" id="radio-<?php echo $avatar; ?>" value="<?php echo $avatar; ?>">
+                                        <label class="form-check-label" for="radio-<?php echo $avatar; ?>">
+                                            <img src="/public/assets/images/avatars/<?php echo $avatar; ?>.png" class="h-45 w-45" alt="<?php echo ucfirst($avatar); ?>">
+                                        </label>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
 
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                    </div>
+                </form>
             </div>
-            <div class="modal-footer">
 
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
-            </div>
-            </form>
         </div>
     </div>
 </div>

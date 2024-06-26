@@ -56,6 +56,8 @@ function checkValidators(options, inputValue, targetElement) {
           targetElement.setCustomValidity(
             minLengthMessage[lang]
           );
+        } else {
+          targetElement.setCustomValidity("");
         }
         break;
 
@@ -71,6 +73,8 @@ function checkValidators(options, inputValue, targetElement) {
           targetElement.setCustomValidity(
             minLengthMessage[lang]
           );
+        } else {
+          targetElement.setCustomValidity("");
         }
         break;
       case "hasNum":

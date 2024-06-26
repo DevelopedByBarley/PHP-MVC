@@ -16,10 +16,11 @@ $langService = new LanguageService();
 $langService->language();
 
 
-require_once 'config/langs.php';
-require_once 'config/app.php';
-require_once 'config/database.php';
-require_once 'config/router.php';
+require_once 'config/variables/avatars.php';
+require_once 'config/app/langs.php';
+require_once 'config/app/app.php';
+require_once 'config/app/database.php';
+require_once 'config/app/router.php';
 
 
 
