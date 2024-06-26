@@ -20,6 +20,7 @@ blurDivs.forEach(div => {
 
 
   const loaded = () => {
+    div.style.backgroundImage  = ''
     div.classList.add('loaded');
   }
 

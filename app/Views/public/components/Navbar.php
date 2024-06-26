@@ -1,7 +1,7 @@
 <?php $csrf = $params['csrf'] ?? null ?>
 
 
-<nav class="navbar navbar-expand-lg border-bottom fixed-top pr-font" id="navbar">
+<nav class="navbar navbar-expand-lg border-bottom fixed-top pr-font">
   <div class="container-fluid ">
     <a class="navbar-brand " href="/">Brand</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,12 +53,19 @@
 
         </div>
       <?php else : ?>
-        <div class="form-check form-switch mt-2">
-          <input class="form-check-input" type="checkbox" role="switch" id="theme-toggle">
-        </div> 
-        <a href="/user/register" class="btn btn-dark m-1 border-0" type="submit">Register</a>
-        <a href="/user/login" class="btn btn-dark m-1 border-0" type="submit">Login</a>
+        <div>
+          <a href="/user/register" class="btn btn-dark m-1 border-0" type="submit">Register</a>
+          <a href="/user/login" class="btn btn-dark m-1 border-0" type="submit">Login</a>
+        </div>
       <?php endif ?>
+      <div class="form-check form-switch theme-switcher p-0 mx-xl-3 mt-2 mt-xl-0">
+        <input type="checkbox" class="form-check-input checkbox text-2xl" role="switch" id="theme-toggle">
+        <label for="theme-toggle" class="dark-bg-sky-700 bg-gray-300 checkbox-label">
+          <i class="fas fa-moon"></i>
+          <i class="fas fa-sun"></i>
+          <span class="ball"></span>
+        </label>
+      </div>
     </div>
   </div>
 </nav>
