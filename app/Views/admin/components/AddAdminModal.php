@@ -19,6 +19,16 @@
                             "maxLength": 50
                         }'>
                     </div>
+                    <div class="form-outline">
+                        <label class="form-label" for="form3Example3">Email address</label>
+                        <input name="email" type="email" id="form3Example3" class="form-control" data-validators='{
+                                "name": "email",
+                                "required": true,
+                                "email": true,
+                                "minLength": 12,
+                                "maxLength": 50
+                                            }' />
+                    </div>
                     <div class="form-group my-2">
                         <label for="exampleInputEmail1">Password</label>
                         <input type="text" id="password" name="password" class="form-control" class="work-id" required data-validators='{
