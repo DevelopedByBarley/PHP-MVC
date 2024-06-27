@@ -3,7 +3,7 @@ $admin = $params['admin'] ?? null;
 $data = $params['data'] ?? [];
 $admin_list = $data['pages'] ?? [];
 $level = $admin['level'] ?? null;
-
+$csrf = $params['csrf'] ?? null;
 ?>
 
 <div class="container-fluid">

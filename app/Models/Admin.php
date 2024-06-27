@@ -12,20 +12,32 @@ class Admin extends Model
   public function storeAdmin($body)
   {
     try {
-      $adminId = uniqid();
+      // Kihagyjuk a CSRF token-t
       $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-      $pw = password_hash(filter_var($body["password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS), PASSWORD_DEFAULT);
+      $email = filter_var($body["email"] ?? '', FILTER_SANITIZE_EMAIL);
+      $password = password_hash(filter_var($body["password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS), PASSWORD_DEFAULT);
+      $avatar = filter_var($body["avatar-radio"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
 
-      $stmt = $this->Pdo->prepare("INSERT INTO `admins` (`id`, `adminId`, `name`, `password`, `created_at`) VALUES (NULL, :adminId, :name, :password, current_timestamp())");
+      $adminId = uniqid(); // Generálunk egy egyedi adminId-t
+
+      // Prepare the SQL statement
+      $stmt = $this->Pdo->prepare("INSERT INTO `admins` (`id`, `adminId`, `name`, `email`, `password`, `avatar`, `created_at`) 
+                                      VALUES (NULL, :adminId, :name, :email, :password, :avatar, current_timestamp())");
+
+      // Bind parameters to the statement
       $stmt->bindParam(":adminId", $adminId, PDO::PARAM_STR);
       $stmt->bindParam(":name", $name, PDO::PARAM_STR);
-      $stmt->bindParam(":password", $pw, PDO::PARAM_STR);
+      $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+      $stmt->bindParam(":password", $password, PDO::PARAM_STR);
+      $stmt->bindParam(":avatar", $avatar, PDO::PARAM_STR);
+
+      // Execute the statement
       $stmt->execute();
     } catch (PDOException $e) {
       throw new Exception("An error occurred during the database operation in storeAdmin: " . $e->getMessage());
-      exit;
     }
   }
+
 
   public function loginAdmin($body)
   {

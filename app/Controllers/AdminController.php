@@ -24,8 +24,13 @@ class AdminController extends Controller
   public function store()
   {
     $this->CSRFToken->check();
-
-    $this->Admin->storeAdmin($_POST);
+    session_start();
+    try {
+      $this->Admin->storeAdmin($_POST);
+      $this->Toast->set('Admin sikeresen hozzáadva', 'success', '/admin/settings', null);
+    } catch (Exception $e) {
+      echo $e->getMessage();
+    }
   }
 
   public function login()
@@ -72,7 +77,7 @@ class AdminController extends Controller
     }
   }
 
-  
+
 
 
 
@@ -184,7 +189,7 @@ class AdminController extends Controller
     $admin_list = $this->Model->all('admins', $adminId, PDO::PARAM_STR);
 
     $data = $this->Model->paginate($admin_list, 2, '',  function ($offset, $numOfPages) {
-      if($offset === 0) {
+      if ($offset === 0) {
         header("Location: /admin/settings");
         exit;
       }
@@ -192,7 +197,7 @@ class AdminController extends Controller
       if ((int)$offset > (int)$numOfPages) {
         header("Location: /admin/settings?offset=$numOfPages");
         exit;
-      }  
+      }
     });
 
 
@@ -202,6 +207,7 @@ class AdminController extends Controller
     echo $this->Render->write("admin/Layout.php", [
       "csrf" => $this->CSRFToken,
       "content" => $this->Render->write("admin/pages/Settings.php", [
+        "csrf" => $this->CSRFToken,
         'data' => $data,
         'admin' => $admin,
         'data' => $data
@@ -224,6 +230,3 @@ class AdminController extends Controller
     ]);
   }
 }
-
-
-

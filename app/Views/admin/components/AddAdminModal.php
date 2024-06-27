@@ -1,4 +1,3 @@
-<!-- Modal -->
 <div class="modal fade " id="addAdminModal" tabindex="-1" role="dialog" aria-labelledby="addAdminModelLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -9,7 +8,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="POST" enctype="multipart/form-data" action="/admin/store">
+                    <?= $csrf->generate() ?>
                     <div class="form-group my-2">
                         <label for="exampleInputEmail1">Name</label>
                         <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name " required data-validators='{
