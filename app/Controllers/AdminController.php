@@ -4,38 +4,22 @@ namespace App\Controllers;
 
 use App\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\AdminActivity;
 use Exception;
+use PDO;
 
 class AdminController extends Controller
 {
   private $Admin;
+  private $Activity;
 
   public function __construct()
   {
     $this->Admin = new Admin();
+    $this->Activity = new AdminActivity();
     parent::__construct();
   }
 
-
-  public function loginPage()
-  {
-    session_start();
-
-    $admin = $_SESSION["adminId"] ?? null;
-
-    if ($admin) {
-      header("Location: /admin/dashboard");
-      exit;
-    }
-
-
-    echo $this->Render->write("admin/Layout.php", [
-      "csrf" => $this->CSRFToken,
-      "content" => $this->Render->write("admin/pages/Login.php", [
-        "csrf" => $this->CSRFToken
-      ])
-    ]);
-  }
 
   public function store()
   {
@@ -68,10 +52,6 @@ class AdminController extends Controller
     }
   }
 
-
-
-
-
   public function logout()
   {
     try {
@@ -92,10 +72,45 @@ class AdminController extends Controller
     }
   }
 
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /**
+   * @param RENDERS --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+   */
+
+
+
   public function index()
   {
-    $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
+    $adminId = $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
+    $admin = $this->Model->selectByRecord('admins', 'id', $adminId, PDO::PARAM_INT);
 
+    $admin_activities = $this->Activity->getAdminActivities();
     $data = [
       'numOfPage' => 10,
     ];
@@ -103,10 +118,33 @@ class AdminController extends Controller
     echo $this->Render->write("admin/Layout.php", [
       "csrf" => $this->CSRFToken,
       "content" => $this->Render->write("admin/pages/Dashboard.php", [
+        'admin' => $admin,
+        'admin_activities' => $admin_activities,
         'data' => $data
       ])
     ]);
   }
+
+
+  public function loginPage()
+  {
+    session_start();
+
+    $admin = $_SESSION["adminId"] ?? null;
+
+    if ($admin) {
+      header("Location: /admin/dashboard");
+      exit;
+    }
+
+    echo $this->Render->write("admin/Layout.php", [
+      "csrf" => $this->CSRFToken,
+      "content" => $this->Render->write("admin/pages/Login.php", [
+        "csrf" => $this->CSRFToken
+      ])
+    ]);
+  }
+
 
   public function table()
   {
@@ -140,15 +178,32 @@ class AdminController extends Controller
   }
   public function settings()
   {
-    $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
+    $adminId = $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
 
-    $data = [
-      'numOfPage' => 10,
-    ];
+    $admin = $this->Model->selectByRecord('admins', 'id', $adminId, PDO::PARAM_STR);
+    $admin_list = $this->Model->all('admins', $adminId, PDO::PARAM_STR);
+
+    $data = $this->Model->paginate($admin_list, 2, '',  function ($offset, $numOfPages) {
+      if($offset === 0) {
+        header("Location: /admin/settings");
+        exit;
+      }
+
+      if ((int)$offset > (int)$numOfPages) {
+        header("Location: /admin/settings?offset=$numOfPages");
+        exit;
+      }  
+    });
+
+
+
+
 
     echo $this->Render->write("admin/Layout.php", [
       "csrf" => $this->CSRFToken,
       "content" => $this->Render->write("admin/pages/Settings.php", [
+        'data' => $data,
+        'admin' => $admin,
         'data' => $data
       ])
     ]);
@@ -169,3 +224,6 @@ class AdminController extends Controller
     ]);
   }
 }
+
+
+

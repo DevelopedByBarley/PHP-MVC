@@ -42,7 +42,7 @@ class Admin extends Model
         return false;
       }
 
-      return $admin["adminId"];
+      return $admin["id"];
     } catch (PDOException $e) {
       throw new Exception("An error occurred during the database operation in LoginAdmin: " . $e->getMessage());
       exit;

@@ -6,12 +6,12 @@ use App\Controllers\AdminRender;
 
 
 //Renders
-$r->addRoute('GET', '', [AdminRender::class, 'loginPage']);
-$r->addRoute('GET', '/dashboard', [AdminRender::class, 'index']);
-$r->addRoute('GET', '/table', [AdminRender::class, 'table']);
-$r->addRoute('GET', '/form', [AdminRender::class, 'form']);
-$r->addRoute('GET', '/settings', [AdminRender::class, 'settings']);
-$r->addRoute('GET', '/mailbox', [AdminRender::class, 'mailbox']);
+$r->addRoute('GET', '', [AdminController::class, 'loginPage']);
+$r->addRoute('GET', '/dashboard', [AdminController::class, 'index']);
+$r->addRoute('GET', '/table', [AdminController::class, 'table']);
+$r->addRoute('GET', '/form', [AdminController::class, 'form']);
+$r->addRoute('GET', '/settings', [AdminController::class, 'settings']);
+$r->addRoute('GET', '/mailbox', [AdminController::class, 'mailbox']);
 
 
 // Operations

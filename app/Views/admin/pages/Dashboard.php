@@ -1,3 +1,7 @@
+<?php
+$admin = $params['admin'];
+$admin_activities = $params['admin_activities'] ?>
+
 <?php include('app/Views/admin/components/Header.php') ?>
 
 
@@ -44,104 +48,17 @@
   </div>
 
 
-  <div class="container-fluid mb-5 my-5" style="margin-top: -2.5rem;">
+  <div class="container-fluid mb-5 my-5">
     <div class="row gap-3 d-flex align-items-center justify-content-center">
-      <div class="col-12 col-md-6 col-lg-6 col-xl-7 min-h-300 border bg-gray-50 dark-bg-gray-900 shadow-lg rounded">
-        <div class="bg-gray-50 dark-bg-gray-800">
-          <h4 class="p-3 mb-3 dark-gray-900">Admin List</h4>
-        </div>
 
-        <div class="admins min-h-300 overflow-y-scroll" style="max-height: 320px;">
-          <ol class="list-group list-group-numbered">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <span class="mx-2">
-                <img style="height: 40px; width: 40px;" class="rounded-circle mx-2" src="https://fakeimg.pl/300/" />
-              </span>
-              <div class="ms-2 me-auto">
-                <div class="fw-bold">Bill Gates</div>
-                Level 3
-              </div>
-              <div class="operations">
-                <button class="btn btn-outline-info ">show</button>
-                <button class="btn btn-outline-danger ">delete</button>
-              </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <span class="mx-2">
-                <img style="height: 40px; width: 40px;" class="rounded-circle mx-2" src="https://fakeimg.pl/300/" />
-              </span>
-              <div class="ms-2 me-auto">
-                <div class="fw-bold">Elon Musk</div>
-                Level 1
-              </div>
-              <div class="operations">
-                <button class="btn btn-outline-info ">show</button>
-                <button class="btn btn-outline-danger ">delete</button>
-              </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <span class="mx-2">
-                <img style="height: 40px; width: 40px;" class="rounded-circle mx-2" src="https://fakeimg.pl/300/" />
-              </span>
-              <div class="ms-2 me-auto">
-                <div class="fw-bold">Jeff Besos</div>
-                Level 2
-              </div>
-              <div class="operations">
-                <button class="btn btn-outline-info ">show</button>
-                <button class="btn btn-outline-danger ">delete</button>
-              </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <span class="mx-2">
-                <img style="height: 40px; width: 40px;" class="rounded-circle mx-2" src="https://fakeimg.pl/300/" />
-              </span>
-              <div class="ms-2 me-auto">
-                <div class="fw-bold">Mark Zuckerberg</div>
-                Level 3
-              </div>
-              <div class="operations">
-                <button class="btn btn-outline-info ">show</button>
-                <button class="btn btn-outline-danger ">delete</button>
-              </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <span class="mx-2">
-                <img style="height: 40px; width: 40px;" class="rounded-circle mx-2" src="https://fakeimg.pl/300/" />
-              </span>
-              <div class="ms-2 me-auto">
-                <div class="fw-bold">Jon Doe</div>
-                Level 1
-              </div>
-              <div class="operations">
-                <button class="btn btn-outline-info">show</button>
-                <button class="btn btn-outline-danger">delete</button>
-              </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <span class="mx-2">
-                <img src="https://mdbootstrap.com/img/new/avatars/7.jpg" class="rounded-circle" alt="" style="width: 45px; height: 45px" />
-              </span>
-              <div class="ms-2 me-auto">
-                <div class="fw-bold">Jon Doe</div>
-                Level 1
-              </div>
-              <div class="operations">
-                <button class="btn btn-outline-info">show</button>
-                <button class="btn btn-outline-danger">delete</button>
-              </div>
-            </li>
-          </ol>
-        </div>
-      </div>
-      <div class="col-12 col-md-6 col-lg-4 col-xl-3 min-h-400 border bg-gray-50 dark-bg-gray-900 shadow-lg rounded d-flex align-items-center justify-content-center">
-        <div class="admin-settings min-h-300 h-100 d-flex align-items-center justify-content-center mx-3">
+      <div class="col-12 col-md-6 col-lg-6 col-xl-5 min-h-400 border bg-gray-50 dark-bg-gray-900 shadow-lg rounded-4 d-flex align-items-center justify-content-center justify-content-xl-start">
+        <div class="admin-settings min-h-300 h-100 d-flex flex-column flex-xl-row align-items-center justify-content-center mx-3">
           <span>
-            <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 90px; height: 90px" class="rounded-circle mx-3" />
+            <img src="/public/assets/images/avatars/<?= $admin['avatar'] ?>.png" alt="" style="width: 200px; height: 200px" class="rounded-circle mx-3" />
           </span>
           <div>
-            <p class="mb-0"><span class="fw-bolder text-3xl">Barley</span> <span>(Level 3)</span></p>
-            <p>developedbybarley@gmail.com</p>
+            <p class="mb-0"><span class="fw-bolder text-3xl"><?= $admin['name'] ?></span> <span>(Level <?= $admin['level'] ?>)</span></p>
+            <p><?= $admin['email'] ?></p>
             <a href="/admin/settings" class="btn bg-purple-600 hover-bg-purple-700 px-4">
               <span><i class="fa-solid fa-gears text-2xl gray-50"></i>
             </a>
@@ -151,58 +68,59 @@
     </div>
   </div>
 
-
-
-  <div class="container-fluid px-5">
-    <div class="row my-7">
-      <div class="col-12 px-5">
-        <h1>Progress 2</h1>
-        <label>Progress 1</label>
-        <div class="progress">
-          <div class="progress-bar bg-primary" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <label>Progress 2</label>
-        <div class="progress">
-          <div class="progress-bar bg-secondary" role="progressbar" style="width: 30%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <label>Progress 3</label>
-        <div class="progress">
-          <div class="progress-bar bg-danger" role="progressbar" style="width: 40%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <label>Progress 4</label>
-        <div class="progress">
-          <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <label>Progress 5</label>
-        <div class="progress">
-          <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <label>Progress 6</label>
-        <div class="progress">
-          <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <label>Progress 7</label>
-        <div class="progress">
-          <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="container-fluid px-5">
+  <div class="container-fluid px-5 mt-8">
     <div class="row">
-      <div class="col-12 col-md-10 mx-auto mb-3 col-xl-6">
+      <div class="col-12 col-md-10 mx-auto mb-3 col-xl-6  my-5">
         <h4>Registrations chart in line</h4>
         <canvas id="myChart"></canvas>
       </div>
 
-      <div class="col-12 col-md-10 mx-auto mb-3 col-xl-4">
+      <div class="col-12 col-md-10 mx-auto mb-3 col-xl-4  my-5">
         <h4>Registrations chart in donut</h4>
         <canvas id="myChart_2"></canvas>
       </div>
     </div>
   </div>
+
+
+
+  <div class="container-fluid px-5">
+    <div class="row mt-5 mb-7">
+      <div class="col-12 px-5">
+        <h1>Progress 2</h1>
+        <label>Progress 1</label>
+        <div class="progress">
+          <div class="progress-bar bg-primary opacity-75" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <label>Progress 2</label>
+        <div class="progress">
+          <div class="progress-bar bg-secondary opacity-75" role="progressbar" style="width: 30%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <label>Progress 3</label>
+        <div class="progress">
+          <div class="progress-bar bg-danger opacity-75" role="progressbar" style="width: 40%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <label>Progress 4</label>
+        <div class="progress">
+          <div class="progress-bar bg-success opacity-75" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <label>Progress 5</label>
+        <div class="progress">
+          <div class="progress-bar bg-info opacity-75" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <label>Progress 6</label>
+        <div class="progress">
+          <div class="progress-bar bg-warning opacity-75" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <label>Progress 7</label>
+        <div class="progress">
+          <div class="progress-bar bg-danger opacity-75" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 
 
   <?php include 'app/Views/admin/pages/Table.php' ?>
