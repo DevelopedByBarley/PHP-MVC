@@ -12,7 +12,7 @@ class Admin extends Model
   public function storeAdmin($body)
   {
     try {
-      // Kihagyjuk a CSRF token-t
+ 
       $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
       $email = filter_var($body["email"] ?? '', FILTER_SANITIZE_EMAIL);
       $password = password_hash(filter_var($body["password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS), PASSWORD_DEFAULT);
@@ -39,6 +39,49 @@ class Admin extends Model
   }
 
 
+  public function updateAdmin($adminId, $body)
+  {
+
+
+    try {
+      $name = filter_var($body["updated_name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+      $password = password_hash(filter_var($body["updated_password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS), PASSWORD_DEFAULT);
+      $prev_password = filter_var($body["prev_password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+      $avatar = filter_var($body["updated_avatar_radio"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+
+
+      $current_password = $this->selectByRecord('admins', 'id', $adminId, PDO::PARAM_INT)['password'];
+  
+
+      if (!password_verify($prev_password, $current_password)) {
+        return false;
+        exit;
+      }
+
+      // Prepare the SQL statement
+      $stmt = $this->Pdo->prepare("UPDATE `admins` 
+                                     SET `name` = :name, 
+                                         `password` = :password, 
+                                         `avatar` = :avatar 
+                                     WHERE `id` = :adminId");
+
+      // Bind parameters to the statement
+      $stmt->bindParam(":adminId", $adminId, PDO::PARAM_STR);
+      $stmt->bindParam(":name", $name, PDO::PARAM_STR);
+      $stmt->bindParam(":password", $password, PDO::PARAM_STR);
+      $stmt->bindParam(":avatar", $avatar, PDO::PARAM_STR);
+
+      // Execute the statement
+      $stmt->execute();
+
+    return true;
+    } catch (PDOException $e) {
+      throw new Exception("An error occurred during the database operation in updateAdmin: " . $e->getMessage());
+    }
+  }
+
+
+
   public function loginAdmin($body)
   {
     try {
@@ -60,4 +103,5 @@ class Admin extends Model
       exit;
     }
   }
+
 }

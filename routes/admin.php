@@ -18,4 +18,5 @@ $r->addRoute('GET', '/mailbox', [AdminController::class, 'mailbox']);
 
 $r->addRoute('POST', '/login', [AdminController::class, 'login']);
 $r->addRoute('POST', '/store', [AdminController::class, 'store']);
+$r->addRoute('POST', '/update', [AdminController::class, 'update']);
 $r->addRoute('POST', '/logout', [AdminController::class, 'logout']);

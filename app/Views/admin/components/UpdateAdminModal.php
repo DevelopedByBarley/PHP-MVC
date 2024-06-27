@@ -6,7 +6,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="POST" enctype="multipart/form-data" action="/admin/update">
+                    <?= $csrf->generate() ?>
+
                     <div class="form-group my-2">
                         <label for="exampleInputEmail1">Name</label>
                         <input name="updated_name" type="text" value="<?= $admin['name'] ?? '' ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name " required data-validators='{
@@ -45,24 +47,25 @@
                     </div>
 
 
-
-                    <div class="form-group my-2">
-                        <label for="exampleInputPassword1">Level</label>
-                        <select class="form-select" aria-label="Default select example" required>
-                            <option value="" selected>Select admin level</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
-                    </div>
+                    <?php if ((int)$admin['level'] === 3) : ?>
+                        <div class="form-group my-2">
+                            <label for="exampleInputPassword1">Level</label>
+                            <select class="form-select" aria-label="Default select example"  required>
+                                <option value="" selected>Select admin level</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                    <?php endif ?>
                     <div class="avatars">
                         <div class="row">
                             <label for="avatars" class="my-3">Avatar kiválasztása</label>
                             <?php foreach (AVATARS as $avatar) : ?>
                                 <div class="col-2 d-flex align-items-center justify-content-center mb-2">
                                     <div class="form-check form-check-inline image-radio">
-                                        <input required class="form-check-input" <?php echo $avatar === $admin['avatar'] ? 'checked' : '' ?> type="radio" name="update_avatar_radio" id="update_avatar_radio-<?php echo $avatar; ?>" value="<?php echo $avatar; ?>">
-                                        <label class="form-check-label" for="update_avatar_radio-<?php echo $avatar; ?>">
+                                        <input required class="form-check-input" <?php echo $avatar === $admin['avatar'] ? 'checked' : '' ?> type="radio" name="updated_avatar_radio" id="updated_avatar_radio-<?php echo $avatar; ?>" value="<?php echo $avatar; ?>">
+                                        <label class="form-check-label" for="updated_avatar_radio-<?php echo $avatar; ?>">
                                             <img src="/public/assets/images/avatars/<?php echo $avatar; ?>.png" class="h-45 w-45" alt="<?php echo ucfirst($avatar); ?>">
                                         </label>
                                     </div>

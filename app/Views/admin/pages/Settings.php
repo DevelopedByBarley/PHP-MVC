@@ -1,5 +1,6 @@
 <?php
 $admin = $params['admin'] ?? null;
+
 $data = $params['data'] ?? [];
 $admin_list = $data['pages'] ?? [];
 $level = $admin['level'] ?? null;
@@ -37,14 +38,14 @@ $csrf = $params['csrf'] ?? null;
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($admin_list as $admin) : ?>
+                                <?php foreach ($admin_list as $current_admin) : ?>
                                     <tr>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <img src="/public/assets/images/avatars/<?= $admin['avatar'] ??  'https://mdbootstrap.com/img/new/avatars/6.jpg' ?>.png" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
+                                                <img src="/public/assets/images/avatars/<?= $current_admin['avatar'] ??  'https://mdbootstrap.com/img/new/avatars/6.jpg' ?>.png" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
                                                 <div class="ms-3">
-                                                    <p class="fw-bold mb-1"><?= htmlspecialchars($admin['name']) ?></p>
-                                                    <p class="text-muted mb-0"><?= htmlspecialchars($admin['email']) ?></p>
+                                                    <p class="fw-bold mb-1"><?= htmlspecialchars($current_admin['name']) ?></p>
+                                                    <p class="text-muted mb-0"><?= htmlspecialchars($current_admin['email']) ?></p>
                                                 </div>
                                             </div>
                                         </td>

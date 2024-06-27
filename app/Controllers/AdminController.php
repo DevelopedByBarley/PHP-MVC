@@ -24,10 +24,26 @@ class AdminController extends Controller
   public function store()
   {
     $this->CSRFToken->check();
-    session_start();
+    $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
     try {
       $this->Admin->storeAdmin($_POST);
       $this->Toast->set('Admin sikeresen hozzáadva', 'success', '/admin/settings', null);
+    } catch (Exception $e) {
+      echo $e->getMessage();
+    }
+  }
+  public function update()
+  {
+    $this->CSRFToken->check();
+    $adminId = $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
+    try {
+      $admin = $this->Admin->updateAdmin($adminId, $_POST);
+      
+      if($admin) {
+        $this->Toast->set('Admin sikeresen frissítve', 'success', '/admin/settings', null);
+      } else {
+        $this->Toast->set('Admin frissítése sikretelen, rosszul adta meg előző jelszavát!', 'danger', '/admin/settings', null);
+      }
     } catch (Exception $e) {
       echo $e->getMessage();
     }

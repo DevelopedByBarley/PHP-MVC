@@ -28,15 +28,11 @@ CREATE TABLE `admins` (
   `avatar` varchar(500) NOT NULL,
   `created_at` date DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `admins` VALUES ('4', '6672c1840a967', '3', 'knorr_admin', 'developedbybarley@gmail.com', '$2y$10$RWHQOr1Wu7.IhZ2UOFP5T..Yfu5chAPCx5PqwWMPxmQCb9m5AyEFO', 'man', '2024-06-19');
-INSERT INTO `admins` VALUES ('5', '6672c1b72a8cf', '3', 'knorr_user', '0developedbybarley@gmail.com', '$2y$10$H8xRkVou7qyICONDvg/eDuHnbXGNLu9JZLOeX9aFvBgNlN9NSqF8C', 'bear', '2024-06-19');
-INSERT INTO `admins` VALUES ('7', '667d54f675be4', '0', 'Szaniszló Árpád', 'Barley@gmail.com', '$2y$10$.4NJLWMSIRCooDLkpGZ./eqby./9HabEvR846/86B90o9mopse8nq', 'bear', '2024-06-27');
-INSERT INTO `admins` VALUES ('8', '667d550be4cb1', '0', 'Szaniszló Árpád', 'Barley@gmail.com', '$2y$10$4eURh4CfMJVDx/ikumKLQexSh5Q9AXeXoo8l9BiCRnUCwZsWmkffG', 'rabbit', '2024-06-27');
-INSERT INTO `admins` VALUES ('9', '667d55428fc0b', '0', 'Szaniszló Árpád', 'dsadsad@asd.com', '$2y$10$Zq93SUjSFrgCzwYk4BPgquchey8YVQviCAof1tOeyk.3nI9aMD1sC', 'rabbit', '2024-06-27');
-INSERT INTO `admins` VALUES ('10', '667d5557c00c7', '0', 'Szaniszló Árpád', 'Barley@gmail.com', '$2y$10$Y2wz/98Xv1qN/Th3MVXhm.kBAYWMNdZVj7yu6LXxaYaLHtXM51fo.', 'bear', '2024-06-27');
-INSERT INTO `admins` VALUES ('11', '667d5565e6613', '0', 'Szaniszló Árpád', 'developedbybarley@gmail.com', '$2y$10$Te4hGlnpw285Smp2G1BKvu69kxg/kNBwU6VK5J/Jnhvtb.Ya1jiTa', 'bear', '2024-06-27');
+INSERT INTO `admins` VALUES ('4', '6672c1840a967', '3', 'knorr_admin', '0developedbybarley@gmail.com', '$2y$10$5b8KV35ntMIp42I9b4wXqOVtIszFGq3YitMnyW9A3fnXzjZ/lROnO', 'shark', '2024-06-19');
+INSERT INTO `admins` VALUES ('5', '6672c1b72a8cf', '3', 'knorr_user', '0developedbybarley@gmail.com', '$2y$10$U1WLkh2qzKMGKXKDCYpSmeN/AskkEYXCkyfCEfcASrT0fkNGwnTmS', 'bear', '2024-06-19');
+INSERT INTO `admins` VALUES ('14', '667d5b2c37694', '0', 'Barleysdasddad', 'Barley@gmail.com', '$2y$10$U1WLkh2qzKMGKXKDCYpSmeN/AskkEYXCkyfCEfcASrT0fkNGwnTmS', 'bear', '2024-06-27');
 
 -- Table structure for `users`
 CREATE TABLE `users` (
