@@ -58,4 +58,3 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` VALUES ('1', 'Szaniszló Árpád', 'mittomén', 'developedbybarley@asd.com', '2132313', '1', '1', '1', '0', '0', '2', '1', '1', '2024-06-18');
 INSERT INTO `users` VALUES ('2', 'Szaniszló Árpád', 'mittomén', 'developedbybarley@asd.com', '2132313', '1', '1', '1', '0', '0', '2', '1', '1', '2024-06-18');
-

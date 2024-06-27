@@ -1,5 +1,6 @@
 <?php
 define('DATABASE_PERM', 1);
+define('DATABASE_BACKUP_PERM', 0);
 define('COOKIE_MODAL_PERM', 0);
 define('VALIDATORS_PERM', 1);
 define('UUID_PERM', 0);

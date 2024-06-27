@@ -62,4 +62,4 @@ function exportDatabaseUsingPDO($outputFile)
 
 // Example usage: Export database to a file using PHP PDO
 $outputFile = 'backup/db/db.sql';  // Specify your desired output file path
-exportDatabaseUsingPDO($outputFile);
+if(DATABASE_BACKUP_PERM) exportDatabaseUsingPDO($outputFile);
