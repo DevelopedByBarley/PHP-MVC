@@ -27,11 +27,11 @@
                                 "email": true,
                                 "minLength": 12,
                                 "maxLength": 50
-                                            }' />
+                                }' />
                     </div>
                     <div class="form-group my-2">
                         <label for="exampleInputEmail1">Password</label>
-                        <input type="text" id="password" name="password" class="form-control" class="work-id" required data-validators='{
+                        <input type="text" id="password" name="password" class="password form-control" class="work-id" required data-validators='{
                                 "name": "password",
                                 "required": true
                             }' />
@@ -53,8 +53,8 @@
                             <?php foreach (AVATARS as $avatar) : ?>
                                 <div class="col-2 d-flex align-items-center justify-content-center mb-2">
                                     <div class="form-check form-check-inline image-radio">
-                                        <input required class="form-check-input" type="radio" name="image-radio" id="radio-<?php echo $avatar; ?>" value="<?php echo $avatar; ?>">
-                                        <label class="form-check-label" for="radio-<?php echo $avatar; ?>">
+                                        <input required class="form-check-input" type="radio" name="avatar-radio" id="avatar_radio-<?php echo $avatar; ?>" value="<?php echo $avatar; ?>">
+                                        <label class="form-check-label" for="avatar_radio-<?php echo $avatar; ?>">
                                             <img src="/public/assets/images/avatars/<?php echo $avatar; ?>.png" class="h-45 w-45" alt="<?php echo ucfirst($avatar); ?>">
                                         </label>
                                     </div>

@@ -6,7 +6,6 @@ const duration = 30;
 
 if (root.children.length > 0) {
   const toastData = JSON.parse(document.getElementById('toast-data').getAttribute('data-toast'));
-  console.log(toastData)
 
   toast(toastData.content, toastData.style)
 }

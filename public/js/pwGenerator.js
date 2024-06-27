@@ -5,9 +5,7 @@ pwGenerators.forEach(generator => {
         generator.addEventListener('click', (e) => {
             e.preventDefault();
             const newPw = generatePassword();
-            const password = e.target.parentElement.querySelector('input[name="password"]');
-
-            console.log(e.target.parentElement);
+            const password = e.target.parentElement.querySelector('.password');
 
             if (newPw && newPw !== '') {
                 password.value = newPw;

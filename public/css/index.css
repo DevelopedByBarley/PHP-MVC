@@ -11901,5 +11901,5 @@ nav .theme-switcher .checkbox:checked + .checkbox-label .ball {
   transition: border 0.1s ease-in-out;
 }
 .image-radio .form-check-input:checked + .form-check-label::before {
-  border: 3px solid #a855f7;
+  border: 5px solid #a855f7;
 }/*# sourceMappingURL=index.css.map */

@@ -92,7 +92,6 @@ function checkValidators(options, inputValue, targetElement) {
 
       case "hasUppercase":
         if (typeof value === 'boolean' && value === true) {
-          console.log(inputValue);
           let hasUpperCase = false;
 
           for (let i = 0; i < inputValue.length; i++) {
@@ -100,8 +99,6 @@ function checkValidators(options, inputValue, targetElement) {
               hasUpperCase = true; // Ha talál nagybetűt, true értéket ad vissza
             }
           }
-
-          console.log(hasUpperCase);
 
 
 
@@ -174,6 +171,32 @@ function checkValidators(options, inputValue, targetElement) {
           }
         }
         break;
+
+
+
+
+
+      case "comparePw":
+        if (typeof value === "boolean" && value === true) {
+          const password = document.querySelector('[data-password-compare]');          
+          if (inputValue != password.value) {
+            errors.push(`A 2 jelszó nem megegyező!`);
+            targetElement.setCustomValidity(
+              `A 2 jelszó nem megegyező!`
+            );
+          } else {
+            targetElement.setCustomValidity("");
+          }
+        }
+        break;
+
+
+
+
+
+
+
+
 
       case "email":
         if (typeof value === "boolean" && value === true) {

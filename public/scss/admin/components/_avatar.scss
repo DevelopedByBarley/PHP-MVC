@@ -31,6 +31,7 @@
     }
 
     .form-check-input:checked+.form-check-label::before {
-        border: 3px solid map-get($colors , 'purple-500' );
+        border: 5px solid map-get($colors , 'purple-500' );
     }
 }
+
