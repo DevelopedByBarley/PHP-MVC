@@ -11,6 +11,7 @@ use App\Helpers\Toast;
 use App\Helpers\UUID;
 use App\Helpers\XLSX;
 use App\Models\Model;
+use App\Models\Visitor;
 
 class Controller
 {
@@ -54,6 +55,7 @@ class Controller
 
   public function index()
   {
+
     echo $this->Render->write("public/Layout.php", [
       "content" => $this->Render->write("public/pages/Welcome.php", [])
     ]);

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Visitor;
 use App\Services\LanguageService;
 
 
@@ -16,11 +17,16 @@ $langService = new LanguageService();
 $langService->language();
 
 
+
 require_once 'config/variables/avatars.php';
 require_once 'config/app/langs.php';
 require_once 'config/app/app.php';
 require_once 'config/app/database.php';
+
+
+$visitor = new Visitor();
+SAVING_VISITOR_PERM ?  $visitor->addVisitor() : null;
+
+
 require_once 'config/app/router.php';
-
-
 

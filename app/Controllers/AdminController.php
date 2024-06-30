@@ -130,6 +130,8 @@ class AdminController extends Controller
   {
     $adminId = $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
     $admin = $this->Model->selectByRecord('admins', 'id', $adminId, PDO::PARAM_INT);
+    $visitors = $this->Model->all('visits');
+    $admin_list = $this->Model->all('admins');
 
     $admin_activities = $this->Activity->getAdminActivities();
     $data = [
@@ -139,8 +141,10 @@ class AdminController extends Controller
     echo $this->Render->write("admin/Layout.php", [
       "csrf" => $this->CSRFToken,
       "content" => $this->Render->write("admin/pages/Dashboard.php", [
+        'admin_list' => $admin_list,
         'admin' => $admin,
         'admin_activities' => $admin_activities,
+        'visitors' => $visitors,
         'data' => $data
       ])
     ]);

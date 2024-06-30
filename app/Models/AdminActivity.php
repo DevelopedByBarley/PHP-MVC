@@ -79,4 +79,7 @@ class AdminActivity extends Admin
             throw new Exception("An error occurred during the database operation in deleteExpiredActivities method in AdminActivity model: " . $e->getMessage());
         }
     }
+
+
+    
 }

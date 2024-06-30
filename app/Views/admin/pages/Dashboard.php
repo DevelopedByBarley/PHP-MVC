@@ -1,6 +1,9 @@
 <?php
 $admin = $params['admin'];
-$admin_activities = $params['admin_activities'] ?>
+$admin_activities = $params['admin_activities'];
+$visitors = $params['visitors'];
+$admin_list = $params['admin_list']; 
+ ?>
 
 <?php include('app/Views/admin/components/Header.php') ?>
 
@@ -19,7 +22,7 @@ $admin_activities = $params['admin_activities'] ?>
       </div>
       <div class="col-12 col-md-5 col-lg-3 col-xl-2 min-h-200 border bg-amber-500 hover-bg-amber-700 dark-bg-amber-700 dark-bg-hover-amber-600 transition-ease-in-out-300  d-flex align-items-center justify-content-between gray-50 shadow-lg rounded">
         <div>
-          <h1>50</h1>
+          <h1><?= count($visitors) ?></h1>
           <p>Unique visitors</p>
         </div>
         <div>
@@ -37,7 +40,7 @@ $admin_activities = $params['admin_activities'] ?>
       </div>
       <div class="col-12 col-md-5 col-lg-3 col-xl-2 min-h-200 border bg-rose-500 hover-bg-rose-700 dark-bg-rose-700 dark-bg-hover-rose-600 transition-ease-in-out-300  d-flex align-items-center justify-content-between gray-50 shadow-lg rounded">
         <div>
-          <h1>4</h1>
+          <h1><?= count($admin_list) ?></h1>
           <p>Admins</p>
         </div>
         <div>
