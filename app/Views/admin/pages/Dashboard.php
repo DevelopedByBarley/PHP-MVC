@@ -1,8 +1,9 @@
 <?php
-$admin = $params['admin'];
-$admin_activities = $params['admin_activities'];
-$visitors = $params['visitors'];
-$admin_list = $params['admin_list']; 
+$admin = $params['admin'] ;
+$admin_activities = $params['admin_activities'] ?? [];
+$visitors = $params['visitors']  ?? [];
+$admin_list = $params['admin_list']  ?? [];
+$users = $params['users']  ?? []; 
  ?>
 
 <?php include('app/Views/admin/components/Header.php') ?>
@@ -13,7 +14,7 @@ $admin_list = $params['admin_list'];
     <div class="row gap-3 d-flex align-items-center justify-content-center">
       <div class="col-12 col-md-5 col-lg-3 col-xl-2 min-h-200 border bg-cyan-500 hover-bg-cyan-700 dark-bg-cyan-700 dark-bg-hover-cyan-600 transition-ease-in-out-300  d-flex align-items-center justify-content-between gray-50 shadow-lg rounded">
         <div>
-          <h1>150</h1>
+          <h1><?= count($users) ?></h1>
           <p>New registrations</p>
         </div>
         <div>
@@ -23,7 +24,7 @@ $admin_list = $params['admin_list'];
       <div class="col-12 col-md-5 col-lg-3 col-xl-2 min-h-200 border bg-amber-500 hover-bg-amber-700 dark-bg-amber-700 dark-bg-hover-amber-600 transition-ease-in-out-300  d-flex align-items-center justify-content-between gray-50 shadow-lg rounded">
         <div>
           <h1><?= count($visitors) ?></h1>
-          <p>Unique visitors</p>
+          <p>Látogató</p>
         </div>
         <div>
           <i class="fa-solid fa-chart-simple text-7xl"></i>

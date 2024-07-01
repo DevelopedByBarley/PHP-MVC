@@ -1,5 +1,8 @@
+
+
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +15,7 @@
 <body>
   <?php include 'app/Views/public/components/Navbar.php' ?>
   <?php include 'app/Views/public/components/Alert.php' ?>
-  
+
   <?php if (COOKIE_MODAL_PERM) : ?>
     <?php include 'app/Views/public/components/Cookie.php' ?>
   <?php endif ?>

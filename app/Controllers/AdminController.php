@@ -38,8 +38,8 @@ class AdminController extends Controller
     $adminId = $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
     try {
       $admin = $this->Admin->updateAdmin($adminId, $_POST);
-      
-      if($admin) {
+
+      if ($admin) {
         $this->Toast->set('Admin sikeresen frissítve', 'success', '/admin/settings', null);
       } else {
         $this->Toast->set('Admin frissítése sikretelen, rosszul adta meg előző jelszavát!', 'danger', '/admin/settings', null);
@@ -132,6 +132,7 @@ class AdminController extends Controller
     $admin = $this->Model->selectByRecord('admins', 'id', $adminId, PDO::PARAM_INT);
     $visitors = $this->Model->all('visits');
     $admin_list = $this->Model->all('admins');
+    $users = $this->Model->all('users');
 
     $admin_activities = $this->Activity->getAdminActivities();
     $data = [
@@ -145,6 +146,7 @@ class AdminController extends Controller
         'admin' => $admin,
         'admin_activities' => $admin_activities,
         'visitors' => $visitors,
+        'users' => $users,
         'data' => $data
       ])
     ]);
@@ -153,7 +155,9 @@ class AdminController extends Controller
 
   public function loginPage()
   {
-    session_start();
+    if (session_status() == PHP_SESSION_NONE) {
+      session_start();
+    }
 
     $admin = $_SESSION["adminId"] ?? null;
 

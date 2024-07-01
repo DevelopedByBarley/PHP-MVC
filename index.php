@@ -4,7 +4,6 @@ use App\Models\Visitor;
 use App\Services\LanguageService;
 
 
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -23,10 +22,9 @@ require_once 'config/app/langs.php';
 require_once 'config/app/app.php';
 require_once 'config/app/database.php';
 
-
 $visitor = new Visitor();
-SAVING_VISITOR_PERM ?  $visitor->addVisitor() : null;
+SAVING_VISITOR_PERM   ?  $visitor->addVisitor() : null;
+
 
 
 require_once 'config/app/router.php';
-

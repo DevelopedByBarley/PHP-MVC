@@ -1,7 +1,7 @@
 <?php
 define('DATABASE_PERM', 1);
 define('DATABASE_BACKUP_PERM', 0);
-define('SAVING_VISITOR_PERM', 0);
+define('SAVING_VISITOR_PERM', 1);
 
 
 define('COOKIE_MODAL_PERM', 0);

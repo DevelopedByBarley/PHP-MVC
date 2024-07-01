@@ -11,39 +11,45 @@ class Visitor extends Model
 
   public function addVisitor()
   {
+    session_start();
+    if(isset($_SESSION['adminId'])) return false;
+
     try {
-      $ip = self::getUserIP();
+        if (!isset($_COOKIE['visitor_session'])) {
+          $sessionId =  session_id();
+          setcookie("visitor_session", $sessionId, 0);
 
-      // Ellenőrizzük, hogy az IP cím már szerepel-e az adatbázisban
-      $checkStmt = $this->Pdo->prepare("SELECT COUNT(*) FROM visits WHERE ip_address = :ip_address");
-      $checkStmt->bindParam(':ip_address', $ip, PDO::PARAM_STR);
-      $checkStmt->execute();
-      $count = $checkStmt->fetchColumn();
+          $browser = self::getUserBrowser();
+          $operatingSystem = php_uname('s');
+          $referrer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'Direct';
+          $userAgent = $_SERVER['HTTP_USER_AGENT'];
+          $deviceType = $this->getDeviceType($userAgent);
+          $ip = self::getUserIP();
+          $country = $this->getCountryFromIP($ip);
 
-      if ($count == 0) {
-        // Ha az IP cím még nem szerepel az adatbázisban, mentjük az adatokat
-        $browser = self::getUserBrowser();
-        $operatingSystem = php_uname('s');
-        $referrer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'Direct';
-        $userAgent = $_SERVER['HTTP_USER_AGENT'];
-        $pageUrl = $_SERVER['REQUEST_URI'];
-        $deviceType = $this->getDeviceType($userAgent);
-        $country = $this->getCountryFromIP($ip);
+          $stmt = $this->Pdo->prepare(
+            "INSERT INTO visits (session_id, ip_address, visit_start, visit_end,  browser, operating_system, referrer, device_type, country) VALUES (:session_id, :ip_address, current_timestamp(), current_timestamp(), :browser, :operating_system, :referrer, :device_type, :country)"
+          );
+          $stmt->bindParam(':session_id', $sessionId, PDO::PARAM_STR);
+          $stmt->bindParam(':ip_address', $ip, PDO::PARAM_STR);
+          $stmt->bindParam(':browser', $browser, PDO::PARAM_STR);
+          $stmt->bindParam(':operating_system', $operatingSystem, PDO::PARAM_STR);
+          $stmt->bindParam(':referrer', $referrer, PDO::PARAM_STR);
+          $stmt->bindParam(':device_type', $deviceType, PDO::PARAM_STR);
+          $stmt->bindParam(':country', $country, PDO::PARAM_STR);
 
-        $stmt = $this->Pdo->prepare(
-          "INSERT INTO visits (ip_address, visit_time, browser, operating_system, referrer, device_type, page_url, country)
-                  VALUES (:ip_address, current_timestamp(), :browser, :operating_system, :referrer, :device_type, :page_url, :country)"
-        );
-        $stmt->bindParam(':ip_address', $ip, PDO::PARAM_STR);
-        $stmt->bindParam(':browser', $browser, PDO::PARAM_STR);
-        $stmt->bindParam(':operating_system', $operatingSystem, PDO::PARAM_STR);
-        $stmt->bindParam(':referrer', $referrer, PDO::PARAM_STR);
-        $stmt->bindParam(':device_type', $deviceType, PDO::PARAM_STR);
-        $stmt->bindParam(':page_url', $pageUrl, PDO::PARAM_STR);
-        $stmt->bindParam(':country', $country, PDO::PARAM_STR);
+          $stmt->execute();
+        } else {
+          // Ha a session él, frissítjük az utolsó látogatási időt
+          $sessionId = $_COOKIE['visitor_session'];
 
-        $stmt->execute();
-      }
+          $stmt = $this->Pdo->prepare(
+            "UPDATE visits SET visit_end = current_timestamp() WHERE session_id = :session_id"
+          );
+          $stmt->bindParam(':session_id', $sessionId, PDO::PARAM_STR);
+          $stmt->execute();
+        }
+      
     } catch (PDOException $e) {
       throw new Exception("An error occurred during the database operation in addVisitor method in Visitor model: " . $e->getMessage());
     }
