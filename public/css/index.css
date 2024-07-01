@@ -11663,25 +11663,22 @@ nav .theme-switcher .checkbox:checked + .checkbox-label .ball {
   transform: translateX(24px);
 }
 
-.modal-body .form-check {
+.rating-modal .modal-body .form-check {
   margin-bottom: 10px;
   /* Adjust spacing between smiley icons */
 }
-
-.form-check-input {
+.rating-modal .form-check-input {
   position: absolute;
   opacity: 0;
 }
-
-.form-check-label {
+.rating-modal .form-check-label {
   cursor: pointer;
   display: inline-block;
   position: relative;
   padding: 5px;
   /* Adjust padding around the smiley icon */
 }
-
-.smiley-icon {
+.rating-modal .smiley-icon {
   font-size: 40px;
   /* Adjust the size as needed */
   display: inline-block;
@@ -11696,8 +11693,7 @@ nav .theme-switcher .checkbox:checked + .checkbox-label .ball {
   border: 10px solid transparent;
   transition: border 0.3s ease;
 }
-
-.form-check-input:checked + .form-check-label .smiley-icon {
+.rating-modal .form-check-input:checked + .form-check-label .smiley-icon {
   border: 3px solid #6f42c1;
   /* Adjust border color as needed */
 }

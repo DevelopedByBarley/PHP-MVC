@@ -1,10 +1,9 @@
 axios.get('/feedback').then(res => {
     const feedback = res.data.isExist;
-    localStorage.removeItem('counter');
 
     if (!feedback) {
         let counter = localStorage.getItem('counter') ? Number(localStorage.getItem('counter')) : 0;
-        const max = 1000  * 5; // 5 mins
+        const max = 1000  * 10; // 5 mins
 
         const interval = setInterval(() => {
 
