@@ -11685,9 +11685,9 @@ nav .theme-switcher .checkbox:checked + .checkbox-label .ball {
   font-size: 40px;
   /* Adjust the size as needed */
   display: inline-block;
-  width: 60px;
+  width: 55px;
   /* Adjust the size as needed */
-  height: 60px;
+  height: 55px;
   /* Adjust the size as needed */
   text-align: center;
   line-height: 48px;

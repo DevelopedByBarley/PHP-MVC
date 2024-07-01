@@ -1,6 +1,5 @@
 <?php
 
-
 function getConnect()
 {
   $servername = $_SERVER['DB_HOST'];
@@ -18,8 +17,14 @@ function getConnect()
   }
 }
 
-
-
+function safeQuote($conn, $value)
+{
+  if (is_null($value)) {
+    return 'NULL';
+  } else {
+    return $conn->quote($value);
+  }
+}
 
 function exportDatabaseUsingPDO($outputFile)
 {
@@ -49,12 +54,14 @@ function exportDatabaseUsingPDO($outputFile)
       // Export table data
       $stmt = $conn->query("SELECT * FROM `$table`");
       while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $rowValues = array_map([$conn, 'quote'], $row);
+        $rowValues = array_map(function($value) use ($conn) {
+          return safeQuote($conn, $value);
+        }, $row);
         $rowValues = implode(", ", $rowValues);
         fwrite($output, "INSERT INTO `$table` VALUES ($rowValues);\n");
       }
       fwrite($output, "\n");
-    }
+    } 
 
     fclose($output);
   } catch (PDOException $e) {
@@ -64,4 +71,6 @@ function exportDatabaseUsingPDO($outputFile)
 
 // Example usage: Export database to a file using PHP PDO
 $outputFile = 'backup/db/db.sql';  // Specify your desired output file path
-if (DATABASE_BACKUP_PERM) exportDatabaseUsingPDO($outputFile);
+if (defined('DATABASE_BACKUP_PERM') && DATABASE_BACKUP_PERM) {
+  exportDatabaseUsingPDO($outputFile);
+}

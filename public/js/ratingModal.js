@@ -6,7 +6,7 @@ axios.get('/feedback').then(res => {
         let counter = localStorage.getItem('counter') ? Number(localStorage.getItem('counter')) : 0;
         const max = 1000  * 5; // 5 mins
 
-        setInterval(() => {
+        const interval = setInterval(() => {
 
             if (counter < max) {
                 counter += 1000;
@@ -14,9 +14,8 @@ axios.get('/feedback').then(res => {
             } else {
                 var myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
                 myModal.show();
+                clearInterval(interval)
             }
-
-            console.log(counter)
 
         }, 1000)
 
