@@ -133,7 +133,7 @@ class AdminController extends Controller
     $visitors = $this->Model->all('visits');
     $admin_list = ADMIN_SERVICE_PERM ? $this->Model->all('admins') : [];
     $users =  USER_SERVICE_PERM ? $this->Model->all('users') : [];
-    $feedbacks = $this->Model->all('feedbacks');
+    $feedbacks = FEEDBACK_PERM ? $this->Model->all('feedbacks') : [];
 
     $admin_activities = $this->Activity->getAdminActivities();
     $data = [
