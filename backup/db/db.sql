@@ -80,7 +80,8 @@ CREATE TABLE `visits` (
   `visit_start` datetime NOT NULL DEFAULT current_timestamp(),
   `visit_end` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `visits` VALUES ('37', 'mrr3m72418tv9hps6f2rtediil', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', 'Windows NT', 'http://localhost:8080/admin/dashboard', 'Desktop', 'Localhost', '2024-07-01 11:50:00', '2024-07-01 11:50:01');
+INSERT INTO `visits` VALUES ('38', 'ooota5554vt1pm9iedfds9jqq5', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', 'Windows NT', 'http://localhost:8080/admin/dashboard', 'Desktop', 'Localhost', '2024-07-01 14:19:15', '2024-07-01 14:19:18');
 
