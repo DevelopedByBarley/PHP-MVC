@@ -11,6 +11,9 @@ function registerRoutes(FastRoute\RouteCollector $router)
   $router->addGroup('/', function (FastRoute\RouteCollector $r) {
     require_once 'routes/home.php';
   });
+  $router->addGroup('/feedback', function (FastRoute\RouteCollector $r) {
+    require_once 'routes/feedback.php';
+  });
   $router->addGroup('/admin', function (FastRoute\RouteCollector $r) {
     if (ADMIN_SERVICE_PERM) {
       require_once 'routes/admin.php';

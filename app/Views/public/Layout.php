@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
 
@@ -9,12 +7,18 @@
   <link rel="stylesheet" href="/public/bootstrap/css/bootstrap.css" />
   <link rel="stylesheet" href="/public/css/index.css?v=<?= time() ?>">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="/public/node_modules/axios/dist/axios.min.js"></script>
+
   <title><?php APP_NAME ?></title>
 </head>
 
 <body>
   <?php include 'app/Views/public/components/Navbar.php' ?>
   <?php include 'app/Views/public/components/Alert.php' ?>
+  <?php if (FEEDBACK_PERM) : ?>
+    <?php include 'app/Views/public/components/RatingModal.php' ?>
+    <script type="module" src="/public/js/ratingModal.js?v=<?= time() ?>"></script>
+  <?php endif ?>
 
   <?php if (COOKIE_MODAL_PERM) : ?>
     <?php include 'app/Views/public/components/Cookie.php' ?>

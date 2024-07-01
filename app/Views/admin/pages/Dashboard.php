@@ -3,7 +3,8 @@ $admin = $params['admin'] ;
 $admin_activities = $params['admin_activities'] ?? [];
 $visitors = $params['visitors']  ?? [];
 $admin_list = $params['admin_list']  ?? [];
-$users = $params['users']  ?? []; 
+$users = $params['users']  ?? [];
+$feedbacks = $params['feedbacks'] ?? []; 
  ?>
 
 <?php include('app/Views/admin/components/Header.php') ?>
@@ -15,7 +16,7 @@ $users = $params['users']  ?? [];
       <div class="col-12 col-md-5 col-lg-3 col-xl-2 min-h-200 border bg-cyan-500 hover-bg-cyan-700 dark-bg-cyan-700 dark-bg-hover-cyan-600 transition-ease-in-out-300  d-flex align-items-center justify-content-between gray-50 shadow-lg rounded">
         <div>
           <h1><?= count($users) ?></h1>
-          <p>New registrations</p>
+          <p>Regisztráció</p>
         </div>
         <div>
           <i class="fa-solid fa-user-plus text-7xl"></i>
@@ -32,8 +33,8 @@ $users = $params['users']  ?? [];
       </div>
       <div class="col-12 col-md-5 col-lg-3 col-xl-2 min-h-200 border bg-indigo-500 hover-bg-indigo-700 dark-bg-indigo-700 dark-bg-hover-indigo-600 transition-ease-in-out-300 d-flex align-items-center justify-content-between gray-50 shadow-lg rounded">
         <div>
-          <h1>600</h1>
-          <p>Likes</p>
+          <h1><?= count($feedbacks) ?></h1>
+          <p>Értékelés</p>
         </div>
         <div>
           <i class="fa-solid fa-thumbs-up text-7xl"></i>
@@ -42,7 +43,7 @@ $users = $params['users']  ?? [];
       <div class="col-12 col-md-5 col-lg-3 col-xl-2 min-h-200 border bg-rose-500 hover-bg-rose-700 dark-bg-rose-700 dark-bg-hover-rose-600 transition-ease-in-out-300  d-flex align-items-center justify-content-between gray-50 shadow-lg rounded">
         <div>
           <h1><?= count($admin_list) ?></h1>
-          <p>Admins</p>
+          <p>Admin</p>
         </div>
         <div>
           <i class="fa-solid fa-user-plus text-7xl"></i>

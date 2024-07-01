@@ -131,8 +131,9 @@ class AdminController extends Controller
     $adminId = $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
     $admin = $this->Model->selectByRecord('admins', 'id', $adminId, PDO::PARAM_INT);
     $visitors = $this->Model->all('visits');
-    $admin_list = $this->Model->all('admins');
-    $users = $this->Model->all('users');
+    $admin_list = ADMIN_SERVICE_PERM ? $this->Model->all('admins') : [];
+    $users =  USER_SERVICE_PERM ? $this->Model->all('users') : [];
+    $feedbacks = $this->Model->all('feedbacks');
 
     $admin_activities = $this->Activity->getAdminActivities();
     $data = [
@@ -145,6 +146,7 @@ class AdminController extends Controller
         'admin_list' => $admin_list,
         'admin' => $admin,
         'admin_activities' => $admin_activities,
+        'feedbacks' => $feedbacks,
         'visitors' => $visitors,
         'users' => $users,
         'data' => $data

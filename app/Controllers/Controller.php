@@ -49,12 +49,12 @@ class Controller
   {
     $visitor = new Visitor();
 
-$is_admin_url = strpos($_SERVER['REQUEST_URI'], '/admin') !== false;
+    $is_admin_url = strpos($_SERVER['REQUEST_URI'], '/admin') !== false;
 
-// Ellenőrizd, hogy a SAVING_VISITOR_PERM definiálva van-e és igaz-e
-if (defined('SAVING_VISITOR_PERM') && SAVING_VISITOR_PERM && !$is_admin_url) {
-    $visitor->addVisitor();
-}
+    // Ellenőrizd, hogy a SAVING_VISITOR_PERM definiálva van-e és igaz-e
+    if (defined('SAVING_VISITOR_PERM') && SAVING_VISITOR_PERM && !$is_admin_url) {
+      $visitor->addVisitor();
+    }
 
 
     echo $this->Render->write("public/Layout.php", [
@@ -91,6 +91,17 @@ if (defined('SAVING_VISITOR_PERM') && SAVING_VISITOR_PERM && !$is_admin_url) {
     } else {
       header("Location: $failed_url");
       exit;
+    }
+  }
+
+  protected function getIpByUser()
+  {
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+      return $_SERVER['HTTP_CLIENT_IP'];
+    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+      return $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } else {
+      return $_SERVER['REMOTE_ADDR'];
     }
   }
 }
