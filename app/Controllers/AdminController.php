@@ -223,7 +223,7 @@ class AdminController extends Controller
     $admin = $this->Model->selectByRecord('admins', 'id', $adminId, PDO::PARAM_STR);
     $admin_list = $this->Model->all('admins', $adminId, PDO::PARAM_STR);
 
-    $data = $this->Model->paginate($admin_list, 2, '',  function ($offset, $numOfPages) {
+    $data = $this->Model->paginate($admin_list, 10, '',  function ($offset, $numOfPages) {
       if ($offset === 0) {
         header("Location: /admin/settings");
         exit;

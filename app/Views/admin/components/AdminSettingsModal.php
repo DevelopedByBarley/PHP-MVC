@@ -1,4 +1,4 @@
-<div class="modal fade" id="updateAdminModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="adminSettingsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -61,8 +61,8 @@
                             <?php foreach (AVATARS as $avatar) : ?>
                                 <div class="col-2 d-flex align-items-center justify-content-center mb-2">
                                     <div class="form-check form-check-inline image-radio">
-                                        <input required class="form-check-input" <?php echo $avatar === $admin['avatar'] ? 'checked' : '' ?> type="radio" name="updated_avatar_radio" id="updated_avatar_radio-<?php echo $avatar; ?>" value="<?php echo $avatar; ?>">
-                                        <label class="form-check-label" for="updated_avatar_radio-<?php echo $avatar; ?>">
+                                        <input required class="form-check-input" <?php echo $avatar === $admin['avatar'] ? 'checked' : '' ?> type="radio" name="settings_avatar_radio" id="settings_avatar_radio-<?php echo $avatar; ?>" value="<?php echo $avatar; ?>">
+                                        <label class="form-check-label" for="settings_avatar_radio-<?php echo $avatar; ?>">
                                             <img src="/public/assets/images/avatars/<?php echo $avatar; ?>.png" class="h-45 w-45" alt="<?php echo ucfirst($avatar); ?>">
                                         </label>
                                     </div>
