@@ -32,6 +32,10 @@ function checkValidators(options, inputValue, targetElement) {
               requiredMessage[lang]
             );
             // Itt megteheted az egyéb teendőket, például hibaüzenet megjelenítése
+          } else {
+            targetElement.setCustomValidity(
+             ''
+            );
           }
         }
         break;

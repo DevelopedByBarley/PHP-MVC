@@ -40,7 +40,7 @@
 
                     <div class="form-group my-2">
                         <label for="exampleInputPassword1">Level</label>
-                        <select class="form-select" aria-label="Default select example" required>
+                        <select class="form-select" name="level" aria-label="Default select example" required>
                             <option value="" selected>Select admin level</option>
                             <option value="1">1</option>
                             <option value="2">2</option>

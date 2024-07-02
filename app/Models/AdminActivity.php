@@ -38,7 +38,7 @@ class AdminActivity extends Admin
     public function getAdminActivities()
     {
         try {
-            $limit = 5;
+            $limit = 10;
             // Prepare the SQL statement
             $stmt = $this->Pdo->prepare(" SELECT activity.id,
                 activity.content,

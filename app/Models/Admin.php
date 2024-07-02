@@ -17,15 +17,17 @@ class Admin extends Model
       $email = filter_var($body["email"] ?? '', FILTER_SANITIZE_EMAIL);
       $password = password_hash(filter_var($body["password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS), PASSWORD_DEFAULT);
       $avatar = filter_var($body["avatar-radio"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+      $level = filter_var($body["level"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
 
       $adminId = uniqid(); // Generálunk egy egyedi adminId-t
 
       // Prepare the SQL statement
-      $stmt = $this->Pdo->prepare("INSERT INTO `admins` (`id`, `adminId`, `name`, `email`, `password`, `avatar`, `created_at`) 
-                                      VALUES (NULL, :adminId, :name, :email, :password, :avatar, current_timestamp())");
+      $stmt = $this->Pdo->prepare("INSERT INTO `admins` (`id`, `adminId`, `level`, `name`, `email`, `password`, `avatar`, `created_at`) 
+                                      VALUES (NULL, :adminId, :level, :name, :email, :password, :avatar, current_timestamp())");
 
       // Bind parameters to the statement
       $stmt->bindParam(":adminId", $adminId, PDO::PARAM_STR);
+      $stmt->bindParam(":level", $level, PDO::PARAM_INT);
       $stmt->bindParam(":name", $name, PDO::PARAM_STR);
       $stmt->bindParam(":email", $email, PDO::PARAM_STR);
       $stmt->bindParam(":password", $password, PDO::PARAM_STR);

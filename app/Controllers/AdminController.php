@@ -27,6 +27,11 @@ class AdminController extends Controller
     $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
     try {
       $this->Admin->storeAdmin($_POST);
+      $this->Activity->store([
+        'content' => "Új admint adott hozzá:  " . $_POST['name'] . ", level(" . $_POST['level'] . ")",
+        'contentInEn' => null,
+        'adminRefId' => $_SESSION['adminId']
+      ],  $_SESSION['adminId']);
       $this->Toast->set('Admin sikeresen hozzáadva', 'success', '/admin/settings', null);
     } catch (Exception $e) {
       echo $e->getMessage();

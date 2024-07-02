@@ -8,13 +8,18 @@ CREATE TABLE `admin_activities` (
   PRIMARY KEY (`id`),
   KEY `adminRef_id` (`adminRef_id`),
   CONSTRAINT `admin_activities_ibfk_1` FOREIGN KEY (`adminRef_id`) REFERENCES `admins` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `admin_activities` VALUES ('25', 'dsadadasdsadsadasdasd', NULL, '4', '2024-06-27 11:33:46');
-INSERT INTO `admin_activities` VALUES ('26', 'dsadsadsad', NULL, '5', '2024-06-27 11:33:52');
-INSERT INTO `admin_activities` VALUES ('27', 'dasdsadsadsadsa', NULL, '4', '2024-06-27 11:33:57');
 INSERT INTO `admin_activities` VALUES ('28', 'dsadasdasdasd', NULL, '5', '2024-06-27 11:34:08');
 INSERT INTO `admin_activities` VALUES ('29', 'dsadasdasdasd', NULL, '5', '2024-06-27 11:34:08');
+INSERT INTO `admin_activities` VALUES ('30', 'Új admint adott hozzá', NULL, '4', '2024-07-02 11:38:45');
+INSERT INTO `admin_activities` VALUES ('31', 'Új admint adott hozzá: Szaniszló Árpád, level(1)', NULL, '4', '2024-07-02 11:43:57');
+INSERT INTO `admin_activities` VALUES ('32', 'Új admint adott hozzá: &#60;b&#62; Szaniszló Árpád, level(3) &#60;/b&#62;', NULL, '4', '2024-07-02 11:45:02');
+INSERT INTO `admin_activities` VALUES ('33', 'dsadasdasdasd', NULL, '5', '2024-06-27 11:34:08');
+INSERT INTO `admin_activities` VALUES ('34', 'dsadasdasdasd', NULL, '5', '2024-06-27 11:34:08');
+INSERT INTO `admin_activities` VALUES ('35', 'Új admint adott hozzá', NULL, '4', '2024-07-02 11:38:45');
+INSERT INTO `admin_activities` VALUES ('36', 'Új admint adott hozzá: Szaniszló Árpád, level(1)', NULL, '4', '2024-07-02 11:43:57');
+INSERT INTO `admin_activities` VALUES ('37', 'Új admint adott hozzá: &#60;b&#62; Szaniszló Árpád, level(3) &#60;/b&#62;', NULL, '4', '2024-07-02 11:45:02');
 
 -- Table structure for `admins`
 CREATE TABLE `admins` (
@@ -27,11 +32,15 @@ CREATE TABLE `admins` (
   `avatar` varchar(500) NOT NULL,
   `created_at` date DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `admins` VALUES ('4', '6672c1840a967', '1', 'knorr_admin', '0developedbybarley@gmail.com', '$2y$10$LtbEMJPx/OGVO7WjcrbWqOBc7sufmGQcErg5DxPDDcQQerTeMHtla', 'bear', '2024-06-19');
-INSERT INTO `admins` VALUES ('5', '6672c1b72a8cf', '3', 'knorr_user', '0developedbybarley@gmail.com', '$2y$10$NIW/tZ1w4P1cMctQi/S4/uEDQg/FgCz/1UuFOBHo90yI5rI.5JzKa', 'man', '2024-06-19');
+INSERT INTO `admins` VALUES ('4', '6672c1840a967', '3', 'knorr_admin', '0developedbybarley@gmail.com', '$2y$10$LtbEMJPx/OGVO7WjcrbWqOBc7sufmGQcErg5DxPDDcQQerTeMHtla', 'bear', '2024-06-19');
+INSERT INTO `admins` VALUES ('5', '6672c1b72a8cf', '3', 'knorr_user', '0developedbybarley@gmail.com', '$2y$10$U1WLkh2qzKMGKXKDCYpSmeN/AskkEYXCkyfCEfcASrT0fkNGwnTmS', 'bear', '2024-06-19');
 INSERT INTO `admins` VALUES ('14', '667d5b2c37694', '0', 'Barleysdasddad', 'Barley@gmail.com', '$2y$10$U1WLkh2qzKMGKXKDCYpSmeN/AskkEYXCkyfCEfcASrT0fkNGwnTmS', 'bear', '2024-06-27');
+INSERT INTO `admins` VALUES ('15', '6683ca7c90323', '0', 'Szaniszló Árpád', 'Barley@gmail.com', '$2y$10$KdyWfqnm0KJzzBy/KD8YIOW.zcXrPR8yh5.UTpGzNdrEuYnjVKuQe', 'bear', '2024-07-02');
+INSERT INTO `admins` VALUES ('16', '6683caa503e26', '0', 'Szaniszló Árpád', 'Barley@gmail.com', '$2y$10$d5UKa7a3V8nlk08VNYg.jue6Xj3YkYF5KnEHESc6R0KgX.ir0jmmq', 'bear', '2024-07-02');
+INSERT INTO `admins` VALUES ('17', '6683cbdd7505b', '1', 'Szaniszló Árpád', 'Barley@gmail.com', '$2y$10$gb86lnYyq.s1TZBN4EoX4ue2J7U8/u0fxRHiM6GlWKUgT8B7BUZy.', 'rabbit', '2024-07-02');
+INSERT INTO `admins` VALUES ('18', '6683cc1ef30b4', '3', 'Szaniszló Árpád', 'Barley@gmail.com', '$2y$10$FkSCABOwVsrBFeNMayg9Sux5sG541mkdUG1EUZ03kB5Ii3KzntxPy', 'bear', '2024-07-02');
 
 -- Table structure for `feedbacks`
 CREATE TABLE `feedbacks` (
@@ -40,9 +49,10 @@ CREATE TABLE `feedbacks` (
   `feedback` int(11) NOT NULL,
   `created_at` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `feedbacks` VALUES ('13', '::1', '0', '2024-07-01 20:13:39');
+INSERT INTO `feedbacks` VALUES ('8', '2', '2', '2024-07-01 13:51:30');
+INSERT INTO `feedbacks` VALUES ('9', '::1', '5', '2024-07-01 14:33:20');
 
 -- Table structure for `users`
 CREATE TABLE `users` (

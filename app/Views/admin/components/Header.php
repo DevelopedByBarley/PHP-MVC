@@ -22,7 +22,7 @@
                     </p>
                 </div>
             </div>
-            <div class="col-12 col-md-5 col-lg-4 col-xl-3 min-h-400 max-h-400 border bg-gray-50 dark-bg-gray-900 shadow-lg rounded">
+            <div class="col-12 col-md-5 col-lg-4 col-xl-3 min-h-400 max-h-400 border bg-gray-50 dark-bg-gray-900 shadow-lg rounded overflow-y-scroll overflow-x-hidden">
                 <div class="bg-gray-50 dark-bg-gray-800">
                     <h4 class="p-3">Activities</h4>
                 </div>
