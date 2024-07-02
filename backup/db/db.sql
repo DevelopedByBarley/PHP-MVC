@@ -30,7 +30,7 @@ CREATE TABLE `admins` (
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `admins` VALUES ('4', '6672c1840a967', '1', 'knorr_admin', '0developedbybarley@gmail.com', '$2y$10$LtbEMJPx/OGVO7WjcrbWqOBc7sufmGQcErg5DxPDDcQQerTeMHtla', 'bear', '2024-06-19');
-INSERT INTO `admins` VALUES ('5', '6672c1b72a8cf', '2', 'knorr_user', '0developedbybarley@gmail.com', '$2y$10$U1WLkh2qzKMGKXKDCYpSmeN/AskkEYXCkyfCEfcASrT0fkNGwnTmS', 'bear', '2024-06-19');
+INSERT INTO `admins` VALUES ('5', '6672c1b72a8cf', '3', 'knorr_user', '0developedbybarley@gmail.com', '$2y$10$NIW/tZ1w4P1cMctQi/S4/uEDQg/FgCz/1UuFOBHo90yI5rI.5JzKa', 'man', '2024-06-19');
 INSERT INTO `admins` VALUES ('14', '667d5b2c37694', '0', 'Barleysdasddad', 'Barley@gmail.com', '$2y$10$U1WLkh2qzKMGKXKDCYpSmeN/AskkEYXCkyfCEfcASrT0fkNGwnTmS', 'bear', '2024-06-27');
 
 -- Table structure for `feedbacks`

@@ -22,42 +22,39 @@
                         <label class="form-label" for="form3Example3">Email address</label>
                         <input name="updated_email" type="email" id="form3Example3" class="form-control" disabled value="<?= $admin['email'] ?? '' ?>" />
                     </div>
-                    <div class="form-group my-2">
-                        <label for="exampleInputEmail1">Prev password</label>
-                        <input type="text" id="prev_password" name="prev_password" class="form-control" required data-validators='{
+
+                    <div class="border p-2 py-3 my-4 rounded-4">
+
+                        <div class="form-check mt-3 mb-4">
+                            <input type="checkbox" class="form-check-input" id="changePasswordCheckbox">
+                            <label class="form-check-label" for="changePasswordCheckbox">Jelszó változtatás</label>
+                        </div>
+
+                        <div class="form-group my-2">
+                            <label for="exampleInputEmail1">Prev password</label>
+                            <input type="text" id="prev_password" name="prev_password" class="form-control" disabled data-validators='{
                                 "name": "prev_password",
                                 "required": true
                             }' />
-                    </div>
-                    <div class="form-group my-2">
-                        <label for="exampleInputEmail1">Password</label>
-                        <input type="text" id="password" name="updated_password" class="password form-control" data-password-compare=1 required data-validators='{
+                        </div>
+                        <div class="form-group my-2">
+                            <label for="exampleInputEmail1">Password</label>
+                            <input type="text" id="password" name="updated_password" class="password form-control" data-password-compare=1 disabled data-validators='{
                                 "name": "updated_password",
                                 "required": true
                             }' />
-                        <button type="button" class="d-inline btn border pw-generator">Generate</button>
-                    </div>
+                            <button type="button" class="d-inline btn border pw-generator">Generate</button>
+                        </div>
 
-                    <div class="form-group my-2">
-                        <label for="exampleInputEmail1">Repeat password</label>
-                        <input type="text" id="repeat" name="repeat" class="form-control" required data-validators='{
+                        <div class="form-group my-2">
+                            <label for="exampleInputEmail1">Repeat password</label>
+                            <input type="text" id="repeat" name="repeat" class="form-control" disabled data-validators='{
                                 "name": "repeat",
                                 "comparePw": true
                             }' />
+                        </div>
                     </div>
 
-
-                    <?php if ((int)$admin['level'] === 3) : ?>
-                        <div class="form-group my-2">
-                            <label for="exampleInputPassword1">Level</label>
-                            <select class="form-select" aria-label="Default select example"  required>
-                                <option value="" selected>Select admin level</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                        </div>
-                    <?php endif ?>
                     <div class="avatars">
                         <div class="row">
                             <label for="avatars" class="my-3">Avatar kiválasztása</label>
@@ -81,7 +78,6 @@
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
 </div>
