@@ -182,7 +182,8 @@ function checkValidators(options, inputValue, targetElement) {
 
       case "comparePw":
         if (typeof value === "boolean" && value === true) {
-          const password = document.querySelector('[data-password-compare]');          
+          const password = targetElement.parentElement.parentElement.querySelector('[data-password-compare]');
+          console.log(password);
           if (inputValue != password.value) {
             errors.push(`A 2 jelszó nem megegyező!`);
             targetElement.setCustomValidity(
