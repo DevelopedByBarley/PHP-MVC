@@ -34,13 +34,9 @@ CREATE TABLE `admins` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `admins` VALUES ('4', '6672c1840a967', '3', 'knorr_admin', '0developedbybarley@gmail.com', '$2y$10$LtbEMJPx/OGVO7WjcrbWqOBc7sufmGQcErg5DxPDDcQQerTeMHtla', 'bear', '2024-06-19');
-INSERT INTO `admins` VALUES ('5', '6672c1b72a8cf', '3', 'knorr_user', '0developedbybarley@gmail.com', '$2y$10$U1WLkh2qzKMGKXKDCYpSmeN/AskkEYXCkyfCEfcASrT0fkNGwnTmS', 'bear', '2024-06-19');
+INSERT INTO `admins` VALUES ('4', '6672c1840a967', '3', 'Barley', '0developedbybarley@gmail.com', '$2y$10$LtbEMJPx/OGVO7WjcrbWqOBc7sufmGQcErg5DxPDDcQQerTeMHtla', 'shark', '2024-06-19');
+INSERT INTO `admins` VALUES ('5', '6672c1b72a8cf', '3', 'knorr_user', '0developedbybarley@gmail.com', '$2y$10$U1WLkh2qzKMGKXKDCYpSmeN/AskkEYXCkyfCEfcASrT0fkNGwnTmS', 'cat', '2024-06-19');
 INSERT INTO `admins` VALUES ('14', '667d5b2c37694', '0', 'Barleysdasddad', 'Barley@gmail.com', '$2y$10$U1WLkh2qzKMGKXKDCYpSmeN/AskkEYXCkyfCEfcASrT0fkNGwnTmS', 'bear', '2024-06-27');
-INSERT INTO `admins` VALUES ('15', '6683ca7c90323', '0', 'Szaniszló Árpád', 'Barley@gmail.com', '$2y$10$KdyWfqnm0KJzzBy/KD8YIOW.zcXrPR8yh5.UTpGzNdrEuYnjVKuQe', 'bear', '2024-07-02');
-INSERT INTO `admins` VALUES ('16', '6683caa503e26', '0', 'Szaniszló Árpád', 'Barley@gmail.com', '$2y$10$d5UKa7a3V8nlk08VNYg.jue6Xj3YkYF5KnEHESc6R0KgX.ir0jmmq', 'bear', '2024-07-02');
-INSERT INTO `admins` VALUES ('17', '6683cbdd7505b', '1', 'Szaniszló Árpád', 'Barley@gmail.com', '$2y$10$gb86lnYyq.s1TZBN4EoX4ue2J7U8/u0fxRHiM6GlWKUgT8B7BUZy.', 'rabbit', '2024-07-02');
-INSERT INTO `admins` VALUES ('18', '6683cc1ef30b4', '3', 'Szaniszló Árpád', 'Barley@gmail.com', '$2y$10$FkSCABOwVsrBFeNMayg9Sux5sG541mkdUG1EUZ03kB5Ii3KzntxPy', 'bear', '2024-07-02');
 
 -- Table structure for `feedbacks`
 CREATE TABLE `feedbacks` (

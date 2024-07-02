@@ -30,8 +30,8 @@ $currentUrl = $_SERVER['REQUEST_URI'];
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasExampleLabel">
                 <span>
-                    <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
-                </span> Barley
+                    <img src="/public/assets/images/avatars/<?= $params['admin']['avatar']?>.png" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
+                </span> <?= $params['admin']['name'] ?>
             </h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
