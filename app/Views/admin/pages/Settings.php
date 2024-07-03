@@ -72,7 +72,8 @@ $csrf = $params['csrf'] ?? null;
                                             <td><?= htmlspecialchars($current_admin['created_at']) ?></td>
                                             <td>
                                                 <div class="btn-group gap-2">
-                                                    <button type="button" class="btn btn-rounded btn-sm fw-bold bg-sky-500 text-white">Show</button>
+                                                    <button type="button" class="btn btn-rounded btn-sm fw-bold bg-sky-500 text-white"  data-bs-toggle="modal" data-bs-target="#showAdminModal-<?= $current_admin['id'] ?>">Show</button>
+                                                    <?php include 'app/Views/admin/components/showAdminModal.php' ?>
                                                     <?php if ((int)$current_admin['level'] !== 3) : ?>
                                                         <button type="button" class="btn btn-rounded btn-sm fw-bold bg-yellow-500 text-white"  data-bs-toggle="modal" data-bs-target="#updateAdminModal-<?= $current_admin['id'] ?>">Edit</button>
                                                         <?php include 'app/Views/admin/components/updateAdminModal.php' ?>
