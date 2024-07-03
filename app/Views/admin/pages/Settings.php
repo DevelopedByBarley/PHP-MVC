@@ -8,7 +8,7 @@ $csrf = $params['csrf'] ?? null;
 
 <div class="container-fluid">
     <div class="row dark-bg-gray-900 min-h-95 py-5">
-        <div class="col-12 shadow dark-bg-gray-800 py-5 <?= (int)$level === 3 ? 'col-lg-2 offset-xl-2' : '' ?>">
+        <div class="col-12 shadow dark-bg-gray-800 py-5 <?= (int)$level === 3 ? 'col-lg-3 offset-xl-2' : '' ?>">
             <div class="d-flex flex-column align-items-center text-center p-3 pt-5">
                 <img class="rounded-circle mt-5" width="150px" src="/public/assets/images/avatars/<?= $admin['avatar'] ?>.png">
                 <div class="mt-2"><span class="fw-bold text-xl"><?= $admin['name'] ?></span> <span>(Level <?= $level ?>)</span></div><span><?= $admin['email'] ?></span><span> </span>
