@@ -6,6 +6,7 @@ use App\Helpers\Alert;
 use App\Helpers\Authenticate;
 use App\Helpers\CSRFToken;
 use App\Helpers\Debug;
+use App\Helpers\Mailer;
 use App\Helpers\Render;
 use App\Helpers\Toast;
 use App\Helpers\UUID;
@@ -24,6 +25,7 @@ class Controller
   protected $Alert;
   protected $Toast;
   protected $CSRFToken;
+  protected $Mailer;
 
 
   public function __construct()
@@ -37,6 +39,7 @@ class Controller
     $this->Alert = new Alert();
     $this->Toast = new Toast();
     $this->CSRFToken = new CSRFToken();
+    $this->Mailer = new Mailer();
   }
 
 

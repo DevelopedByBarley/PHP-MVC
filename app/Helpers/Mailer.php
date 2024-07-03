@@ -46,6 +46,7 @@ class Mailer
         } else {
             // Hibás fájlelérés esetén hibaüzenet kiírása
             echo "Error: File $path not found";
+            exit;
         }
     }
 
@@ -56,7 +57,7 @@ class Mailer
         try {
             $mail = new PHPMailer();
             $mail->isSMTP();
-            $mail->SMTPDebug = 3;
+           //$mail->SMTPDebug = 3;
             $mail->setFrom($_SERVER['MAILER_SET_FROM'], $_SERVER['MAILER_SET_TO']);
             $mail->addAddress($address);
             $mail->Username = $_SERVER['MAILER_USERNAME'];

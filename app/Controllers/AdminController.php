@@ -27,21 +27,41 @@ class AdminController extends Controller
     $this->CSRFToken->check();
     $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
     try {
-      $admin = $this->Admin->storeAdmin($_POST);
-      if (!isset($admin['status']) && $admin['status'] !== false) {
+      $is_success = $this->Admin->storeAdmin($_POST);
+
+      if (!isset($admin['status']) && $is_success['status'] !== false) {
         $this->Activity->store([
-          'content' => "Új admint adott hozzá:  " . $_POST['name'] . ", level(" . $_POST['level'] . ")",
+          'content' => "Új admint adott hozzá: " . $_POST['name'] . ", level(" . $_POST['level'] . ")",
           'contentInEn' => null,
           'adminRefId' => $_SESSION['adminId']
-        ],  $_SESSION['adminId']);
+        ], $_SESSION['adminId']);
+
+        /* 
+        $this->Mailer->renderAndSend('NewAdmin', [
+          'admin_name' => $admin['name'] ?? 'problem',
+          'site_url' => 'http://localhost:8080' ?? 'problem',
+          'admin_password' => $_POST['password'] ?? 'problem'
+        ], $admin['email'], 'Hello');
+         */
+
+        $this->Mailer->renderAndSend('NewAdmin', [
+          'admin_name' => $_POST['name'] ?? 'problem',
+          'site_url' => 'http://localhost:8080' ?? 'problem',
+          'admin_password' => $_POST['password'] ?? 'problem'
+        ], $_POST['email'], 'Hello');
+
         $this->Toast->set('Admin sikeresen hozzáadva', 'success', '/admin/settings', null);
       } else {
-        $this->Toast->set($admin['message'], 'danger', '/admin/settings', null);
+        $this->Toast->set($is_success['message'], 'danger', '/admin/settings', null);
       }
     } catch (Exception $e) {
-      echo $e->getMessage();
+      // Log the exception instead of echoing it
+      error_log($e->getMessage());
+      $this->Toast->set('Hiba történt az admin hozzáadásakor.', 'danger', '/admin/settings', null);
     }
   }
+
+
   public function update()
   {
     $this->CSRFToken->check();
@@ -105,6 +125,21 @@ class AdminController extends Controller
 
       header("Location: /admin");
       exit();
+    } catch (Exception $e) {
+      http_response_code(500);
+      echo "Internal Server Error" . $e->getMessage();
+      return;
+    }
+  }
+
+
+  public function delete($vars)
+  {
+    try {
+      $id  = filter_var($vars["id"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+      $this->Model->deleteRecordById('admins', $id);
+
+      $this->Toast->set('Admin törlése sikeres volt', 'green-500', '/admin/settings', null);
     } catch (Exception $e) {
       http_response_code(500);
       echo "Internal Server Error" . $e->getMessage();

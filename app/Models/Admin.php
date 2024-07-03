@@ -9,46 +9,49 @@ use PDOException;
 
 class Admin extends Model
 {
+
   public function storeAdmin($body)
   {
-    try {
-
-      $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-      $email = filter_var($body["email"] ?? '', FILTER_SANITIZE_EMAIL);
-      $password = password_hash(filter_var($body["password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS), PASSWORD_DEFAULT);
-      $avatar = filter_var($body["avatar-radio"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-      $level = filter_var($body["level"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-
-      $adminId = uniqid(); // Generálunk egy egyedi adminId-t
-
-
-      if ($this->checkIsAdminExist($name, $email)) {
-        return [
-          'status' => false,
-          'message' => 'Ez az admin ezzel a névvel vagy e-maillel már létezik.'
-        ];
-        exit;
+      try {
+          $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+          $email = filter_var($body["email"] ?? '', FILTER_SANITIZE_EMAIL);
+          $password = password_hash(filter_var($body["password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS), PASSWORD_DEFAULT);
+          $avatar = filter_var($body["avatar-radio"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+          $level = filter_var($body["level"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+  
+          $adminId = uniqid(); // Generálunk egy egyedi adminId-t
+  
+          if ($this->checkIsAdminExist($name, $email)) {
+              return [
+                  'status' => false,
+                  'message' => 'Ez az admin ezzel a névvel vagy e-maillel már létezik.'
+              ];
+          }
+  
+          // Prepare the SQL statement
+          $stmt = $this->Pdo->prepare("INSERT INTO `admins` (`id`, `adminId`, `level`, `name`, `email`, `password`, `avatar`, `created_at`) 
+                                        VALUES (NULL, :adminId, :level, :name, :email, :password, :avatar, current_timestamp())");
+  
+          // Bind parameters to the statement
+          $stmt->bindParam(":adminId", $adminId, PDO::PARAM_STR);
+          $stmt->bindParam(":level", $level, PDO::PARAM_INT);
+          $stmt->bindParam(":name", $name, PDO::PARAM_STR);
+          $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+          $stmt->bindParam(":password", $password, PDO::PARAM_STR);
+          $stmt->bindParam(":avatar", $avatar, PDO::PARAM_STR);
+  
+          // Execute the statement
+          $stmt->execute();
+          
+          return [
+              'status' => true,
+              'message' => 'Admin sikeresen hozzáadva.'
+          ];
+      } catch (PDOException $e) {
+          throw new Exception("An error occurred during the database operation in storeAdmin: " . $e->getMessage());
       }
-
-      // Prepare the SQL statement
-      $stmt = $this->Pdo->prepare("INSERT INTO `admins` (`id`, `adminId`, `level`, `name`, `email`, `password`, `avatar`, `created_at`) 
-                                      VALUES (NULL, :adminId, :level, :name, :email, :password, :avatar, current_timestamp())");
-
-      // Bind parameters to the statement
-      $stmt->bindParam(":adminId", $adminId, PDO::PARAM_STR);
-      $stmt->bindParam(":level", $level, PDO::PARAM_INT);
-      $stmt->bindParam(":name", $name, PDO::PARAM_STR);
-      $stmt->bindParam(":email", $email, PDO::PARAM_STR);
-      $stmt->bindParam(":password", $password, PDO::PARAM_STR);
-      $stmt->bindParam(":avatar", $avatar, PDO::PARAM_STR);
-
-      // Execute the statement
-      $stmt->execute();
-    } catch (PDOException $e) {
-      throw new Exception("An error occurred during the database operation in storeAdmin: " . $e->getMessage());
-    }
   }
-
+  
 
   public function updateAdmin($adminId, $body, $child_admin_id)
   {

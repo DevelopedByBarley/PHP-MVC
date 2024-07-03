@@ -77,8 +77,9 @@ $csrf = $params['csrf'] ?? null;
                                                     <?php if ((int)$current_admin['level'] !== 3) : ?>
                                                         <button type="button" class="btn btn-rounded btn-sm fw-bold bg-yellow-500 text-white"  data-bs-toggle="modal" data-bs-target="#updateAdminModal-<?= $current_admin['id'] ?>">Edit</button>
                                                         <?php include 'app/Views/admin/components/updateAdminModal.php' ?>
-                                                        <button type="button" class="btn btn-rounded btn-sm fw-bold bg-red-500 text-white">Delete</button>
-                                                    <?php endif ?>
+                                                        <button type="button" class="btn btn-rounded btn-sm fw-bold bg-red-500 text-white" data-bs-toggle="modal" data-bs-target="#deleteAdminModal-<?= $current_admin['id'] ?>">Delete</button>
+                                                        <?php include 'app/Views/admin/components/DeleteAdminModal.php' ?>
+                                                        <?php endif ?>
                                                 </div>
                                             </td>
                                         </tr>
@@ -99,5 +100,5 @@ $csrf = $params['csrf'] ?? null;
 
 
 
-<?php include 'app/Views/admin/components/adminSettingsModal.php' ?>
+<?php include 'app/Views/admin/components/AdminSettingsModal.php' ?>
 <?php include 'app/Views/admin/components/AddAdminModal.php' ?>
