@@ -1,7 +1,7 @@
 <div class="modal fade " id="addAdminModal" tabindex="-1" role="dialog" aria-labelledby="addAdminModelLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header d-flex justify-content-between">
+            <div class="modal-header d-flex justify-content-between  text-white bg-purple-600">
                 <h5 class="modal-title" id="exampleModalLabel">Add admin</h5>
                 <button type="button" class="close border-0 rounded-circle" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -72,8 +72,8 @@
             </div>
 
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn bg-purple-500 hover-bg-purple-600">Elküld</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bezár</button>
             </div>
             </form>
         </div>

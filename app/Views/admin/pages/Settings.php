@@ -18,7 +18,7 @@ $csrf = $params['csrf'] ?? null;
             </div>
 
             <div class="d-flex gap-3 align-items-center justify-content-center">
-                <button data-bs-toggle="modal" data-bs-target="#adminSettingsModal" class="btn bg-yellow-500 hover-bg-yellow-600 text-white  profile-button border-0 py-2" type="button">Update Profile</button>
+                <button data-bs-toggle="modal" data-bs-target="#adminSettingsModal" class="btn bg-orange-500 hover-bg-orange-600 text-white  profile-button border-0 py-2" type="button">Update Profile</button>
                 <button <?= (int)$admin['level'] < 3 ? 'disabled' : '' ?> data-bs-toggle="modal" data-bs-target="#addAdminModal" class="btn bg-purple-500 hover-bg-purple-600 text-white  profile-button border-0  py-2" type="button"><span class="px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Admin</span></button>
             </div>
 

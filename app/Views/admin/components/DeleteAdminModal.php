@@ -26,7 +26,7 @@
                     <?= $csrf->generate() ?>
                     <button type="submit" class="btn btn-danger">Törlés</button>
                 </form>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bezárás</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bezár</button>
             </div>
         </div>
     </div>

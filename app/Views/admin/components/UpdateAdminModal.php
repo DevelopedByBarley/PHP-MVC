@@ -1,7 +1,7 @@
 <div class="modal fade" id="updateAdminModal-<?= $current_admin['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header  text-white bg-warning">
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Profil frissítése</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -70,8 +70,8 @@
                     </div>
                     <div class="modal-footer">
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-warning text-white">Frissít</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bezár</button>
 
                     </div>
                 </form>
