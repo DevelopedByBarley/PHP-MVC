@@ -11,8 +11,8 @@
 
                     <div class="form-group my-2">
                         <label for="exampleInputEmail1">Name</label>
-                        <input name="updated_name" type="text" value="<?= $admin['name'] ?? '' ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name " required data-validators='{
-                            "name": "updated_name",
+                        <input name="name" type="text" value="<?= $admin['name'] ?? '' ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name " required data-validators='{
+                            "name": "name",
                             "required": true,
                             "minLength": 12,
                             "maxLength": 50
@@ -20,7 +20,7 @@
                     </div>
                     <div class="form-outline">
                         <label class="form-label" for="form3Example3">Email address</label>
-                        <input name="updated_email" type="email" id="form3Example3" class="form-control" disabled value="<?= $admin['email'] ?? '' ?>" />
+                        <input name="email" type="email" id="form3Example3" class="form-control" disabled value="<?= $admin['email'] ?? '' ?>" />
                     </div>
 
                     <div class="border p-2 py-3 my-4 rounded-4">
@@ -39,8 +39,8 @@
                         </div>
                         <div class="form-group my-2">
                             <label for="exampleInputEmail1">Password</label>
-                            <input type="text" id="password" name="updated_password" class="password form-control" data-password-compare=1 disabled data-validators='{
-                                "name": "updated_password",
+                            <input type="text" id="password" name="password" class="password form-control" data-password-compare=1 disabled data-validators='{
+                                "name": "password",
                                 "required": true
                             }' />
                             <button type="button" class="d-inline btn border pw-generator">Generate</button>

@@ -44,11 +44,11 @@ class Admin extends Model
   public function updateAdmin($adminId, $body)
   {
     try {
-      $name = filter_var($body["updated_name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-      $password = filter_var($body["updated_password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+      $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+      $password = filter_var($body["password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
       $hash = password_hash($password, PASSWORD_DEFAULT);
       $prev_password = filter_var($body["prev_password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-      $avatar = filter_var($body["updated_avatar_radio"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+      $avatar = filter_var($body["settings_avatar_radio"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
 
       $current_password = $this->selectByRecord('admins', 'id', $adminId, PDO::PARAM_INT)['password'];
 

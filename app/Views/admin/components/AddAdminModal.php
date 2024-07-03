@@ -29,15 +29,22 @@
                                 "maxLength": 50
                                 }' />
                     </div>
-                    <div class="form-group my-2">
+                    <div class="form-outline">
                         <label for="exampleInputEmail1">Password</label>
-                        <input type="text" id="password" name="password" class="password form-control" class="work-id" required data-validators='{
+                        <input type="text" id="password" name="password" class="password form-control" data-password-compare=1 data-validators='{
                                 "name": "password",
                                 "required": true
                             }' />
                         <button type="button" class="d-inline btn border pw-generator">Generate</button>
                     </div>
 
+                    <div class="form-outline my-2">
+                        <label for="exampleInputEmail1">Repeat password</label>
+                        <input type="text" id="repeat" name="repeat" class="form-control" data-validators='{
+                                "name": "repeat",
+                                "comparePw": true
+                            }' />
+                    </div>
                     <div class="form-group my-2">
                         <label for="exampleInputPassword1">Level</label>
                         <select class="form-select" name="level" aria-label="Default select example" required>
@@ -62,16 +69,16 @@
                             <?php endforeach; ?>
                         </div>
                     </div>
-                    <div class="modal-footer">
-
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
-                    </div>
-                </form>
             </div>
 
-
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+            </form>
         </div>
+
+
     </div>
+</div>
 </div>

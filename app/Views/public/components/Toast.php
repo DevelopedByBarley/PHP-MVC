@@ -54,7 +54,12 @@ if (isset($toast)) {
 
   @keyframes toastIn {
     0% {
-      transform: translateX(200%);
+      transform: translateX(150%);
+    }
+
+
+    60% {
+      transform: translateX(0);
     }
 
     100% {

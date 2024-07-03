@@ -45,7 +45,12 @@ class AdminController extends Controller
       $admin = $this->Admin->updateAdmin($adminId, $_POST);
 
       if ($admin) {
-        $this->Toast->set('Admin sikeresen frissítve', 'success', '/admin/settings', null);
+        $this->Activity->store([
+          'content' => "Frissítette a profilját.",
+          'contentInEn' => null,
+          'adminRefId' => $_SESSION['adminId']
+        ],  $_SESSION['adminId']);
+        $this->Toast->set('Admin sikeresen frissítve', 'cyan-500', '/admin/settings', null);
       } else {
         $this->Toast->set('Admin frissítése sikretelen, rosszul adta meg előző jelszavát!', 'danger', '/admin/settings', null);
       }
@@ -185,7 +190,7 @@ class AdminController extends Controller
 
   public function table()
   {
-    $adminId =$this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
+    $adminId = $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
     $admin = $this->Model->selectByRecord('admins', 'id', $adminId, PDO::PARAM_INT);
 
     $data = [
@@ -202,8 +207,8 @@ class AdminController extends Controller
   }
   public function form()
   {
-    $adminId =$this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
-    $admin = $this->Model->selectByRecord('admins', 'id', $adminId, PDO::PARAM_INT);  
+    $adminId = $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
+    $admin = $this->Model->selectByRecord('admins', 'id', $adminId, PDO::PARAM_INT);
     $data = [
       'numOfPage' => 10,
     ];

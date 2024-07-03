@@ -1,6 +1,5 @@
 <?php
 $admin = $params['admin'] ?? null;
-
 $data = $params['data'] ?? [];
 $admin_list = $data['pages'] ?? [];
 $level = $admin['level'] ?? null;
@@ -74,8 +73,10 @@ $csrf = $params['csrf'] ?? null;
                                             <td>
                                                 <div class="btn-group gap-2">
                                                     <button type="button" class="btn btn-rounded btn-sm fw-bold bg-sky-500 text-white">Show</button>
-                                                    <button type="button" class="btn btn-rounded btn-sm fw-bold bg-yellow-500 text-white">Edit</button>
-                                                    <button type="button" class="btn btn-rounded btn-sm fw-bold bg-red-500 text-white">Delete</button>
+                                                    <?php if ((int)$current_admin['level'] !== 3) : ?>
+                                                        <button type="button" class="btn btn-rounded btn-sm fw-bold bg-yellow-500 text-white">Edit</button>
+                                                        <button type="button" class="btn btn-rounded btn-sm fw-bold bg-red-500 text-white">Delete</button>
+                                                    <?php endif ?>
                                                 </div>
                                             </td>
                                         </tr>
