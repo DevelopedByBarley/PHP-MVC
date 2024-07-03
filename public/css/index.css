@@ -11682,9 +11682,9 @@ nav .theme-switcher .checkbox:checked + .checkbox-label .ball {
   font-size: 40px;
   /* Adjust the size as needed */
   display: inline-block;
-  width: 55px;
+  width: 60px;
   /* Adjust the size as needed */
-  height: 55px;
+  height: 60px;
   /* Adjust the size as needed */
   text-align: center;
   line-height: 48px;

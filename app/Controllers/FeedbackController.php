@@ -33,22 +33,33 @@ class FeedbackController extends Controller
         }
     }
 
-
     public function storeFeedback()
     {
-
         try {
-            $body = $_POST;
+            // Elérjük a POST adatokat php://input segítségével
+            $inputJSON = file_get_contents('php://input');
+            // Dekódoljuk a JSON adatot asszociatív tömbbé
+            $body = json_decode($inputJSON, true);
+    
+            // Ellenőrizzük, hogy sikerült-e a dekódolás és hogy megvannak-e a szükséges adatok
+            if (json_last_error() !== JSON_ERROR_NONE || !isset($body['feedback'])) {
+                throw new Exception('Invalid JSON data');
+            }
+    
+            // További adatok feldolgozása
             $ip = $this->getIpByUser();
+    
+            // Feedback tárolása
+            $this->Feedback->store($body['feedback'], $ip);
+            http_response_code(200);
 
-            $this->Feedback->store($body, $ip);
-            $prev = $_SERVER['HTTP_REFERER'];
-
-            header("Location: $prev");
+            echo json_encode(['isSuccess' => true]);
+            exit;
         } catch (Exception $e) {
             http_response_code(500);
-            echo "Internal Server Error" . $e->getMessage();
+            echo "Internal Server Error: " . $e->getMessage();
             exit;
         }
     }
+    
 }

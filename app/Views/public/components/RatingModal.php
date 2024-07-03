@@ -15,7 +15,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <form action="/feedback" method="POST" enctype="multipart/form-data">
+                            <form>
                                 <p>Please select your preferred style:</p>
 
                                 <div class="d-flex flex-wrap align-items-center justify-content-center">
@@ -52,7 +52,7 @@
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary" id="submitFeedbackBtn">Elküldés</button>
+                                    <button  type="submit" class="btn btn-primary" id="submitFeedbackBtn">Elküldés</button>
                                 </div>
                             </form>
 

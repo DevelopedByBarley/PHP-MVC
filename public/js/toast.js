@@ -15,7 +15,7 @@ toastBtn?.addEventListener('click', () => {
     {
       title: null,
       message: null,
-      time: null
+      time: new Date().toLocaleTimeString('hu-HU', { hour: 'numeric', minute: 'numeric' })
     },
     {
       textColor: 'white',
@@ -37,12 +37,12 @@ function renderToasts(root, content, style) {
   let isPaused = false;
 
   // Inicializáljuk a percent változót a timer alapján
-  const percent = timer * 20 + '%';
+  const percent = timer * 40 + '%';
 
   toast.innerHTML = `
     <div class="toast-header d-flex justify-content-between bg-${style.background ? style.background : 'light'} text-${style.textColor ? style.textColor : 'dark'}">
       <strong class="mr-auto">${content.title ? content.title : 'MVC message!'}</strong>
-      <small>${content.time ? content.time : 'now'}</small>
+      <small>${content.time ? content.time : 'most'}</small>
     </div>
     <div class="toast-body">
       ${content.message ? content.message : 'Please give message!'}
