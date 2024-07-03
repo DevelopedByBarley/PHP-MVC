@@ -1,4 +1,4 @@
-<div class="modal fade" id="adminSettingsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="updateAdminModal-<?= $current_admin['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -10,8 +10,12 @@
                     <?= $csrf->generate() ?>
 
                     <div class="form-group my-2">
+                        <input name="current_admin_id" type="hidden" value="<?= $current_admin['id'] ?? '' ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name " required>
+                    </div>
+
+                    <div class="form-group my-2">
                         <label for="exampleInputEmail1">Name</label>
-                        <input name="name" type="text" value="<?= $admin['name'] ?? '' ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name " required data-validators='{
+                        <input name="name" type="text" value="<?= $current_admin['name'] ?? '' ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name " required data-validators='{
                             "name": "name",
                             "required": true,
                             "minLength": 12,
@@ -20,7 +24,7 @@
                     </div>
                     <div class="form-outline">
                         <label class="form-label" for="form3Example3">Email address</label>
-                        <input name="email" type="email" id="form3Example3" class="form-control" disabled value="<?= $admin['email'] ?? '' ?>" />
+                        <input name="email" type="email" id="form3Example3" class="form-control" disabled value="<?= $current_admin['email'] ?? '' ?>" />
                     </div>
 
                     <div class="border p-2 py-3 my-4 rounded-4">
@@ -30,28 +34,22 @@
                             <label class="form-check-label" for="changePasswordCheckbox">Jelszó változtatás</label>
                         </div>
 
-                        <div class="form-group my-2">
-                            <label for="exampleInputEmail1">Prev password</label>
-                            <input type="text" id="prev_password" name="prev_password" class="form-control" disabled data-validators='{
-                                "name": "prev_password",
-                                "required": true
-                            }' />
-                        </div>
+
                         <div class="form-group my-2">
                             <label for="exampleInputEmail1">Password</label>
                             <input type="text" id="password" name="password" class="password form-control" data-password-compare=1 disabled data-validators='{
-                                "name": "password",
-                                "required": true
-                            }' />
+        "name": "password",
+        "required": true
+    }' />
                             <button type="button" class="d-inline btn border pw-generator">Generate</button>
                         </div>
 
                         <div class="form-group my-2">
                             <label for="exampleInputEmail1">Repeat password</label>
                             <input type="text" id="repeat" name="repeat" class="form-control" disabled data-validators='{
-                                "name": "repeat",
-                                "comparePw": true
-                            }' />
+        "name": "repeat",
+        "comparePw": true
+    }' />
                         </div>
                     </div>
 
@@ -61,8 +59,8 @@
                             <?php foreach (AVATARS as $avatar) : ?>
                                 <div class="col-2 d-flex align-items-center justify-content-center mb-2">
                                     <div class="form-check form-check-inline image-radio">
-                                        <input required class="form-check-input" <?php echo $avatar === $admin['avatar'] ? 'checked' : '' ?> type="radio" name="settings_avatar_radio" id="settings_avatar_radio-<?php echo $avatar; ?>" value="<?php echo $avatar; ?>">
-                                        <label class="form-check-label" for="settings_avatar_radio-<?php echo $avatar; ?>">
+                                        <input required class="form-check-input" <?php echo $avatar === $current_admin['avatar'] ? 'checked' : '' ?> type="radio" name="settings_avatar_radio" id="settings_avatar_radio-<?= $current_admin['id'] ?>-<?php echo $avatar; ?>" value="<?php echo $avatar; ?>">
+                                        <label class="form-check-label" for="settings_avatar_radio-<?= $current_admin['id'] ?>-<?php echo $avatar; ?>">
                                             <img src="/public/assets/images/avatars/<?php echo $avatar; ?>.png" class="h-45 w-45" alt="<?php echo ucfirst($avatar); ?>">
                                         </label>
                                     </div>

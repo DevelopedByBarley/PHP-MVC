@@ -41,8 +41,9 @@ class Admin extends Model
   }
 
 
-  public function updateAdmin($adminId, $body)
+  public function updateAdmin($adminId, $body, $child_admin_id)
   {
+
     try {
       $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
       $password = filter_var($body["password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -52,7 +53,7 @@ class Admin extends Model
 
       $current_password = $this->selectByRecord('admins', 'id', $adminId, PDO::PARAM_INT)['password'];
 
-      if ($password !== '' && !password_verify($prev_password, $current_password)) {
+      if (($password !== '' && !password_verify($prev_password, $current_password)) && !$child_admin_id) {
         return false;
         exit;
       }

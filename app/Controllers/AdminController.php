@@ -40,9 +40,13 @@ class AdminController extends Controller
   public function update()
   {
     $this->CSRFToken->check();
-    $adminId = $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
+    $child_admin_id = isset($_POST['current_admin_id']) ? $_POST['current_admin_id']  : null;
+    $loggedAdmin =  $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');;
+    $adminId = $child_admin_id ?? $loggedAdmin;
+
+
     try {
-      $admin = $this->Admin->updateAdmin($adminId, $_POST);
+      $admin = $this->Admin->updateAdmin($adminId, $_POST, $child_admin_id);
 
       if ($admin) {
         $this->Activity->store([

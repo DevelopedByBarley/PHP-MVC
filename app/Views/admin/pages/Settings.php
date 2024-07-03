@@ -63,9 +63,9 @@ $csrf = $params['csrf'] ?? null;
                                                 echo 'bg-red-500';
                                                 break;
                                             default:
-                                                echo 'bg-sky-500';
+                                            echo 'bg-sky-500';
                                         }
-                                    ?> rounded-pill d-inline">
+                                        ?> rounded-pill d-inline">
                                                     Level <?= htmlspecialchars($current_admin['level']) ?>
                                                 </span>
                                             </td>
@@ -74,7 +74,8 @@ $csrf = $params['csrf'] ?? null;
                                                 <div class="btn-group gap-2">
                                                     <button type="button" class="btn btn-rounded btn-sm fw-bold bg-sky-500 text-white">Show</button>
                                                     <?php if ((int)$current_admin['level'] !== 3) : ?>
-                                                        <button type="button" class="btn btn-rounded btn-sm fw-bold bg-yellow-500 text-white">Edit</button>
+                                                        <button type="button" class="btn btn-rounded btn-sm fw-bold bg-yellow-500 text-white"  data-bs-toggle="modal" data-bs-target="#updateAdminModal-<?= $current_admin['id'] ?>">Edit</button>
+                                                        <?php include 'app/Views/admin/components/updateAdminModal.php' ?>
                                                         <button type="button" class="btn btn-rounded btn-sm fw-bold bg-red-500 text-white">Delete</button>
                                                     <?php endif ?>
                                                 </div>
@@ -97,6 +98,5 @@ $csrf = $params['csrf'] ?? null;
 
 
 
-
-<?php include 'app/Views/admin/components/AdminSettingsModal.php' ?>
+<?php include 'app/Views/admin/components/adminSettingsModal.php' ?>
 <?php include 'app/Views/admin/components/AddAdminModal.php' ?>
