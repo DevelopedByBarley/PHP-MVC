@@ -21,6 +21,15 @@ class Admin extends Model
 
       $adminId = uniqid(); // Generálunk egy egyedi adminId-t
 
+
+      if ($this->checkIsAdminExist($name, $email)) {
+        return [
+          'status' => false,
+          'message' => 'Ez az admin ezzel a névvel vagy e-maillel már létezik.'
+        ];
+        exit;
+      }
+
       // Prepare the SQL statement
       $stmt = $this->Pdo->prepare("INSERT INTO `admins` (`id`, `adminId`, `level`, `name`, `email`, `password`, `avatar`, `created_at`) 
                                       VALUES (NULL, :adminId, :level, :name, :email, :password, :avatar, current_timestamp())");
@@ -53,8 +62,21 @@ class Admin extends Model
 
       $current_password = $this->selectByRecord('admins', 'id', $adminId, PDO::PARAM_INT)['password'];
 
+
+      if ($this->checkIsAdminExist($name, null)) {
+        return [
+          'status' => false,
+          'message' => 'Ez az admin ezzel a névvel már létezik.'
+        ];
+        exit;
+      }
+
+
       if (($password !== '' && !password_verify($prev_password, $current_password)) && !$child_admin_id) {
-        return false;
+        return [
+          'status' => false,
+          'message' => 'Rosszul adta meg előző jelszavát'
+        ];
         exit;
       }
 
@@ -112,6 +134,29 @@ class Admin extends Model
     } catch (PDOException $e) {
       throw new Exception("An error occurred during the database operation in LoginAdmin: " . $e->getMessage());
       exit;
+    }
+  }
+
+
+  private function checkIsAdminExist($name, $email = null)
+  {
+    try {
+      if ($email === null) {
+        $stmt = $this->Pdo->prepare("SELECT COUNT(*) FROM `admins` WHERE `name` = :name");
+        $stmt->bindParam(":name", $name, PDO::PARAM_STR);
+      } else {
+        $stmt = $this->Pdo->prepare("SELECT COUNT(*) FROM `admins` WHERE `name` = :name OR `email` = :email");
+        $stmt->bindParam(":name", $name, PDO::PARAM_STR);
+        $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+      }
+
+      $stmt->execute();
+
+      $count = $stmt->fetchColumn();
+
+      return $count > 0;
+    } catch (PDOException $e) {
+      throw new Exception("An error occurred during the database operation in checkIsAdminExist: " . $e->getMessage());
     }
   }
 }

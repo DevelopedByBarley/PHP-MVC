@@ -21,18 +21,23 @@ class AdminController extends Controller
   }
 
 
+
   public function store()
   {
     $this->CSRFToken->check();
     $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
     try {
-      $this->Admin->storeAdmin($_POST);
-      $this->Activity->store([
-        'content' => "Új admint adott hozzá:  " . $_POST['name'] . ", level(" . $_POST['level'] . ")",
-        'contentInEn' => null,
-        'adminRefId' => $_SESSION['adminId']
-      ],  $_SESSION['adminId']);
-      $this->Toast->set('Admin sikeresen hozzáadva', 'success', '/admin/settings', null);
+      $admin = $this->Admin->storeAdmin($_POST);
+      if (!isset($admin['status']) && $admin['status'] !== false) {
+        $this->Activity->store([
+          'content' => "Új admint adott hozzá:  " . $_POST['name'] . ", level(" . $_POST['level'] . ")",
+          'contentInEn' => null,
+          'adminRefId' => $_SESSION['adminId']
+        ],  $_SESSION['adminId']);
+        $this->Toast->set('Admin sikeresen hozzáadva', 'success', '/admin/settings', null);
+      } else {
+        $this->Toast->set($admin['message'], 'danger', '/admin/settings', null);
+      }
     } catch (Exception $e) {
       echo $e->getMessage();
     }
@@ -48,7 +53,7 @@ class AdminController extends Controller
     try {
       $admin = $this->Admin->updateAdmin($adminId, $_POST, $child_admin_id);
 
-      if ($admin) {
+      if (!isset($admin['status']) && $admin['status'] !== false) {
         $this->Activity->store([
           'content' => "Frissítette a profilját.",
           'contentInEn' => null,
@@ -56,7 +61,7 @@ class AdminController extends Controller
         ],  $_SESSION['adminId']);
         $this->Toast->set('Admin sikeresen frissítve', 'cyan-500', '/admin/settings', null);
       } else {
-        $this->Toast->set('Admin frissítése sikretelen, rosszul adta meg előző jelszavát!', 'danger', '/admin/settings', null);
+        $this->Toast->set($admin['message'], 'rose-500', '/admin/settings', null);
       }
     } catch (Exception $e) {
       echo $e->getMessage();
@@ -80,7 +85,7 @@ class AdminController extends Controller
         header('Location: /admin/dashboard');
         exit;
       } else {
-        $this->Toast->set('Sikertelen belépés, hibás felhasználónév vagy jelszó', 'danger', '/admin', null);
+        $this->Toast->set('Sikertelen belépés, hibás felhasználónév vagy jelszó', 'rose-500', '/admin', null);
       }
     } catch (Exception $e) {
       echo $e->getMessage();
