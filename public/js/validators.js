@@ -3,11 +3,17 @@ import { getCookie } from '/public/js/getCookie.js';
 
 /**
  * @example
- *  <input class="form-control py-2" id="inputPassword" type="password" placeholder="Enter password" name="password" data-validators='{
-          "name": "password",
-          "required": true,
-          "password": true
-      }'
+ *  
+ *    <div class="form-outline">
+ *        <label class="form-label" for="form3Example3">Email address</label>
+ *        <input name="email" type="email" id="form3Example3" class="form-control" data-validators='{
+ *           "name": "email",
+ *            "required": true,
+ *            "email": true,
+ *            "minLength": 12,
+ *            "maxLength": 50
+ *        }' />
+ *    </div>
  */
 
 const lang = getCookie('lang') ? getCookie('lang') : 'En';
@@ -25,17 +31,11 @@ function checkValidators(options, inputValue, targetElement) {
             Hu: "A mező kitöltése kötelező."
           };
 
-
           if (inputValue.trim().length === 0) {
             errors.push(requiredMessage[lang]);
-            targetElement.setCustomValidity(
-              requiredMessage[lang]
-            );
-            // Itt megteheted az egyéb teendőket, például hibaüzenet megjelenítése
+            targetElement.setCustomValidity(requiredMessage[lang]);
           } else {
-            targetElement.setCustomValidity(
-             ''
-            );
+            targetElement.setCustomValidity('');
           }
         }
         break;
@@ -57,26 +57,21 @@ function checkValidators(options, inputValue, targetElement) {
           };
 
           errors.push(minLengthMessage[lang]);
-          targetElement.setCustomValidity(
-            minLengthMessage[lang]
-          );
+          targetElement.setCustomValidity(minLengthMessage[lang]);
         } else {
           targetElement.setCustomValidity("");
         }
         break;
 
       case "maxLength":
-
         if (typeof value === 'number' && inputValue.trim().length > value) {
-          const minLengthMessage = {
+          const maxLengthMessage = {
             En: `The length of the field cannot be more than ${value}`,
             Hu: `A mező hossza nem lehet több mint ${value}.`
           };
 
-          errors.push(minLengthMessage[lang]);
-          targetElement.setCustomValidity(
-            minLengthMessage[lang]
-          );
+          errors.push(maxLengthMessage[lang]);
+          targetElement.setCustomValidity(maxLengthMessage[lang]);
         } else {
           targetElement.setCustomValidity("");
         }
@@ -100,12 +95,9 @@ function checkValidators(options, inputValue, targetElement) {
 
           for (let i = 0; i < inputValue.length; i++) {
             if (inputValue[i] !== inputValue[i].toLowerCase()) {
-              hasUpperCase = true; // Ha talál nagybetűt, true értéket ad vissza
+              hasUpperCase = true;
             }
           }
-
-
-
 
           if (!hasUpperCase) {
             errors.push("A mezőnek tartalmaznia kell legalább egy nagybetűt!");
@@ -117,17 +109,12 @@ function checkValidators(options, inputValue, targetElement) {
         break;
 
       case "split":
-
         if (typeof value === "boolean" && value === true) {
           const nameParts = inputValue.split(" ");
 
-
           if (inputValue !== "" && nameParts.length < 2) {
-            errors.push(`Az mező értékének minimum 2 szóból kell állnia`);
-            targetElement.setCustomValidity(
-              `Az mező értékének minimum 2 szóból kell állnia`
-            );
-            // Itt megteheted az egyéb teendőket, például hibaüzenet megjelenítése
+            errors.push("Az mező értékének minimum 2 szóból kell állnia");
+            targetElement.setCustomValidity("Az mező értékének minimum 2 szóból kell állnia");
           }
         }
         break;
@@ -175,39 +162,23 @@ function checkValidators(options, inputValue, targetElement) {
           }
         }
         break;
-
-
-
-
-
       case "comparePw":
         if (typeof value === "boolean" && value === true) {
           const password = targetElement.parentElement.parentElement.querySelector('[data-password-compare]');
           console.log(password);
           if (inputValue != password.value) {
-            errors.push(`A 2 jelszó nem megegyező!`);
-            targetElement.setCustomValidity(
-              `A 2 jelszó nem megegyező!`
-            );
+            errors.push("A 2 jelszó nem megegyező!");
+            targetElement.setCustomValidity("A 2 jelszó nem megegyező!");
           } else {
             targetElement.setCustomValidity("");
           }
         }
         break;
-
-
-
-
-
-
-
-
-
       case "email":
         if (typeof value === "boolean" && value === true) {
           const emailMessage = {
-            En: `Please enter a valid e-mail address.`,
-            Hu: `Kérem adjon meg érvényes e-mail címet.`
+            En: "Please enter a valid e-mail address.",
+            Hu: "Kérem adjon meg érvényes e-mail címet."
           };
           const emailValue = inputValue.trim();
           const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -222,16 +193,13 @@ function checkValidators(options, inputValue, targetElement) {
         break;
       case "phone":
         if (typeof value === "boolean" && value === true) {
-
           const phoneValue = inputValue.trim();
           const isLengthValid = phoneValue.length >= 9;
           const isNumeric = /^\d+$/.test(phoneValue);
 
           if (!isLengthValid) {
             errors.push("A telefonszámnak legalább 9 karakter hosszúnak kell lennie!");
-            targetElement.setCustomValidity(
-              "A telefonszámnak legalább 9 karakter hosszúnak kell lennie!"
-            );
+            targetElement.setCustomValidity("A telefonszámnak legalább 9 karakter hosszúnak kell lennie!");
           } else {
             targetElement.setCustomValidity("");
           }
@@ -244,11 +212,9 @@ function checkValidators(options, inputValue, targetElement) {
           }
         }
         break;
-
       default:
         break;
     }
-
   });
 
   // Border szín beállítása
@@ -261,39 +227,30 @@ function checkValidators(options, inputValue, targetElement) {
   return errors;
 }
 
-// A kód többi része változatlan marad
-let inputElements = document.querySelectorAll("[data-validators]");
+const forms = document.querySelectorAll('form');
+forms.forEach(form => {
+  let inputElements = form.querySelectorAll("[data-validators]");
 
-inputElements.forEach(inputElement => {
-  let options = JSON.parse(inputElement.getAttribute("data-validators"));
-  let name = options.name;
-  let targetElement = document.querySelector(`[name="${name}"]`)
+  inputElements.forEach(inputElement => {
+    let options = JSON.parse(inputElement.getAttribute("data-validators"));
+    let name = options.name;
+    let targetElement = inputElement.parentElement.querySelector(`[name="${name}"]`);
 
-  let inputAlert = document.createElement("div");
-  inputAlert.id = `${name}Alert`; // Egyedi azonosító generálása
-  inputAlert.style.color = "red";
-  inputAlert.style.marginTop = ".5rem";
-  targetElement.parentNode.insertBefore(inputAlert, inputElement.nextSibling);
+    let inputAlert = document.createElement("div");
+    inputAlert.id = `${name}Alert`;
+    inputAlert.style.color = "red";
+    inputAlert.style.marginTop = ".5rem";
+    targetElement.parentNode.insertBefore(inputAlert, inputElement.nextSibling);
 
-  inputElement.addEventListener("input", function (e) {
-    let errors = checkValidators(options, e.target.value, targetElement);
-    inputAlert.innerHTML = ""; // Töröljük az előző hibaüzeneteket
+    inputElement.addEventListener("input", function (e) {
+      let errors = checkValidators(options, e.target.value, targetElement);
+      inputAlert.innerHTML = ""; // Töröljük az előző hibaüzeneteket
 
-    errors.forEach(error => {
-      let errorElement = document.createElement("div");
-      errorElement.textContent = error;
-      inputAlert.appendChild(errorElement);
+      errors.forEach(error => {
+        let errorElement = document.createElement("div");
+        errorElement.textContent = error;
+        inputAlert.appendChild(errorElement);
+      });
     });
   });
 });
-
-
-
-function checkCurrentValidility(valid, element) {
-  if (valid === false) {
-    element.style.border = "2px solid #ec0677";
-  } else {
-    element.style.border = "2px solid #00a79c";
-  }
-}
-
