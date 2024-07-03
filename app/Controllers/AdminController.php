@@ -136,8 +136,18 @@ class AdminController extends Controller
   public function delete($vars)
   {
     try {
+      $adminId = $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
+
       $id  = filter_var($vars["id"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+      $admin = $this->Model->selectByRecord('admins', 'id', $id, PDO::PARAM_INT);
+
       $this->Model->deleteRecordById('admins', $id);
+
+      $this->Activity->store([
+        'content' => "Kitörölt egy admint: " . $admin['name'] . ", level(" . $admin['level'] . ")",
+        'contentInEn' => null,
+        'adminRefId' => $adminId
+      ], $adminId);
 
       $this->Toast->set('Admin törlése sikeres volt', 'green-500', '/admin/settings', null);
     } catch (Exception $e) {

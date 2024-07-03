@@ -66,7 +66,7 @@ class Admin extends Model
       $current_password = $this->selectByRecord('admins', 'id', $adminId, PDO::PARAM_INT)['password'];
 
 
-      if ($this->checkIsAdminExist($name, null)) {
+      if ($child_admin_id && $this->checkIsAdminExist($name, null)) {
         return [
           'status' => false,
           'message' => 'Ez az admin ezzel a névvel már létezik.'
