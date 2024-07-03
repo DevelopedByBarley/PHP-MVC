@@ -69,7 +69,7 @@ class Admin extends Model
 
 
 
-      if ($child_admin_id && $prev_name !== $name && $this->checkIsAdminExist($name, null)) {
+      if ($prev_name !== $name && $this->checkIsAdminExist($name, null)) {
         return [
           'status' => false,
           'message' => 'Ez az admin ezzel a névvel már létezik.'
