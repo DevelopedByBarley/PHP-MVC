@@ -1,11 +1,28 @@
 <?php
-$admin = $params['admin'] ;
+$admin = $params['admin'];
 $admin_activities = $params['admin_activities'] ?? [];
 $visitors = $params['visitors']  ?? [];
 $admin_list = $params['admin_list']  ?? [];
 $users = $params['users']  ?? [];
-$feedbacks = $params['feedbacks'] ?? []; 
- ?>
+$feedbacks = $params['feedbacks'] ?? [];
+$feedbackPercentages = $params['feedbackPercentages'] ?? null;
+
+$smileys = [
+  1 => '😞',
+  2 => '😐',
+  3 => '🙂',
+  4 => '😊',
+  5 => '😄',
+];
+
+$barColors = [
+  1 => 'bg-red-500',
+  2 => 'bg-orange-500',
+  3 => 'bg-purple-500',
+  4 => 'bg-teal-500',
+  5 => 'bg-yellow-500',
+];
+?>
 
 <?php include('app/Views/admin/components/Header.php') ?>
 

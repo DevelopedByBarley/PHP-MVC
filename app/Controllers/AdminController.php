@@ -190,6 +190,8 @@ class AdminController extends Controller
 
 
 
+
+
   public function index()
   {
     $adminId = $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
@@ -198,6 +200,8 @@ class AdminController extends Controller
     $admin_list = ADMIN_SERVICE_PERM ? $this->Model->all('admins') : [];
     $users =  USER_SERVICE_PERM ? $this->Model->all('users') : [];
     $feedbacks = FEEDBACK_PERM ? $this->Model->all('feedbacks') : [];
+    $feedbackPercentages = self::getPercentageOfFeedbacks($feedbacks);
+
 
     $admin_activities = $this->Activity->getAdminActivities();
     $data = [
@@ -212,6 +216,7 @@ class AdminController extends Controller
         'admin' => $admin,
         'admin_activities' => $admin_activities,
         'feedbacks' => $feedbacks,
+        'feedbackPercentages' => $feedbackPercentages,
         'visitors' => $visitors,
         'users' => $users,
         'data' => $data
@@ -325,5 +330,77 @@ class AdminController extends Controller
         'data' => $data
       ])
     ]);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // PRIVATES 
+
+  private function getPercentageOfFeedbacks($feedbacks)
+  {
+    $countOfFeedbacks = [
+      1 => 0,
+      2 => 0,
+      3 => 0,
+      4 => 0,
+      5 => 0,
+    ];
+
+    $totalFeedbacks = count($feedbacks);
+
+    foreach ($feedbacks as $feedback) {
+      switch ((int)$feedback['feedback']) {
+        case 1:
+          $countOfFeedbacks[1]++;
+          break;
+        case 2:
+          $countOfFeedbacks[2]++;
+          break;
+        case 3:
+          $countOfFeedbacks[3]++;
+          break;
+        case 4:
+          $countOfFeedbacks[4]++;
+          break;
+        case 5:
+          $countOfFeedbacks[5]++;
+          break;
+        default:
+          // Esetleges egyéb kezelés, ha van
+          break;
+      }
+    }
+
+    $percentages = [];
+
+    foreach ($countOfFeedbacks as $key => $value) {
+      if ($totalFeedbacks > 0) {
+        $percentages[$key] = ($value / $totalFeedbacks) * 100;
+      } else {
+        $percentages[$key] = 0; // Ha nincs feedback, akkor 0 százalék
+      }
+    }
+
+    return $percentages;
+
   }
 }
