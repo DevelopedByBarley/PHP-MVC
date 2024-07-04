@@ -49,15 +49,19 @@ class FeedbackController extends Controller
             // További adatok feldolgozása
             $ip = $this->getIpByUser();
 
+
+
             $feedback = isset($body["feedback"]) && filter_var($body["feedback"], FILTER_VALIDATE_INT) !== false
                 ? filter_var($body["feedback"], FILTER_VALIDATE_INT)
                 : 0;
 
+            $content = isset($body["content"]) ? filter_var($body["content"], FILTER_SANITIZE_SPECIAL_CHARS) : '';
+
             if ($feedback === 0) {
-                $this->setCookieWithExpiry('rating_denied', 1, 30); //1 * 24 *60*60 1 ay
+                $this->setCookieWithExpiry('rating_denied', 1, 1 * 24 *60*60); 
                 return;
             }
-            $this->Feedback->store($feedback, $ip);
+            $this->Feedback->store($feedback, $content, $ip);
             http_response_code(200);
 
             echo json_encode(['isSuccess' => true]);

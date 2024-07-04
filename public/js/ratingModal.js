@@ -20,11 +20,13 @@ axios.get('/feedback').then(res => {
                 submitFeedbackBtn.addEventListener('click', (e) => {
                     e.preventDefault();
                     const checkedInput = document.querySelector('input[name="feedback"]:checked');
+                    const content = document.querySelector('#additionalFeedback').value;
                     const newValue = checkedInput ? checkedInput.value : 0;
 
 
                     axios.post('/feedback', {
-                        feedback: newValue
+                        feedback: newValue,
+                        content: content
                     }).then(res => {
                         myModal.hide();
                         toast(
