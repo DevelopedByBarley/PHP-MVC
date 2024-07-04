@@ -1,7 +1,7 @@
 <?php
 
 // USER 
-define('USER_SERVICE_PERM', 0);
+define('USER_SERVICE_PERM', 1);
 
 // ADMIN
 define('ADMIN_SERVICE_PERM', 1);

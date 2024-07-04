@@ -4,6 +4,7 @@ $admin_activities = $params['admin_activities'] ?? [];
 $visitors = $params['visitors']  ?? [];
 $admin_list = $params['admin_list']  ?? [];
 $users = $params['users']  ?? [];
+$registrationsChartData = $params['registrationsChartData'] ?? json_encode([]);
 $feedbacks = $params['feedbacks'] ?? [];
 $feedbackPercentages = $params['feedbackPercentages'] ?? null;
 
@@ -22,6 +23,8 @@ $barColors = [
   4 => 'bg-teal-500',
   5 => 'bg-yellow-500',
 ];
+
+
 ?>
 
 <?php include('app/Views/admin/components/Header.php') ?>
@@ -32,7 +35,7 @@ $barColors = [
     <div class="row gap-3 d-flex align-items-center justify-content-center">
       <div class="col-12 col-md-5 col-lg-3 col-xl-2 min-h-200 border bg-cyan-500 hover-bg-cyan-700 dark-bg-cyan-700 dark-bg-hover-cyan-600 transition-ease-in-out-300  d-flex align-items-center justify-content-between gray-50 shadow-lg rounded">
         <div>
-          <h1><?= count($users) ?></h1>
+          <h1><?= $users ? count($users) : 0 ?></h1>
           <p>Regisztráció</p>
         </div>
         <div>
@@ -41,7 +44,7 @@ $barColors = [
       </div>
       <div class="col-12 col-md-5 col-lg-3 col-xl-2 min-h-200 border bg-amber-500 hover-bg-amber-700 dark-bg-amber-700 dark-bg-hover-amber-600 transition-ease-in-out-300  d-flex align-items-center justify-content-between gray-50 shadow-lg rounded">
         <div>
-          <h1><?= count($visitors) ?></h1>
+          <h1><?= $visitors ? count($visitors) : 0 ?></h1>
           <p>Látogató</p>
         </div>
         <div>
@@ -50,7 +53,7 @@ $barColors = [
       </div>
       <div class="col-12 col-md-5 col-lg-3 col-xl-2 min-h-200 border bg-indigo-500 hover-bg-indigo-700 dark-bg-indigo-700 dark-bg-hover-indigo-600 transition-ease-in-out-300 d-flex align-items-center justify-content-between gray-50 shadow-lg rounded">
         <div>
-          <h1><?= count($feedbacks) ?></h1>
+          <h1><?= $feedbacks ? count($feedbacks) : 0 ?></h1>
           <p>Értékelés</p>
         </div>
         <div>
@@ -59,7 +62,7 @@ $barColors = [
       </div>
       <div class="col-12 col-md-5 col-lg-3 col-xl-2 min-h-200 border bg-rose-500 hover-bg-rose-700 dark-bg-rose-700 dark-bg-hover-rose-600 transition-ease-in-out-300  d-flex align-items-center justify-content-between gray-50 shadow-lg rounded">
         <div>
-          <h1><?= count($admin_list) ?></h1>
+          <h1><?= $admin_list ? count($admin_list) : 0 ?></h1>
           <p>Admin</p>
         </div>
         <div>
@@ -90,20 +93,23 @@ $barColors = [
     </div>
   </div>
 
-  <div class="container-fluid px-5 mt-8">
-    <div class="row">
-      <div class="col-12 col-md-10 mx-auto mb-3 col-xl-6  my-5">
-        <h4>Registrations chart in line</h4>
-        <canvas id="myChart"></canvas>
-      </div>
+  <?php if (USER_SERVICE_PERM && SAVING_VISITOR_PERM) : ?>
+    <div class="container-fluid px-5 mt-8">
+      <div id="registrations-chart-data" data-registrations="<?= htmlspecialchars($registrationsChartData) ?>"></div>
+      <div id="visitors-data" data-visitors="<?= htmlspecialchars(json_encode($visitors)) ?>"></div>
+      <div class="row">
+        <div class="col-12 col-md-10 mx-auto mb-3 col-xl-6  my-5" id="">
+          <h4>Registrations chart in line</h4>
+          <canvas id="myChart"></canvas>
+        </div>
 
-      <div class="col-12 col-md-10 mx-auto mb-3 col-xl-4  my-5">
-        <h4>Registrations chart in donut</h4>
-        <canvas id="myChart_2"></canvas>
+        <div class="col-12 col-md-10 mx-auto mb-3 col-xl-4  my-5">
+          <h4>Registrations chart in donut</h4>
+          <canvas id="myChart_2"></canvas>
+        </div>
       </div>
     </div>
-  </div>
-
+  <?php endif ?>
 
 
   <div class="container-fluid px-5">

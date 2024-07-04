@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\AdminActivity;
+use DateTime;
 use Exception;
 use PDO;
 
@@ -196,11 +197,13 @@ class AdminController extends Controller
   {
     $adminId = $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
     $admin = $this->Model->selectByRecord('admins', 'id', $adminId, PDO::PARAM_INT);
-    $visitors = $this->Model->all('visits');
+    $visitors = SAVING_VISITOR_PERM ? $this->Model->all('visits') : '';
     $admin_list = ADMIN_SERVICE_PERM ? $this->Model->all('admins') : [];
     $users =  USER_SERVICE_PERM ? $this->Model->all('users') : [];
     $feedbacks = FEEDBACK_PERM ? $this->Model->all('feedbacks') : [];
     $feedbackPercentages = self::getPercentageOfFeedbacks($feedbacks);
+    $registrationsChartData = self::getRegistrationsByMonth($users);
+
 
 
     $admin_activities = $this->Activity->getAdminActivities();
@@ -219,6 +222,7 @@ class AdminController extends Controller
         'feedbackPercentages' => $feedbackPercentages,
         'visitors' => $visitors,
         'users' => $users,
+        'registrationsChartData' => $registrationsChartData,
         'data' => $data
       ])
     ]);
@@ -355,6 +359,32 @@ class AdminController extends Controller
 
   // PRIVATES 
 
+  private function getRegistrationsByMonth($users)
+  {
+    // Például, hogy hogyan lehet a $users tömböt a hónapok szerint csoportosítani
+    $registrationsByMonth = [];
+    $currentYear = date('Y');
+
+    foreach ($users as $user) {
+      $createdAt = new DateTime($user['created_at']);
+      $year = $createdAt->format('Y');
+      $month = $createdAt->format('F'); // Hónap neve, pl. "January", "February", stb.
+
+      if ($year == $currentYear) {
+        if (!isset($registrationsByMonth[$month])) {
+          $registrationsByMonth[$month] = 0;
+        }
+
+        $registrationsByMonth[$month]++;
+      }
+    }
+
+
+    // JSON formátumba alakítás PHP-ban
+    $registrationsChartData = json_encode($registrationsByMonth);
+    return $registrationsChartData;
+  }
+
   private function getPercentageOfFeedbacks($feedbacks)
   {
     $countOfFeedbacks = [
@@ -401,6 +431,5 @@ class AdminController extends Controller
     }
 
     return $percentages;
-
   }
 }
