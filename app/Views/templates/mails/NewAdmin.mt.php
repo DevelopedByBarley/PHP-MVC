@@ -319,7 +319,6 @@
         <div class="content">
 
           <!-- START CENTERED WHITE CONTAINER -->
-          <span class="preheader">This is preheader text. Some clients will show this text as a preview.</span>
           <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="main">
 
             <!-- START MAIN CONTENT AREA -->
@@ -329,52 +328,23 @@
                 <h5>Ez a(z) <?= $site_url ?> oldal meghívója az admin oldal felhasználói közé.</h5>
                 <br>
 
-               <p> Az amin oldalhoz való belépéshez látogass el a <a href="<?= $site_url ?>/admin" target="_blank"><?= $site_url ?>/admin</a> weboldalra.</p>
+                <p> Az amin oldalhoz való belépéshez látogass el a <a href="<?= $site_url ?>/admin" target="_blank"><?= $site_url ?>/admin</a> weboldalra.</p>
                 <br>
-                <span><h3>Felhasználónév</h3> <?= $admin_name ?></span>
-                <span><h3>Jelszó</h3> <?= $admin_password ?></span>
+                <span>
+                  <h3>Felhasználónév</h3> <?= $admin_name ?>
+                </span>
+                <span>
+                  <h3>Jelszó</h3> <?= $admin_password ?>
+                </span>
 
-                <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
-                  <tbody>
-                    <tr>
-                      <td align="left">
-                        <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                          <tbody>
-                            <tr>
-                              <td> <a href="http://htmlemail.io" target="_blank">Call To Action</a> </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <p>This is a really simple email template. It's sole purpose is to get the recipient to click the button with no distractions.</p>
-                <p>Good luck! Hope it works.</p>
-              </td>
-            </tr>
+                <div>
+                  <p style="margin-top: 2rem;">Sok szerencsét! Reméljük működik 😄.</p>
+                </div>
 
-            <!-- END MAIN CONTENT AREA -->
+                <!-- END MAIN CONTENT AREA -->
           </table>
 
-          <!-- START FOOTER -->
-          <div class="footer">
-            <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-              <tr>
-                <td class="content-block">
-                  <span class="apple-link">Company Inc, 7-11 Commercial Ct, Belfast BT1 2NB</span>
-                  <br> Don't like these emails? <a href="http://htmlemail.io/blog">Unsubscribe</a>.
-                </td>
-              </tr>
-              <tr>
-                <td class="content-block powered-by">
-                  Powered by <a href="http://htmlemail.io">HTMLemail.io</a>
-                </td>
-              </tr>
-            </table>
-          </div>
 
-          <!-- END FOOTER -->
 
           <!-- END CENTERED WHITE CONTAINER -->
         </div>

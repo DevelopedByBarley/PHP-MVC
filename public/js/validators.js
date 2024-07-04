@@ -24,6 +24,8 @@ function checkValidators(options, inputValue, targetElement) {
     let value = options[key];
 
     switch (key) {
+
+
       case "required":
         if (typeof value === "boolean" && value === true) {
           const requiredMessage = {
@@ -39,6 +41,17 @@ function checkValidators(options, inputValue, targetElement) {
           }
         }
         break;
+      case "noSpaces":
+        if (typeof value === "boolean" && value === true) {
+          if (inputValue.includes(" ")) {
+            errors.push("A mező értéke nem tartalmazhat szóközt!");
+            targetElement.setCustomValidity("A mező értéke nem tartalmazhat szóközt!");
+          } else {
+            targetElement.setCustomValidity("");
+          }
+        }
+        break;
+
       case "num":
         if (typeof value === "boolean" && value === true) {
           if (isNaN(parseInt(inputValue))) {

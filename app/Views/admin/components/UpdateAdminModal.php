@@ -19,7 +19,9 @@
                             "name": "name",
                             "required": true,
                             "minLength": 12,
-                            "maxLength": 50
+                            "maxLength": 50,
+                            "noSpaces": true
+
                         }'>
                     </div>
                     <div class="form-outline">
