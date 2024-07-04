@@ -8,12 +8,10 @@ use Exception;
 
 class Feedback extends Admin
 {
-    public function store($body, $ip)
+    public function store($feedback, $ip)
     {
         // Az üres feedback kezelése és validálása
-        $feedback = isset($body["feedback"]) && filter_var($body["feedback"], FILTER_VALIDATE_INT) !== false
-            ? filter_var($body["feedback"], FILTER_VALIDATE_INT)
-            : 0;
+
 
         try {
             $stmt = $this->Pdo->prepare("INSERT INTO `feedbacks` (`id`, `user_ip`, `feedback`, `created_at`) VALUES (NULL, :user_ip, :feedback, current_timestamp());");

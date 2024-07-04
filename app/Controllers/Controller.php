@@ -107,4 +107,10 @@ class Controller
       return $_SERVER['REMOTE_ADDR'];
     }
   }
+
+  protected function setCookieWithExpiry($name, $value, $expiry) {
+    $expiryTime = time() + ($expiry);
+    setcookie($name, $value, $expiryTime, "/");
+}
+
 }

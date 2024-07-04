@@ -21,7 +21,7 @@ class FeedbackController extends Controller
     {
         try {
             $ip = $this->getIpByUser();
-            $isExist = $this->Model->selectByRecord('feedbacks', 'user_ip', $ip, PDO::PARAM_STR);
+            $isExist = $this->Model->selectByRecord('feedbacks', 'user_ip', $ip, PDO::PARAM_STR) || isset($_COOKIE['rating_denied']);
 
             echo json_encode(
                 ['isExist' => $isExist]
@@ -40,17 +40,24 @@ class FeedbackController extends Controller
             $inputJSON = file_get_contents('php://input');
             // Dekódoljuk a JSON adatot asszociatív tömbbé
             $body = json_decode($inputJSON, true);
-    
+
             // Ellenőrizzük, hogy sikerült-e a dekódolás és hogy megvannak-e a szükséges adatok
             if (json_last_error() !== JSON_ERROR_NONE || !isset($body['feedback'])) {
                 throw new Exception('Invalid JSON data');
             }
-    
+
             // További adatok feldolgozása
             $ip = $this->getIpByUser();
-    
-            // Feedback tárolása
-            $this->Feedback->store($body['feedback'], $ip);
+
+            $feedback = isset($body["feedback"]) && filter_var($body["feedback"], FILTER_VALIDATE_INT) !== false
+                ? filter_var($body["feedback"], FILTER_VALIDATE_INT)
+                : 0;
+
+            if ($feedback === 0) {
+                $this->setCookieWithExpiry('rating_denied', 1, 30); //1 * 24 *60*60 1 ay
+                return;
+            }
+            $this->Feedback->store($feedback, $ip);
             http_response_code(200);
 
             echo json_encode(['isSuccess' => true]);
@@ -61,5 +68,4 @@ class FeedbackController extends Controller
             exit;
         }
     }
-    
 }
