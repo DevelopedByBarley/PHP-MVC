@@ -1,6 +1,7 @@
 <?php
 
 // USER 
+define('BASE_URL', 'http://localhost:8080');
 define('USER_SERVICE_PERM', 0);
 
 // ADMIN

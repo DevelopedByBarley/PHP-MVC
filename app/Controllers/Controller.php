@@ -86,6 +86,32 @@ class Controller
     ]);
   }
 
+
+  public function createResetUrl($tokenData)
+  {
+    return BASE_URL . '/reset?token=' . urlencode($tokenData['token']) . '&expires=' . urlencode($tokenData['expires']);
+  }
+
+  public function generateExpiresTokenByDays($days)
+  {
+    $token = bin2hex(random_bytes(16));
+    $expires = time() + ($days * 24 * 60 * 60);
+    return [
+      'token' => $token,
+      'expires' => $expires,
+    ];
+  }
+
+  public function generateExpiresTokenByHours($hours)
+  {
+    $token = bin2hex(random_bytes(16));
+    $expires = time() + ($hours * 60 * 60);
+    return [
+      'token' => $token,
+      'expires' => $expires,
+    ];
+  }
+
   public function redirectByState($isSuccess, $success_url, $failed_url)
   {
     if ($isSuccess) {
@@ -108,9 +134,9 @@ class Controller
     }
   }
 
-  protected function setCookieWithExpiry($name, $value, $expiry) {
+  protected function setCookieWithExpiry($name, $value, $expiry)
+  {
     $expiryTime = time() + ($expiry);
     setcookie($name, $value, $expiryTime, "/");
-}
-
+  }
 }
