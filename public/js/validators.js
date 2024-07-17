@@ -6,7 +6,7 @@ import { getCookie } from '/public/js/getCookie.js';
  *  
  *    <div class="form-outline">
  *        <label class="form-label" for="form3Example3">Email address</label>
- *        <input name="email" type="email" id="form3Example3" class="form-control" data-validators='{
+ *        <input name="email" type="email" id="form3Example3" class="form-control" validators='{
  *           "name": "email",
  *            "required": true,
  *            "email": true,
@@ -125,7 +125,7 @@ function checkValidators(options, inputValue, targetElement) {
         if (typeof value === "boolean" && value === true) {
           const nameParts = inputValue.split(" ");
 
-          if (inputValue !== "" && nameParts.length < 2) {
+          if ((inputValue !== "" && nameParts.length < 2) || (nameParts.length >= 2 && nameParts[1].length === 0)) {
             errors.push("Az mező értékének minimum 2 szóból kell állnia");
             targetElement.setCustomValidity("Az mező értékének minimum 2 szóból kell állnia");
           }
@@ -137,6 +137,7 @@ function checkValidators(options, inputValue, targetElement) {
           const hasUpperCase = /[A-Z]/.test(passwordValue);
           const hasLowerCase = /[a-z]/.test(passwordValue);
           const hasNumber = /\d/.test(passwordValue);
+          const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(passwordValue); // Speciális karakter ellenőrzés
           const isLengthValid = passwordValue.length >= 8;
 
           if (inputValue.trim() === "") {
@@ -167,6 +168,13 @@ function checkValidators(options, inputValue, targetElement) {
             targetElement.setCustomValidity("");
           }
 
+          if (!hasSpecialChar) {
+            errors.push("A jelszónak tartalmaznia kell legalább egy speciális karaktert!");
+            targetElement.setCustomValidity("A jelszónak tartalmaznia kell legalább egy speciális karaktert!");
+          } else {
+            targetElement.setCustomValidity("");
+          }
+
           if (!isLengthValid) {
             errors.push("A jelszónak legalább 8 karakter hosszúnak kell lennie!");
             targetElement.setCustomValidity("A jelszónak legalább 8 karakter hosszúnak kell lennie!");
@@ -175,6 +183,7 @@ function checkValidators(options, inputValue, targetElement) {
           }
         }
         break;
+
       case "comparePw":
         if (typeof value === "boolean" && value === true) {
           const password = targetElement.parentElement.parentElement.querySelector('[data-password-compare]');
@@ -232,9 +241,9 @@ function checkValidators(options, inputValue, targetElement) {
 
   // Border szín beállítása
   if (errors.length > 0) {
-    targetElement.style.border = "2px solid red";
+    targetElement.style.border = "2px solid salmon";
   } else {
-    targetElement.style.border = "2px solid green";
+    targetElement.style.border = "2px solid lightgreen";
   }
 
   return errors;
@@ -242,10 +251,10 @@ function checkValidators(options, inputValue, targetElement) {
 
 const forms = document.querySelectorAll('form');
 forms.forEach(form => {
-  let inputElements = form.querySelectorAll("[data-validators]");
+  let inputElements = form.querySelectorAll("[validators]");
 
   inputElements.forEach(inputElement => {
-    let options = JSON.parse(inputElement.getAttribute("data-validators"));
+    let options = JSON.parse(inputElement.getAttribute("validators"));
     let name = options.name;
     let targetElement = inputElement.parentElement.querySelector(`[name="${name}"]`);
 
