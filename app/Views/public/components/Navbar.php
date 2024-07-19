@@ -1,7 +1,7 @@
 <?php $csrf = $params['csrf'] ?? null ?>
 
 
-<nav class="navbar navbar-expand-lg border-bottom fixed-top pr-font">
+<nav class="navbar navbar-expand-lg border-bottom fixed-top pr-font bg-light dark-bg-slate-800">
   <div class="container-fluid ">
     <a class="navbar-brand " href="/">Brand</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

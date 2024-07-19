@@ -98,7 +98,6 @@ $csrf = $params['csrf'] ?? null;
     <?php include 'app/Views/admin/components/showAdminModal.php' ?>
     <?php include 'app/Views/admin/components/updateAdminModal.php' ?>
     <?php include 'app/Views/admin/components/DeleteAdminModal.php' ?>
-
 <?php endforeach?>
 
 

@@ -3,9 +3,7 @@
         <div class="modal-content">
             <div class="modal-header d-flex justify-content-between  text-white bg-purple-600">
                 <h5 class="modal-title" id="exampleModalLabel">Add admin</h5>
-                <button type="button" class="close border-0 rounded-circle" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form method="POST" enctype="multipart/form-data" action="/admin/store">
