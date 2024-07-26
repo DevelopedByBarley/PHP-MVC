@@ -15,8 +15,7 @@ $dotenv->load();
 $langService = new LanguageService();
 $langService->language();
 
-
-
+require_once 'config/meta/index.meta.php';
 require_once 'config/variables/avatars.php';
 require_once 'config/app/langs.php';
 require_once 'config/app/app.php';
