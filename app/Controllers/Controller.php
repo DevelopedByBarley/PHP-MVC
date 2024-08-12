@@ -42,12 +42,6 @@ class Controller
     $this->Mailer = new Mailer();
   }
 
-
-
-  public function testMail()
-  {
-    $this->Model->sendMail();
-  }
   public function test()
   {
 

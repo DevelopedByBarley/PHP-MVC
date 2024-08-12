@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-use App\Helpers\Debug;
-use App\Helpers\FileSaver;
-use App\Helpers\Mailer;
 use Database;
 use Exception;
 use PDO;
@@ -13,24 +10,13 @@ use PDOException;
 class Model
 {
   protected $Pdo;
-  protected $Debug;
-  protected $Mailer;
-  protected $FileSaver;
 
 
   public function __construct()
   {
     DATABASE_PERM === 1 ? $this->Pdo = Database::getInstance() : null;
-    $this->Debug = new Debug();
-    $this->Mailer = new Mailer();
-    $this->FileSaver = new FileSaver();
   }
 
-  public function sendMail()
-  {
-    $name = 'name';
-    $this->Mailer->renderAndSend('Test', ['name' => $name], 'arpadsz@max.hu', 'Test');
-  }
 
   public function storeToken($token, $expires, $link, $ref_id)
   {
