@@ -21,12 +21,6 @@ require_once 'config/app/langs.php';
 require_once 'config/app/app.php';
 require_once 'config/app/database.php';
 
-if (SAVING_VISITOR_PERM) {
-    $visitor = new Visitor();
-    SAVING_VISITOR_PERM   ?  $visitor->addVisitor() : null;
-}
-
-
 
 
 require_once 'config/app/router.php';

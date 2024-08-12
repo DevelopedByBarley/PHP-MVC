@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Helpers\Debug;
 use App\Helpers\FileSaver;
 use App\Helpers\Mailer;
+use Database;
 use Exception;
 use PDO;
 use PDOException;
@@ -19,7 +20,7 @@ class Model
 
   public function __construct()
   {
-    DATABASE_PERM === 1 ? $this->Pdo = getConnect() : null;
+    DATABASE_PERM === 1 ? $this->Pdo = Database::getInstance() : null;
     $this->Debug = new Debug();
     $this->Mailer = new Mailer();
     $this->FileSaver = new FileSaver();

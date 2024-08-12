@@ -1,4 +1,7 @@
-<?php $levels = [1, 2, 3] ?>
+<?php $levels = [1, 2, 3];
+$csrf = $params['csrf'] ?? null;
+
+?>
 
 <div class="modal fade" id="updateAdminModal-<?= $current_admin['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">

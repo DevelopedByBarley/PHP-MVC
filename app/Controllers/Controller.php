@@ -50,13 +50,7 @@ class Controller
   }
   public function test()
   {
-    $visitor = new Visitor();
 
-    $is_admin_url = strpos($_SERVER['REQUEST_URI'], '/admin') !== false;
-
-    if (defined('SAVING_VISITOR_PERM') && SAVING_VISITOR_PERM && !$is_admin_url) {
-      $visitor->addVisitor();
-    }
     echo $this->Render->write("public/Layout.php", [
       "content" => $this->Render->write("public/pages/Test.php", [])
     ]);
@@ -65,6 +59,15 @@ class Controller
 
   public function index()
   {
+
+    $visitor = new Visitor();
+
+    $is_admin_url = strpos($_SERVER['REQUEST_URI'], '/admin') !== false;
+
+    if (defined('SAVING_VISITOR_PERM') && SAVING_VISITOR_PERM && !$is_admin_url) {
+      $visitor->addVisitor();
+    }
+    
     echo $this->Render->write("public/Layout.php", [
       "meta_tags" => WELCOME_META_TAGS,
       "content" => $this->Render->write("public/pages/Welcome.php", [])
