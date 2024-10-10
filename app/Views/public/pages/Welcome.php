@@ -90,11 +90,3 @@
 
 </main>
 
-
-<div class="container">
-    <div class="row">
-        <div class="col-12 col-lg-6 min-h-600 bg-teal-500">
-            <div class="bg-fuchsia-400  hover-slate-50 mb-10 px-8 rounded-0  border-green-100 hover-border-teal-400 transition-ease-in-out-100">dsad</div>
-        </div>
-    </div>
-</div>
