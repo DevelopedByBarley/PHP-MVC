@@ -10,6 +10,7 @@ use App\Helpers\Mailer;
 use App\Helpers\Render;
 use App\Helpers\Toast;
 use App\Helpers\UUID;
+use App\Helpers\Validator;
 use App\Helpers\XLSX;
 use App\Models\Model;
 use App\Models\Visitor;
@@ -26,6 +27,7 @@ class Controller
   protected $Toast;
   protected $CSRFToken;
   protected $Mailer;
+  protected $Validator;
 
 
   public function __construct()
@@ -40,16 +42,13 @@ class Controller
     $this->Toast = new Toast();
     $this->CSRFToken = new CSRFToken();
     $this->Mailer = new Mailer();
+    $this->Validator = new Validator();
   }
 
   public function test()
   {
 
-    echo $this->Render->write("public/Layout.php", [
-      "content" => $this->Render->write("public/pages/Test.php", [])
-    ]);
   }
-
 
   public function index()
   {
@@ -61,7 +60,7 @@ class Controller
     if (defined('SAVING_VISITOR_PERM') && SAVING_VISITOR_PERM && !$is_admin_url) {
       $visitor->addVisitor();
     }
-    
+
     echo $this->Render->write("public/Layout.php", [
       "meta_tags" => WELCOME_META_TAGS,
       "content" => $this->Render->write("public/pages/Welcome.php", [])

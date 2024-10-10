@@ -16,6 +16,7 @@ class UserController extends Controller
     parent::__construct();
   }
 
+
   public function index()
   {
     $userId = $this->Auth->checkUserIsLoggedInOrRedirect('userId', '/user/login');
