@@ -142,7 +142,7 @@ class CSRFToken
   private function isSafeOrigin()
   {
     // Az elfogadható eredetek listája
-    $safeOrigins = array('http://localhost:8080', 'http://localhost:9090', 'http://localhost:3000', 'https://barley-test.hu');
+    $safeOrigins = explode(',', $_SERVER['CSRF_APPLY_URL']);
 
     // Ellenőrizzük az Origin fejlécet
     if (isset($_SERVER['HTTP_ORIGIN'])) {
