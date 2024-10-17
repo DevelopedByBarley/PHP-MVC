@@ -16,7 +16,9 @@ import { getCookie } from '/public/js/getCookie.js';
  *    </div>
  */
 
-const lang = getCookie('lang') ? getCookie('lang') : 'En';
+console.log(getCookie('lang'));
+
+const lang = getCookie('lang') ? getCookie('lang') : 'en'
 
 function checkValidators(options, inputValue, targetElement) {
   let errors = [];
@@ -29,8 +31,8 @@ function checkValidators(options, inputValue, targetElement) {
       case "required":
         if (typeof value === "boolean" && value === true) {
           const requiredMessage = {
-            En: "This field is required.",
-            Hu: "A mező kitöltése kötelező."
+            en: "This field is required.",
+            hu: "A mező kitöltése kötelező."
           };
 
           if (inputValue.trim().length === 0) {
@@ -65,8 +67,8 @@ function checkValidators(options, inputValue, targetElement) {
       case "minLength":
         if (typeof value === 'number' && inputValue.trim().length < value) {
           const minLengthMessage = {
-            En: `The length of the field cannot be less than ${value}`,
-            Hu: `A mező hossza nem lehet kevesebb mint ${value}.`
+            en: `The length of the field cannot be less than ${value}`,
+            hu: `A mező hossza nem lehet kevesebb mint ${value}.`
           };
 
           errors.push(minLengthMessage[lang]);
@@ -79,8 +81,8 @@ function checkValidators(options, inputValue, targetElement) {
       case "maxLength":
         if (typeof value === 'number' && inputValue.trim().length > value) {
           const maxLengthMessage = {
-            En: `The length of the field cannot be more than ${value}`,
-            Hu: `A mező hossza nem lehet több mint ${value}.`
+            en: `The length of the field cannot be more than ${value}`,
+            hu: `A mező hossza nem lehet több mint ${value}.`
           };
 
           errors.push(maxLengthMessage[lang]);
@@ -216,24 +218,21 @@ function checkValidators(options, inputValue, targetElement) {
       case "phone":
         if (typeof value === "boolean" && value === true) {
           const phoneValue = inputValue.trim();
-          const isLengthValid = phoneValue.length >= 9;
-          const isNumeric = /^\d+$/.test(phoneValue);
 
-          if (!isLengthValid) {
-            errors.push("A telefonszámnak legalább 9 karakter hosszúnak kell lennie!");
-            targetElement.setCustomValidity("A telefonszámnak legalább 9 karakter hosszúnak kell lennie!");
-          } else {
-            targetElement.setCustomValidity("");
-          }
+          // Regex a +36-os és 06-os telefonszámokra, kötőjelekkel vagy anélkül
+          const phonePattern = /^(?:\+36|06)\d{9}$|^(?:\+36-\d{2}-\d{3}-\d{4})$/;
+          const isValidFormat = phonePattern.test(phoneValue);
 
-          if (!isNumeric) {
-            errors.push("A telefonszámnak csak számokat tartalmazhat!");
-            targetElement.setCustomValidity("A telefonszámnak csak számokat tartalmazhat!");
+          if (!isValidFormat) {
+            errors.push("A telefonszámnak a következő formátumok valamelyikét kell követnie: +36-30-551-1234, +36305511234, vagy 06305511234");
+            targetElement.setCustomValidity("A telefonszámnak a következő formátumok valamelyikét kell követnie: +36-30-551-1234, +36305511234, vagy 06305511234");
           } else {
             targetElement.setCustomValidity("");
           }
         }
         break;
+
+
       default:
         break;
     }
