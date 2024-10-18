@@ -168,7 +168,7 @@ class Model
       $stmt = $this->Pdo->prepare("SELECT * FROM `$table` WHERE id = :id");
       $stmt->bindParam(':id', $id, PDO::PARAM_INT);
       $stmt->execute();
-      $result = $stmt->fetch(PDO::FETCH_ASSOC);
+      $result = $stmt->fetch(PDO::FETCH_OBJ);
       return $result;
     } catch (PDOException $e) {
 

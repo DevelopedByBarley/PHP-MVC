@@ -22,7 +22,7 @@ class Toast
         "time" => 'most',
         "expires" => time() + 2,
       ];
-    } else if ($lang === "hu") {
+    } else if ($lang === "en") {
       $_SESSION["toast"] = [
         "message" => $messageInEng,
         "bg" => $bg,

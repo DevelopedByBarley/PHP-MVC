@@ -20,11 +20,13 @@ class UserController extends Controller
   public function index()
   {
     $userId = $this->Auth->checkUserIsLoggedInOrRedirect('userId', '/user/login');
+    $user = $this->Model->show('users', $userId);
 
     echo $this->Render->write("public/Layout.php", [
       "csrf" => $this->CSRFToken,
+      "user" => $user,
       "content" => $this->Render->write("public/pages/user/Dashboard.php", [
-        "user" => $this->Model->show('users', $userId)
+        "user" => $user,
 
       ])
     ]);
@@ -74,9 +76,11 @@ class UserController extends Controller
   public function store()
   {
     session_start();
-    $this->CSRFToken->check();
+    //$this->CSRFToken->check();
 
-    $isSuccess = $this->User->storeUser($_POST, $_FILES);
+
+    $fileName = $this->FileSaver->saver($_FILES['file'], '/uploads/images/', ['1688134460671231c4eae175.49361389.png'], null);
+    $isSuccess = $this->User->storeUser($_POST, $fileName);
 
     if (!$isSuccess) {
       $this->Toast->set('Regisztráció sikertelen, próbálja meg más adatokkal!', 'danger', '/user/register', null);

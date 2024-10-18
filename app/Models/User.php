@@ -9,12 +9,11 @@ use PDOException;
 
 class User extends Model
 {
-  public function storeUser($body, $files)
+  public function storeUser($body, $fileName = null)
   {
     $email = filter_var($body["email"] ?? '', FILTER_SANITIZE_EMAIL);
-    $pw = password_hash(filter_var($body["password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS), PASSWORD_DEFAULT);
-    $fileName = $this->FileSaver->saver($files['file'], 'uploads/images', null, ['image/png', 'image/jpeg']);
-
+    $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $pw = password_hash(filter_var($body["password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS), PASSWORD_DEFAULT);;
 
     $isUserExist = $this->selectByRecord('users', 'email', $email, PDO::PARAM_STR);
 
@@ -22,7 +21,8 @@ class User extends Model
 
     try {
 
-      $stmt = $this->Pdo->prepare("INSERT INTO `users` (`id`, `email`, `password`,  `fileName`, `created_at`) VALUES (NULL, :email, :password, :fileName, current_timestamp())");
+      $stmt = $this->Pdo->prepare("INSERT INTO `users` (`id`, `name`, `email`, `password`,  `fileName`, `created_at`) VALUES (NULL, :name, :email, :password, :fileName, current_timestamp())");
+      $stmt->bindParam(":name", $name, PDO::PARAM_STR);
       $stmt->bindParam(":email", $email, PDO::PARAM_STR);
       $stmt->bindParam(":password", $pw, PDO::PARAM_STR);
       $stmt->bindParam(":fileName", $fileName, PDO::PARAM_STR);

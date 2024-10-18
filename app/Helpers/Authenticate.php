@@ -4,25 +4,23 @@ namespace App\Helpers;
 
 class Authenticate
 {
-  private static function isLoggedIn($entity)
-  {
-  
-    if (!isset($_COOKIE[session_name()])) return false;
-    if (session_id() == '') {
-      session_start();
+    private static function isLoggedIn($entity)
+    {
+        if (!isset($_COOKIE[session_name()])) return false;
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();
+        }
+        if (!isset($_SESSION[$entity])) return false;
+        return true;
     }
-    if (!isset($_SESSION[$entity])) return false;
-    return true;
-  }
 
+    public static function checkUserIsLoggedInOrRedirect($entity, $redirect)
+    {
+        if (self::isLoggedIn($entity)) {
+            return $_SESSION[$entity];
+        }
 
-  public static function checkUserIsLoggedInOrRedirect($entity, $redirect)
-  {
-    if (self::isLoggedIn($entity)) {
-      return $_SESSION[$entity];
-    };
-
-    header("Location: $redirect");
-    exit;
-  }
+        header("Location: $redirect");
+        exit;
+    }
 }

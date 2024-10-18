@@ -6,7 +6,7 @@ namespace App\Helpers;
 /*
   ?How to use?
   $fileSaver = new FileSaver();
-  $fileSaver->saver($_FILES['files'], 'public/assets/PATH', array($prevImages) ?? null, array($whiteList) ?? null ) 
+  $fileSaver->saver($_FILES['ValueWhereNameIsExist'], 'public/assets/PATH', array($prevImages) ?? null, array($whiteList) ?? null ) 
 */
 
 class FileSaver
@@ -20,8 +20,8 @@ class FileSaver
       'application/msword',
       'image/png',
       'image/jpeg',
+      'image/jpg',
     ];
-
 
     if (empty($files["name"])) return false;
 

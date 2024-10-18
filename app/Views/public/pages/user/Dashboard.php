@@ -1,44 +1,74 @@
-
-
-<?php
-  $user = $params['user'] ?? null;
-?>
-
-<!-- Add Bootstrap container -->
-<div class="container vh-100 d-flex align-items-center justify-content-center mt-8 mt-xxl-0">
-  <div class="row">
-    <div class="col-12 shadow p-xxl-5">
-      <!-- Add profile header -->
-        <div class="row">
-          <div class="col-md-3">
-            <img src="<?= isset($user['fileName']) ? '/public/assets/uploads/images/' . $user['fileName'] : 'https://via.placeholder.com/150' ?>" class="profile-image img-fluid my-3">
+<section class="h-100 gradient-custom-2">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center">
+      <div class="col col-lg-9 col-xl-8">
+        <div class="card">
+          <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
+            <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+              <img src="<?= "/public/assets/uploads/images/$user->fileName" ?? 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp' ?>""
+                alt=" Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+                style="width: 150px; z-index: 1">
+              <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-dark text-body" data-mdb-ripple-color="dark" style="z-index: 1;">
+                Edit profile
+              </button>
+            </div>
+            <div class="ms-3" style="margin-top: 130px;">
+              <h5><?= $user->name ?></h5>
+              <p><?= $user->email ?></p>
+            </div>
           </div>
-          <div class="col-md-9 d-flex flex-column justify-content-end">
-            <h1>John Doe</h1>
-            <p>Email: <?= $user['email'] ?? 'error'?></p>
+          <div class="p-4 text-black bg-body-tertiary">
+            <div class="d-flex justify-content-end text-center py-1 text-body">
+              <div>
+                <p class="mb-1 h5">253</p>
+                <p class="small text-muted mb-0">Photos</p>
+              </div>
+              <div class="px-3">
+                <p class="mb-1 h5">1026</p>
+                <p class="small text-muted mb-0">Followers</p>
+              </div>
+              <div>
+                <p class="mb-1 h5">478</p>
+                <p class="small text-muted mb-0">Following</p>
+              </div>
+            </div>
           </div>
-        </div>
-
-      <!-- Add profile info -->
-      <div class="profile-info">
-        <div class="row">
-          <div class="col-md-3">
-            <h5>Personal Info</h5>
-            <ul class="list-unstyled">
-              <li>Gender: Male</li>
-              <li>Age: 30</li>
-              <li>Location: New York, NY</li>
-            </ul>
-          </div>
-          <div class="col-md-9 mt-4">
-            <h5>About Me</h5>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, magna a ullamcorper laoreet,
-              velit nisi varius nisl, eget congue dui ligula eget nisi. Sed auctor, magna a ullamcorper laoreet,
-              velit nisi varius nisl, eget congue dui ligula eget nisi.</p>
+          <div class="card-body p-4 text-black">
+            <div class="mb-5  text-body">
+              <p class="lead fw-normal mb-1">About</p>
+              <div class="p-4 bg-body-tertiary">
+                <p class="font-italic mb-1">Web Developer</p>
+                <p class="font-italic mb-1">Lives in New York</p>
+                <p class="font-italic mb-0">Photographer</p>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-4 text-body">
+              <p class="lead fw-normal mb-0">Recent photos</p>
+              <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p>
+            </div>
+            <div class="row g-2">
+              <div class="col mb-2">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp" alt="image 1"
+                  class="w-100 rounded-3">
+              </div>
+              <div class="col mb-2">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp" alt="image 1"
+                  class="w-100 rounded-3">
+              </div>
+            </div>
+            <div class="row g-2">
+              <div class="col">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp" alt="image 1"
+                  class="w-100 rounded-3">
+              </div>
+              <div class="col">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp" alt="image 1"
+                  class="w-100 rounded-3">
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
+</section>

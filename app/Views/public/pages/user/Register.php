@@ -1,41 +1,58 @@
 <?php $csrf = $params['csrf'] ?? null ?>
 
-<section class="vh-100 gradient-custom pr-font">
+<section class="mt-5 gradient-custom pr-font">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12 col-md-8 col-lg-6 col-xl-5 shadow">
-        <div class="card  border-0" style="border-radius: 1rem;">
-          <div class="card-body p-5 text-center ">
+        <div class="card border-0" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
             <form action="/user/register" method="POST" enctype="multipart/form-data">
               <?= $csrf->generate() ?>
 
               <div class="mb-md-5 mt-md-4 pb-5">
-
-                <h2 class="fw-bold mb-2 text-uppercase">USER REGISTER</h2>
-                <p class="mb-5">Please enter your login and password!</p>
+                <h2 class="fw-bold mb-2 text-uppercase">User Register</h2>
+                <p class="text-muted mb-5">Please enter your details to register.</p>
 
                 <div class="form-outline form-white mb-4">
-                  <input type="email" name="email" class="form-control" id="exampleInputEmail1" validators='{
-                    "name": "email",
-                    "required": true,
-                    "email": true,
-                    "minLength": 12,
-                    "maxLength": 50
-                    }' aria-describedby="emailHelp">
-                  <label class="form-label" for="typeEmailX">Email</label>
+                  <label class="form-label" for="name">Name</label>
+                  <input type="text" name="name" class="form-control" id="name" 
+                         validators='{
+                           "name": "name",
+                           "required": true,
+                           "minLength": 12,
+                           "maxLength": 50,
+                           "split": true
+                         }' aria-describedby="nameHelp" required>
                 </div>
 
                 <div class="form-outline form-white mb-4">
-                  <input type="password" name="password" validators='{
-                    "name": "password",
-                    "required": true,
-                    "password": true
-                    }' class="form-control" id="exampleInputPassword1">
-                  <label class="form-label" for="typePasswordX">Password</label>
+                  <label class="form-label" for="email">Email</label>
+                  <input type="email" name="email" class="form-control" id="exampleInputEmail1" 
+                         validators='{
+                           "name": "email",
+                           "required": true,
+                           "email": true,
+                           "minLength": 12,
+                           "maxLength": 50
+                         }' aria-describedby="emailHelp" required>
                 </div>
 
-                <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+                <div class="form-outline form-white mb-4">
+                  <label class="form-label" for="password">Password</label>
+                  <input type="password" name="password" class="form-control" id="exampleInputPassword1" 
+                         validators='{
+                           "name": "password",
+                           "required": true,
+                           "password": true
+                         }' required>
+                </div>
 
+                <div class="mb-3">
+                  <label for="formFileMultiple" class="form-label">File Upload</label>
+                  <input class="form-control" type="file" id="formFileMultiple" name="file" required>
+                </div>
+
+                <button class="btn btn-outline-light btn-lg px-5" type="submit">Register</button>
               </div>
             </form>
           </div>

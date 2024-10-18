@@ -7,7 +7,7 @@ define('APP_ADMIN_NAME', 'PHP-MVC-ADMIN');
 
 // USER
 
-define('USER_SERVICE_PERM', 0);
+define('USER_SERVICE_PERM', 1);
 
 // ADMIN
 define('ADMIN_SERVICE_PERM', 1);
@@ -28,9 +28,9 @@ define('SAVING_VISITOR_PERM', 0);
 // RATINGS & FEEDBACK PERMISSION
 define('FEEDBACK_PERM', 0);
 
-define('VALIDATORS_PERM', 0);
+define('VALIDATORS_PERM', 1);
 define('UUID_PERM', 0);
-define('TOAST_PERM', 0);
+define('TOAST_PERM', 1);
 define('IMG_LOADER_PERM', 0);
 define('SKELETON_PERM', 0);
 define('PW_GENERATOR_PERM', 0);

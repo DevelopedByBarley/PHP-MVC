@@ -36,7 +36,7 @@ $title = isset($params['title']) ? '- ' . $params['title'] : '';
   <?php include('app/Views/admin/components/Navbar.php') ?>
 
 
-  <?= $params["content"] ?>
+  <?= $content ?>
 
   <script src="/public/bootstrap/js/bootstrap.bundle.js"></script>
   <script type="module" src="/public/js/getCookie.js?v=<?= time() ?>"></script>

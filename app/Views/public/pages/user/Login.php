@@ -1,4 +1,3 @@
-<?php $csrf = $params['csrf'] ?? null ?>
 
 
 <section class="vh-100 gradient-custom   pr-font">

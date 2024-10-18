@@ -1,10 +1,5 @@
-<?php
-    $lang = $_COOKIE['lang'] ?? null;
-?>
-
 <main class="flex-shrink-0">
 
-    <!-- Header-->
     <header class="py-5 mt-5 min-vh-75 d-flex align-items-center justify-content-center">
         <div class="container px-5 flex">
             <div class="row gx-5 align-items-center justify-content-center">

@@ -1,6 +1,3 @@
-<?php $csrf = $params['csrf'] ?? null ?>
-
-
 <nav class="navbar navbar-expand-lg border-bottom fixed-top pr-font bg-light dark-bg-slate-800">
   <div class="container-fluid ">
     <a class="navbar-brand " href="/">Brand</a>
@@ -30,12 +27,11 @@
           <a class="nav-link btn-dark disabled " href="#" tabindex="-1" aria-disabled="true">Disabled</a>
         </li>
       </ul>
-      <?php if (isset($_SESSION['userId'])) : ?>
+      <?php if (isset($user)) : ?>
         <div class="btn-group dropstart">
-
           <div class="dropdown">
             <button class="btn  dropdown-toggle p-1 " type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="/public/assets/uploads/images/1.png" class="avatar img-fluid rounded-circle" style="height: 30px; width: 30px;" alt="">
+              <img src="<?= "/public/assets/uploads/images/$user->fileName" ?? 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp' ?>" class="avatar img-fluid rounded-circle" style="height: 30px; width: 30px;" alt="">
             </button>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">Action</a></li>

@@ -6,6 +6,7 @@ use App\Helpers\Alert;
 use App\Helpers\Authenticate;
 use App\Helpers\CSRFToken;
 use App\Helpers\Debug;
+use App\Helpers\FileSaver;
 use App\Helpers\Mailer;
 use App\Helpers\Render;
 use App\Helpers\Toast;
@@ -28,6 +29,7 @@ class Controller
   protected $CSRFToken;
   protected $Mailer;
   protected $Validator;
+  protected $FileSaver;
 
 
   public function __construct()
@@ -43,6 +45,7 @@ class Controller
     $this->CSRFToken = new CSRFToken();
     $this->Mailer = new Mailer();
     $this->Validator = new Validator();
+    $this->FileSaver = new FileSaver();
   }
 
   public function test()
@@ -60,10 +63,14 @@ class Controller
     if (defined('SAVING_VISITOR_PERM') && SAVING_VISITOR_PERM && !$is_admin_url) {
       $visitor->addVisitor();
     }
+    
 
     echo $this->Render->write("public/Layout.php", [
+      "title" => "Welcome",
       "meta_tags" => WELCOME_META_TAGS,
-      "content" => $this->Render->write("public/pages/Welcome.php", [])
+      "content" => $this->Render->write("public/pages/Welcome.php", [
+        "lang" => $_COOKIE['lang']
+      ])
     ]);
   }
   public function cookie()
@@ -83,7 +90,7 @@ class Controller
 
   public function createResetUrl($tokenData)
   {
-    return BASE_URL . '/reset?token=' . urlencode($tokenData['token']) . '&expires=' . urlencode($tokenData['expires']);
+    return APP_URL . '/reset?token=' . urlencode($tokenData['token']) . '&expires=' . urlencode($tokenData['expires']);
   }
 
   public function generateExpiresTokenByDays($days)

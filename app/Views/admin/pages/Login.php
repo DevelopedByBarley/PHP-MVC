@@ -1,6 +1,4 @@
-<?php
-$csrf = $params['csrf'];
-?>
+  
 
 <section class="vh-100 gradient-custom pr-font">
   <div class="container py-5 h-100">
