@@ -1,12 +1,4 @@
 <?php
-$admin = $params['admin'];
-$admin_activities = $params['admin_activities'] ?? [];
-$visitors = $params['visitors']  ?? [];
-$admin_list = $params['admin_list']  ?? [];
-$users = $params['users']  ?? [];
-$registrationsChartData = $params['registrationsChartData'] ?? json_encode([]);
-$feedbacks = $params['feedbacks'] ?? [];
-$feedbackPercentages = $params['feedbackPercentages'] ?? null;
 
 $smileys = [
   1 => '😞',

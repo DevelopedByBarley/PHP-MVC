@@ -14,13 +14,13 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link btn-dark dropdown-toggle " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+            <?= $_COOKIE['lang'] ?>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item ">Hello</a></li>
             <li>
-              <hr class="dropdown-divider">
+              <a href="/lang/hu" class="dropdown-item">hu</a>
             </li>
+            <li><a  href="/lang/en" class="dropdown-item">en</a></li>
           </ul>
         </li>
         <li class="nav-item">
