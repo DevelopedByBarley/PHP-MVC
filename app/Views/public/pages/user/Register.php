@@ -1,4 +1,3 @@
-<?php $csrf = $params['csrf'] ?? null ?>
 
 <section class="mt-5 gradient-custom pr-font">
   <div class="container py-5 h-100">
@@ -15,36 +14,57 @@
 
                 <div class="form-outline form-white mb-4">
                   <label class="form-label" for="name">Name</label>
-                  <input type="text" name="name" class="form-control" id="name" 
-                         validators='{
+                  <input type="text" name="name" class="form-control" id="name"
+                    validators='{
                            "name": "name",
                            "required": true,
                            "minLength": 12,
                            "maxLength": 50,
                            "split": true
                          }' aria-describedby="nameHelp" required>
+                  <?php if (!empty($errors['name'])): ?>
+                    <div class="alert alert-danger p-1" role="alert">
+                      <?php foreach ($errors['name'] as $error): ?>
+                        <p class="m-0"><?= $error ?></p>
+                      <?php endforeach ?>
+                    </div>
+                  <?php endif ?>
                 </div>
 
                 <div class="form-outline form-white mb-4">
                   <label class="form-label" for="email">Email</label>
-                  <input type="email" name="email" class="form-control" id="exampleInputEmail1" 
-                         validators='{
+                  <input type="email" name="email" class="form-control" id="exampleInputEmail1"
+                    validators='{
                            "name": "email",
                            "required": true,
                            "email": true,
                            "minLength": 12,
                            "maxLength": 50
                          }' aria-describedby="emailHelp" required>
+                  <?php if (!empty($errors['email'])): ?>
+                    <div class="alert alert-danger p-1" role="alert">
+                      <?php foreach ($errors['email'] as $error): ?>
+                        <p class="m-0"><?= $error ?></p>
+                      <?php endforeach ?>
+                    </div>
+                  <?php endif ?>
                 </div>
 
                 <div class="form-outline form-white mb-4">
                   <label class="form-label" for="password">Password</label>
-                  <input type="password" name="password" class="form-control" id="exampleInputPassword1" 
-                         validators='{
+                  <input type="password" name="password" class="form-control" id="exampleInputPassword1"
+                    validators='{
                            "name": "password",
                            "required": true,
                            "password": true
                          }' required>
+                  <?php if (!empty($errors['password'])): ?>
+                    <div class="alert alert-danger p-1" role="alert">
+                      <?php foreach ($errors['password'] as $error): ?>
+                        <p class="m-0"><?= $error ?></p>
+                      <?php endforeach ?>
+                    </div>
+                  <?php endif ?>
                 </div>
 
                 <div class="mb-3">

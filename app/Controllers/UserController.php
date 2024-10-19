@@ -47,7 +47,8 @@ class UserController extends Controller
 
     echo $this->Render->write("public/Layout.php", [
       "content" => $this->Render->write("public/pages/user/Register.php", [
-        "csrf" => $this->CSRFToken
+        "csrf" => $this->CSRFToken,
+        "errors" => $_SESSION['errors']
       ])
     ]);
   }
@@ -76,8 +77,23 @@ class UserController extends Controller
   public function store()
   {
     session_start();
-    //$this->CSRFToken->check();
+    $this->CSRFToken->check();
 
+    $validators  = [
+      'name' => ['validators' => ['required' => true, 'split' => true, 'minLength' => 5, 'maxLength' => 50,]],
+      'email' => ['validators' => ['required' => true, 'minLength' => 7, 'maxLength' => 30, 'email' => true]],
+      'password' => ['validators' => ['required' => true, 'password' => true, 'minLength' => 5, 'maxLength' => 50,]],
+    ];
+
+    $errors = $this->Validator->validate($validators);
+
+    if (!empty($errors)) {
+      if (isset($_POST['csrf'])) unset($_POST['csrf']);
+      $_SESSION['prev'] = $_POST;
+      $_SESSION['errors'] = $errors;
+      $this->Toast->set('Hibás adatok, kérjük próbálja meg más adatokkal', 'danger', $_SERVER['REQUEST_URI'], null);
+      exit;
+    }
 
     $fileName = $this->FileSaver->saver($_FILES['file'], '/uploads/images/', ['1688134460671231c4eae175.49361389.png'], null);
     $isSuccess = $this->User->storeUser($_POST, $fileName);
@@ -86,6 +102,8 @@ class UserController extends Controller
       $this->Toast->set('Regisztráció sikertelen, próbálja meg más adatokkal!', 'danger', '/user/register', null);
     }
 
+    if (isset($_SESSION['prev'])) unset($_SESSION['prev']);
+    if (isset($_SESSION['errors'])) unset($_SESSION['errors']);
     $this->Toast->set('Regisztráció sikeres!', 'success', '/user/login', null);
   }
 
