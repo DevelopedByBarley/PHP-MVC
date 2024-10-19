@@ -48,7 +48,7 @@ class UserController extends Controller
     echo $this->Render->write("public/Layout.php", [
       "content" => $this->Render->write("public/pages/user/Register.php", [
         "csrf" => $this->CSRFToken,
-        "errors" => $_SESSION['errors']
+        "errors" => $_SESSION['errors'] ?? null
       ])
     ]);
   }
