@@ -1,7 +1,4 @@
-<?php
-$meta_tags = $params['meta_tags'] ?? [];
-$title = isset($params['title']) ? '- ' . $params['title'] : '';
-?>
+
 
 
 <!DOCTYPE html>
@@ -13,7 +10,7 @@ $title = isset($params['title']) ? '- ' . $params['title'] : '';
   <link rel="stylesheet" href="/public/bootstrap/css/bootstrap.css" />
   <link rel="stylesheet" href="/public/css/index.css?v=<?= time() ?>">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <title><?php echo htmlspecialchars(APP_NAME); ?> <?php echo $title ?></title>
+  <title><?php echo htmlspecialchars(APP_NAME); ?> <?php echo isset($title) ? '- ' . $title : '' ?></title>
 
   <?php echo isset($meta_tags['description']) ? '<meta name="description" content="' . htmlspecialchars($meta_tags['description']) . '">' : ''; ?>
   <?php echo isset($meta_tags['keywords']) ? '<meta name="keywords" content="' . htmlspecialchars($meta_tags['keywords']) . '">' : ''; ?>
@@ -54,6 +51,8 @@ $title = isset($params['title']) ? '- ' . $params['title'] : '';
     <?php include 'app/Views/public/components/Toast.php' ?>
     <script src="/public/js/toast.js?v=<?= time() ?>"></script>
   <?php endif ?>
+
+  
   <?php if (IMG_LOADER_PERM) : ?><script src="/public/js/imgLoader.js?v=<?= time() ?>"></script><?php endif ?>
   <?php if (SKELETON_PERM) : ?>
     <?php include 'app/Views/templates/skeletons/card.skeleton.php' ?>

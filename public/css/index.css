@@ -11663,28 +11663,6 @@ nav .theme-switcher .checkbox:checked + .checkbox-label .ball {
   transform: translateX(24px);
 }
 
-#toast-root {
-  position: fixed;
-  right: 20px;
-  top: 100px;
-  z-index: 1056 !important;
-}
-
-.toast {
-  position: relative;
-  animation: toastIn;
-  animation-duration: 0.5s;
-  cursor: pointer;
-}
-
-@keyframes toastIn {
-  0% {
-    transform: translateX(200%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
 .rating-modal .modal-body .form-check {
   margin-bottom: 10px;
   /* Adjust spacing between smiley icons */
@@ -11720,74 +11698,12 @@ nav .theme-switcher .checkbox:checked + .checkbox-label .ball {
   /* Adjust border color as needed */
 }
 
-#cookie-consent.zone-hidden {
-  visibility: hidden;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow: hidden !important;
-}
-
-.cookie-banner_wrapper {
-  transition: all 0.4s ease-in-out;
-  position: fixed;
-  padding: 8px 21px;
-  margin: 0;
-  border-radius: 5px;
-  z-index: 200;
-  color: #FFFFFF;
-  border: 1px solid #FFFFFF;
-  left: 50%;
-  bottom: 30px;
-  transform: translate(-50%, 0);
-}
-.cookie-banner_wrapper p {
-  bottom: 30px;
-  font-size: 0.9rem;
-  margin: 0;
-  font-weight: bold;
-}
-.cookie-banner_wrapper p a {
-  border-bottom: dotted thin #eee;
-  text-decoration: none;
-}
-.cookie-banner_wrapper p a:hover {
-  text-decoration: none;
-  border-bottom-style: solid;
-}
-.cookie-banner_wrapper .btn-group button.cookie-banner_btn {
-  background: #ffffff;
-  border: 1px solid #ffffff;
-  border-radius: 5px;
-  box-shadow: inset 0 0 1px 1px #ffffff;
-  color: #333;
-  font: bold 12px "helvetica neue", helvetica, arial, sans-serif;
-  line-height: 1;
-  padding: 15px 0;
-  width: 100px;
-  margin: 0.5rem;
-}
-.cookie-banner_wrapper .btn-group button.cookie-banner_btn:hover {
-  background: var(--sc-color);
-  box-shadow: inset 0 0 1px 1px var(--sc-color);
-  color: #222;
-  cursor: pointer;
-  border: none;
-  color: #ffffff;
-}
-.cookie-banner_wrapper .btn-group button.cookie-banner_btn:active {
-  box-shadow: inset 0 0 1px 1px #e3e3e3;
-  color: #000;
-}
-
 .blur-load {
   position: relative;
   filter: blur(0.5px);
   border-radius: 16px;
 }
 .blur-load img {
-  min-height: 250px;
-  min-width: 250px;
   opacity: 0;
   border-radius: 16px;
 }

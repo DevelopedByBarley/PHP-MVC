@@ -3,10 +3,10 @@
 <section class="mt-5 gradient-custom pr-font">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-12 col-md-8 col-lg-6 col-xl-5 shadow">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
         <div class="card border-0" style="border-radius: 1rem;">
-          <div class="card-body p-5 text-center">
-            <form action="/user/register" method="POST" enctype="multipart/form-data">
+          <div class="card-body p-5 text-center shadow">
+            <form action="/user/register" method="POST" class="text-start" enctype="multipart/form-data">
               <?= $csrf->generate() ?>
 
               <div class="mb-md-5 mt-md-4 pb-5">
@@ -52,7 +52,7 @@
                   <input class="form-control" type="file" id="formFileMultiple" name="file" required>
                 </div>
 
-                <button class="btn btn-outline-light btn-lg px-5" type="submit">Register</button>
+                <button class="btn bg-slate-900 text-white btn-lg px-5 mt-4" type="submit">Register</button>
               </div>
             </form>
           </div>

@@ -71,11 +71,11 @@ $barColors = [
       <div class="col-12 col-md-6 col-lg-6 col-xl-5 min-h-400 border bg-gray-50 dark-bg-gray-900 shadow-lg rounded-4 d-flex align-items-center justify-content-center justify-content-xl-start">
         <div class="admin-settings min-h-300 h-100 d-flex flex-column flex-xl-row align-items-center justify-content-center mx-3">
           <span>
-            <img src="/public/assets/images/avatars/<?= $admin['avatar'] ?>.png" alt="" style="width: 200px; height: 200px" class="rounded-circle mx-3" />
+            <img src="/public/assets/images/avatars/<?= $admin->avatar ?>.png" alt="" style="width: 200px; height: 200px" class="rounded-circle mx-3" />
           </span>
           <div>
-            <p class="mb-0"><span class="fw-bolder text-3xl"><?= $admin['name'] ?></span> <span>(Level <?= $admin['level'] ?>)</span></p>
-            <p><?= $admin['email'] ?></p>
+            <p class="mb-0"><span class="fw-bolder text-3xl"><?= $admin->name ?></span> <span>(Level <?= $admin->level ?>)</span></p>
+            <p><?= $admin->email ?></p>
             <a href="/admin/settings" class="btn bg-purple-600 hover-bg-purple-700 px-4">
               <span><i class="fa-solid fa-gears text-2xl gray-50"></i>
             </a>
@@ -139,11 +139,6 @@ $barColors = [
       </div>
     </div>
   </div>
-
-
-
-
-  <?php include 'app/Views/admin/pages/Table.php' ?>
 
 
 </main>

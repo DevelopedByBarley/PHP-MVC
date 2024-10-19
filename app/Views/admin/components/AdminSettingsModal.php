@@ -11,7 +11,7 @@
 
                     <div class="form-group my-2">
                         <label for="exampleInputEmail1">Name</label>
-                        <input name="name" type="text" value="<?= $admin['name'] ?? '' ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name " required validators='{
+                        <input name="name" type="text" value="<?= $admin->name ?? '' ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name " required validators='{
                             "name": "name",
                             "required": true,
                             "minLength": 12,
@@ -21,7 +21,7 @@
                     </div>
                     <div class="form-outline">
                         <label class="form-label" for="form3Example3">Email address</label>
-                        <input name="email" type="email" id="form3Example3" class="form-control" disabled value="<?= $admin['email'] ?? '' ?>" />
+                        <input name="email" type="email" id="form3Example3" class="form-control" disabled value="<?= $admin->email ?? '' ?>" />
                     </div>
 
                     <div class="border p-2 py-3 my-4 rounded-4">
@@ -62,7 +62,7 @@
                             <?php foreach (AVATARS as $avatar) : ?>
                                 <div class="col-2 d-flex align-items-center justify-content-center mb-2">
                                     <div class="form-check form-check-inline image-radio">
-                                        <input required class="form-check-input" <?php echo $avatar === $admin['avatar'] ? 'checked' : '' ?> type="radio" name="settings_avatar_radio" id="settings_avatar_radio-<?php echo $avatar; ?>" value="<?php echo $avatar; ?>">
+                                        <input required class="form-check-input" <?php echo $avatar === $admin->avatar ? 'checked' : '' ?> type="radio" name="settings_avatar_radio" id="settings_avatar_radio-<?php echo $avatar; ?>" value="<?php echo $avatar; ?>">
                                         <label class="form-check-label" for="settings_avatar_radio-<?php echo $avatar; ?>">
                                             <img src="/public/assets/images/avatars/<?php echo $avatar; ?>.png" class="h-45 w-45" alt="<?php echo ucfirst($avatar); ?>">
                                         </label>

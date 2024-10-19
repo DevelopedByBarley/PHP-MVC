@@ -65,9 +65,9 @@ class Admin extends Model
       
       
       $prev_admin = $this->selectByRecord('admins', 'id', $adminId, PDO::PARAM_INT);
-      $level = filter_var($body["level"] ?? $prev_admin['level'] , FILTER_SANITIZE_SPECIAL_CHARS);
-      $current_password = $prev_admin['password'];
-      $prev_name = $prev_admin['name'];
+      $level = filter_var($body["level"] ?? $prev_admin->level , FILTER_SANITIZE_SPECIAL_CHARS);
+      $current_password = $prev_admin->password;
+      $prev_name = $prev_admin->name;
 
 
 

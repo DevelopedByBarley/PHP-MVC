@@ -52,7 +52,7 @@ class Model
       $stmt->execute(['token' => $token]);
 
       if ($stmt->rowCount() > 0) {
-        $token = $stmt->fetch(PDO::FETCH_ASSOC);
+        $token = $stmt->fetch(PDO::FETCH_OBJ);
         return $token;
       } else {
         return false;
@@ -96,7 +96,7 @@ class Model
       $stmt = $this->Pdo->prepare("SELECT * FROM `$table` WHERE `$entity` LIKE :searched");
       $stmt->bindParam(":searched", $searched);
       $stmt->execute();
-      $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      $data = $stmt->fetchAll(PDO::FETCH_OBJ);
 
       return $data;
     } catch (PDOException $e) {
@@ -108,7 +108,7 @@ class Model
   public function paginate($results, $limit, $search = '', $searchCondition = null)
   {
     if (empty($results)) {
-      return [
+      return (object)[
         "status" => true,
         "pages" => [],
         "numOfPage" => 0,
@@ -130,7 +130,7 @@ class Model
 
 
     if ($countOfRecords === 0) {
-      return [
+      return (object)[
         "status" => false,
         "message" => "No results found for the given search criteria.",
         "pages" => [],
@@ -143,7 +143,7 @@ class Model
     // Lapozott eredmények kiválasztása a limit és offset alapján
     $pagedResults = array_slice($results, $calculated, $limit);
     if (empty($pagedResults)) {
-      return [
+      return (object)[
         "status" => false,
         "message" => "No paginated results found for the given offset and limit.",
         "pages" => [],
@@ -153,7 +153,7 @@ class Model
     }
 
 
-    return [
+    return (object)[
       "status" => true,
       "pages" => $pagedResults,
       "numOfPage" => $numOfPage,
@@ -185,7 +185,7 @@ class Model
     try {
       $stmt = $this->Pdo->prepare("SELECT * FROM `$table`");
       $stmt->execute();
-      $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      $results = $stmt->fetchAll(PDO::FETCH_OBJ);
 
       return $results;
     } catch (PDOException  $e) {
@@ -202,7 +202,7 @@ class Model
       $stmt = $this->Pdo->prepare("SELECT * FROM {$table} WHERE {$column} = :value");
       $stmt->bindParam(':value', $value, $param);
       $stmt->execute();
-      $result = $stmt->fetch(PDO::FETCH_ASSOC);
+      $result = $stmt->fetch(PDO::FETCH_OBJ);
 
       return $result;
     } catch (PDOException $e) {
@@ -216,7 +216,7 @@ class Model
       $stmt = $this->Pdo->prepare("SELECT * FROM $table WHERE  $entity = :entity");
       $stmt->bindParam(':entity', $value, $param);
       $stmt->execute();
-      $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      $result = $stmt->fetchAll(PDO::FETCH_OBJ);
       return $result;
     } catch (PDOException $e) {
       throw new Exception("An error occurred during the database operation in the selectAllByRecord method: " . $e->getMessage());

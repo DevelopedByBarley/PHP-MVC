@@ -146,7 +146,7 @@ class AdminController extends Controller
       $this->Model->deleteRecordById('admins', $id);
 
       $this->Activity->store([
-        'content' => "Kitörölt egy admint: " . $admin['name'] . ", level(" . $admin['level'] . ")",
+        'content' => "Kitörölt egy admint: " . $admin->name . ", level(" . $admin->level . ")",
         'contentInEn' => null,
         'adminRefId' => $adminId
       ], $adminId);
@@ -256,16 +256,16 @@ class AdminController extends Controller
   {
     $adminId = $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
     $admin = $this->Model->selectByRecord('admins', 'id', $adminId, PDO::PARAM_INT);
+    $users = $this->Model->all('users');
+    $data = $this->Model->paginate($users, 1, '', null);
 
-    $data = [
-      'numOfPage' => 10,
-    ];
 
     echo $this->Render->write("admin/Layout.php", [
       "csrf" => $this->CSRFToken,
       "admin" => $admin,
       "content" => $this->Render->write("admin/pages/Table.php", [
-        'data' => $data
+        'data' => $data,
+        'users' => $data->pages
       ])
     ]);
   }
@@ -293,16 +293,13 @@ class AdminController extends Controller
     $admin_list = $this->Model->all('admins', $adminId, PDO::PARAM_STR);
 
     $data = $this->Model->paginate($admin_list, 10, '',  function ($offset, $numOfPages) {
-      if ($offset === 0) {
-        header("Location: /admin/settings");
-        exit;
-      }
-
       if ((int)$offset > (int)$numOfPages) {
         header("Location: /admin/settings?offset=$numOfPages");
         exit;
       }
     });
+
+
 
 
 
@@ -367,7 +364,7 @@ class AdminController extends Controller
     $currentYear = date('Y');
 
     foreach ($users as $user) {
-      $createdAt = new DateTime($user['created_at']);
+      $createdAt = new DateTime($user->created_at);
       $year = $createdAt->format('Y');
       $month = $createdAt->format('F'); // Hónap neve, pl. "January", "February", stb.
 
@@ -399,7 +396,7 @@ class AdminController extends Controller
     $totalFeedbacks = count($feedbacks);
 
     foreach ($feedbacks as $feedback) {
-      switch ((int)$feedback['feedback']) {
+      switch ((int)$feedback->feedback) {
         case 1:
           $countOfFeedbacks[1]++;
           break;
