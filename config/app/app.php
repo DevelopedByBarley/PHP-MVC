@@ -23,17 +23,17 @@ define('COOKIE_USE_ANALYTICS', 1);
 define('COOKIE_USE_MARKETING',1);
 
 // VISITORS PERMISSION
-define('SAVING_VISITOR_PERM', 1);
+define('SAVING_VISITOR_PERM', 0);
 
 // RATINGS & FEEDBACK PERMISSION
-define('FEEDBACK_PERM', 1);
+define('FEEDBACK_PERM', 0);
 
 define('VALIDATORS_PERM', 1);
-define('UUID_PERM', 1);
+define('UUID_PERM', 0);
 define('TOAST_PERM', 1);
 define('IMG_LOADER_PERM', 1);
-define('SKELETON_PERM', 1);
-define('PW_GENERATOR_PERM', 1);
+define('SKELETON_PERM', 0);
+define('PW_GENERATOR_PERM', 0);
 
 
 
