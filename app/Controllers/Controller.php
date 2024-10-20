@@ -2,19 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Helpers\Alert;
-use App\Helpers\Authenticate;
-use App\Helpers\CSRFToken;
-use App\Helpers\Debug;
-use App\Helpers\FileSaver;
-use App\Helpers\Mailer;
-use App\Helpers\Render;
-use App\Helpers\Toast;
-use App\Helpers\UUID;
-use App\Helpers\Validator;
-use App\Helpers\XLSX;
-use App\Models\Model;
-use App\Models\Visitor;
+use App\Helpers\{Alert, Authenticate, CSRFToken, Debug, FileSaver, Mailer, Render, Toast, UUID, Validator, XLSX};
+use App\Models\{Model, Visitor};
+
+
 
 class Controller
 {
@@ -48,12 +39,9 @@ class Controller
     $this->FileSaver = new FileSaver();
   }
 
-  public function test()
-  {
+  public function test(): void {}
 
-  }
-
-  public function index()
+  public function home(): void
   {
 
     $visitor = new Visitor();
@@ -63,7 +51,7 @@ class Controller
     if (defined('SAVING_VISITOR_PERM') && SAVING_VISITOR_PERM && !$is_admin_url) {
       $visitor->addVisitor();
     }
-    
+
 
     echo $this->Render->write("public/Layout.php", [
       "title" => "Welcome",

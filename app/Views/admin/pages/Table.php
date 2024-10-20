@@ -14,7 +14,9 @@
         <tr>
           <td>
             <div class="d-flex align-items-center">
-              <img src="<?= "/public/assets/uploads/images/$user->fileName" ?? 'https://mdbootstrap.com/img/new/avatars/8.jpg' ?>" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
+              <div class="blur-load">
+                <img loading="lazy" src="<?= "/public/assets/uploads/images/$user->fileName" ?? 'https://mdbootstrap.com/img/new/avatars/8.jpg' ?>" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
+              </div>
               <div class="ms-3">
                 <p class="fw-bold mb-1"><?= $user->name ?></p>
               </div>

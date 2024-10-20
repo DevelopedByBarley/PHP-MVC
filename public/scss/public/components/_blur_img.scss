@@ -15,7 +15,7 @@
     position: absolute;
     inset: 0;
     animation: pulse 2.5s infinite;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.7);
   }
 
   &.loaded {
@@ -38,7 +38,7 @@
   }
 
   50% {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.7);
   }
 
   100% {

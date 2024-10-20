@@ -4,14 +4,10 @@ namespace App\Helpers;
 
 class XLSX
 {
-  private $Pdo;
-  private $Alert;
 
-  public function __construct()
-  {
-  }
+  public function __construct() {}
 
-  public function write($data)
+  public function write($data, $headers = ["id", "name", "email", "pw", "created_at"])
   {
     // Ellenőrzés, hogy az adatok üresek-e vagy nem tömb típusúak
     if (empty($data) || !is_array($data)) {
@@ -24,13 +20,7 @@ class XLSX
     $sheet = $excel->getActiveSheet();
 
     // Fejlécek definiálása
-    $headers = [
-      "id",
-      "name",
-      "email",
-      "pw",
-      "create_at"
-    ];
+
 
     // Beírjuk a fejléceket
     $columnIndex = 1;

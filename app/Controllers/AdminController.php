@@ -205,8 +205,6 @@ class AdminController extends Controller
     $feedbackPercentages = self::getPercentageOfFeedbacks($feedbacks);
     $registrationsChartData = self::getRegistrationsByMonth($users);
 
-
-
     $admin_activities = $this->Activity->getAdminActivities();
     $data = [
       'numOfPage' => 10,
@@ -257,7 +255,7 @@ class AdminController extends Controller
     $adminId = $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
     $admin = $this->Model->selectByRecord('admins', 'id', $adminId, PDO::PARAM_INT);
     $users = $this->Model->all('users');
-    $data = $this->Model->paginate($users, 1, '', null);
+    $data = $this->Model->paginate($users, 4, '', null);
 
 
     echo $this->Render->write("admin/Layout.php", [

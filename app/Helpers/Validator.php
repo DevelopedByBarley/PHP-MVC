@@ -2,8 +2,9 @@
 
 namespace App\Helpers;
 
-use App\Models\Model;
-
+use Database;
+use Exception;
+use PDO;
 
 /*  
   
@@ -21,12 +22,7 @@ use App\Models\Model;
 
 class Validator
 {
-  protected $Model;
 
-  public function __construct()
-  {
-    $this->Model = new Model();
-  }
 
   private function structureValidators($validators)
   {
@@ -103,18 +99,14 @@ class Validator
     return true;
   }
 
-  // Új validátor: Telefonszám formátum ellenőrzése
   public function phone($value)
   {
-    // Tisztítja a számot szóközöktől és kötőjelekről
     $cleanValue = preg_replace('/[\s\-]/', '', $value);
-    // Regex, ami +36 vagy 06 formátumot fogad el
     $pattern = '/^(?:\+36|06)\d{9}$/';
 
     return preg_match($pattern, $cleanValue);
   }
 
-  // Új validátor: E-mail formátum ellenőrzése
   public function email($value)
   {
     return filter_var($value, FILTER_VALIDATE_EMAIL) !== false;
@@ -122,40 +114,34 @@ class Validator
 
 
 
-  // Új validátor: Szóköz nélküli érték ellenőrzése
   public function noSpaces($value)
   {
     if (strpos($value, ' ') !== false) return false;
     return true;
   }
 
-  // Új validátor: Csak szám ellenőrzés
   public function num($value)
   {
     if (!is_numeric($value)) return false;
     return true;
   }
 
-  // Új validátor: Legalább egy számot tartalmaz
   public function hasNum($value)
   {
     return preg_match('/\d/', $value);
   }
 
-  // Új validátor: Legalább egy nagybetűt tartalmaz
   public function hasUppercase($value)
   {
     return preg_match('/[A-Z]/', $value);
   }
 
-  // Új validátor: Legalább két szó (szóköz alapú szétválasztás)
   public function split($value)
   {
     $words = explode(' ', trim($value));
     return count($words) >= 2 && strlen($words[1]) > 0;
   }
 
-  // Új validátor: Jelszó összetettség ellenőrzése
   public function password($value)
   {
     $hasUpperCase = preg_match('/[A-Z]/', $value);
@@ -167,7 +153,6 @@ class Validator
     return $hasUpperCase && $hasLowerCase && $hasNumber && $hasSpecialChar && $isLengthValid;
   }
 
-  // Új validátor: Jelszó összehasonlítás
   public function comparePw($password, $confirmPassword)
   {
     return $password === $confirmPassword;
@@ -177,9 +162,24 @@ class Validator
 
   public function allowedCharacters($value)
   {
-    // Engedélyezett karakterek: A-Z, a-z, 0-9, szóköz, -, &, ékezetes karakterek stb.
     return preg_match('/^[A-Za-z0-9áéíóöőúüűÁÉÍÓÖŐÚÜŰ\-&\s]+$/u', $value);
   }
+
+
+  public function uniqueUser($table, $id)
+  {
+    $pdo = Database::getInstance();
+    if (!$pdo) {
+      throw new Exception("Database connection failed.");
+    }
+
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM `$table` WHERE id = :id");
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+
+    return $stmt->fetchColumn() > 0;
+  }
+
 
   // Validátor hibaüzenetek frissítése
   public function errorMessages($validator, $field = '', $param = '')
@@ -238,6 +238,10 @@ class Validator
       'allowedCharacters' => [
         'hu' => 'A mező csak megengedett karaktereket tartalmazhat (betűk, számok, szóköz, -, &).',
         'en' => 'The field can only contain allowed characters (letters, numbers, space, -, &).',
+      ],
+      'uniqueUser' => [
+        'hu' => 'Ezekkel az adatokkal nem tud már regisztrálni, kérjük próbálkozzon más adatokkal.',
+        'en' => 'You cannot register with these details, please try using different information.',
       ],
     ];
 

@@ -11712,7 +11712,7 @@ nav .theme-switcher .checkbox:checked + .checkbox-label .ball {
   position: absolute;
   inset: 0;
   animation: pulse 2.5s infinite;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 .blur-load.loaded {
   filter: blur(0);
@@ -11730,7 +11730,7 @@ nav .theme-switcher .checkbox:checked + .checkbox-label .ball {
     background-color: rgba(255, 255, 255, 0);
   }
   50% {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.7);
   }
   100% {
     background-color: rgba(255, 255, 255, 0);
