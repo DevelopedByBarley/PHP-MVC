@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\Controller;
 use App\Models\User;
 use Exception;
+use PDO;
 
 class UserController extends Controller
 {
@@ -27,7 +28,6 @@ class UserController extends Controller
       "user" => $user,
       "content" => $this->Render->write("public/pages/user/Dashboard.php", [
         "user" => $user,
-
       ])
     ]);
   }
@@ -48,7 +48,8 @@ class UserController extends Controller
     echo $this->Render->write("public/Layout.php", [
       "content" => $this->Render->write("public/pages/user/Register.php", [
         "csrf" => $this->CSRFToken,
-        "errors" => $_SESSION['errors'] ?? null
+        "errors" => $_SESSION['errors'] ?? null,
+        "prev" => $_SESSION['prev'] ?? null
       ])
     ]);
   }
@@ -78,20 +79,26 @@ class UserController extends Controller
   {
     session_start();
     $this->CSRFToken->check();
+    echo '<pre>';
+
 
     $validators  = [
-      'name' => ['validators' => ['required' => true, 'split' => true, 'minLength' => 5, 'maxLength' => 50,]],
-      'email' => ['validators' => ['required' => true, 'minLength' => 7, 'maxLength' => 30, 'email' => true]],
-      'password' => ['validators' => ['required' => true, 'password' => true, 'minLength' => 5, 'maxLength' => 50,]],
+      'name' => ['required' => true, 'split' => true, 'minLength' => 5, 'maxLength' => 50],
+      'email' => ['required' => true, 'minLength' => 5, 'maxLength' => 30, 'email' => true, 'unique' => ['users', 'email', PDO::PARAM_STR]],
+      'password' => ['required' => true, 'password' => true, 'minLength' => 5, 'maxLength' => 50]
     ];
 
     $errors = $this->Validator->validate($validators);
+
+
+
+
 
     if (!empty($errors)) {
       if (isset($_POST['csrf'])) unset($_POST['csrf']);
       $_SESSION['prev'] = $_POST;
       $_SESSION['errors'] = $errors;
-      $this->Toast->set('Hibás adatok, kérjük próbálja meg más adatokkal', 'danger', $_SERVER['REQUEST_URI'], null);
+      $this->Alert->set('Hibás adatok, kérjük próbálja meg más adatokkal', 'danger', $_SERVER['REQUEST_URI'], null);
       exit;
     }
 
@@ -99,12 +106,12 @@ class UserController extends Controller
     $isSuccess = $this->User->storeUser($_POST, $fileName);
 
     if (!$isSuccess) {
-      $this->Toast->set('Regisztráció sikertelen, próbálja meg más adatokkal!', 'danger', '/user/register', null);
+      $this->Alert->set('Regisztráció sikertelen, próbálja meg más adatokkal!', 'danger', '/user/register', null);
     }
 
     if (isset($_SESSION['prev'])) unset($_SESSION['prev']);
     if (isset($_SESSION['errors'])) unset($_SESSION['errors']);
-    $this->Toast->set('Regisztráció sikeres!', 'success', '/user/login', null);
+    $this->Alert->set('Regisztráció sikeres!', 'success', '/user/login', null);
   }
 
 

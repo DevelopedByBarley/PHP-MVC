@@ -15,9 +15,7 @@ class User extends Model
     $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $pw = password_hash(filter_var($body["password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS), PASSWORD_DEFAULT);;
 
-    $isUserExist = $this->selectByRecord('users', 'email', $email, PDO::PARAM_STR);
 
-    if ($isUserExist) return false;
 
     try {
 

@@ -17,7 +17,64 @@ use PDO;
     ];
 
 
-    $validated = $this->Validator->validate( $validators); */
+    $validated = $this->Validator->validate( $validators); 
+    
+    
+    
+array(3) {
+  [0]=>
+  array(2) {
+    ["validators"]=>
+    array(4) {
+      ["required"]=>
+      bool(true)
+      ["split"]=>
+      bool(true)
+      ["minLength"]=>
+      int(5)
+      ["maxLength"]=>
+      int(50)
+    }
+    ["name"]=>
+    string(4) "name"
+  }
+  [1]=>
+  array(2) {
+    ["validators"]=>
+    array(4) {
+      ["required"]=>
+      bool(true)
+      ["minLength"]=>
+      int(7)
+      ["maxLength"]=>
+      int(30)
+      ["email"]=>
+      bool(true)
+    }
+    ["name"]=>
+    string(5) "email"
+  }
+  [2]=>
+  array(2) {
+    ["validators"]=>
+    array(4) {
+      ["required"]=>
+      bool(true)
+      ["password"]=>
+      bool(true)
+      ["minLength"]=>
+      int(5)
+      ["maxLength"]=>
+      int(50)
+    }
+    ["name"]=>
+    string(8) "password"
+  }
+}
+    
+    */
+
+
 
 
 class Validator
@@ -28,9 +85,9 @@ class Validator
   {
     $ret = [];
     foreach ($validators as $key => $validator) {
-      $validator['name'] = $key;
-      $ret[] = $validator;
+      $ret[$key] = $validator;
     }
+
     return $ret;
   }
 
@@ -40,10 +97,10 @@ class Validator
     $data = self::structureValidators($validators);
 
 
-    foreach ($data as $index => $validatorsData) {
-      $value = filter_var($_POST[$validatorsData['name']], FILTER_SANITIZE_SPECIAL_CHARS);
-      $name = $data[$index]['name'];
-      foreach ($validatorsData['validators'] as $validatorName => $validatorValue) {
+
+    foreach ($data as $name => $validatorsData) {
+      $value = filter_var($_POST[$name], FILTER_SANITIZE_SPECIAL_CHARS);
+      foreach ($validatorsData as $validatorName => $validatorValue) {
         $ret[$name][$validatorName] = [
           'status' => $this->{$validatorName}($value, $validatorValue),
           'errorMessage' => !$this->{$validatorName}($value, $validatorValue) ? self::errorMessages($validatorName, $name, $validatorValue) : ''
@@ -165,20 +222,25 @@ class Validator
     return preg_match('/^[A-Za-z0-9áéíóöőúüűÁÉÍÓÖŐÚÜŰ\-&\s]+$/u', $value);
   }
 
-
-  public function uniqueUser($table, $id)
+  public function unique($value, $data)
   {
     $pdo = Database::getInstance();
     if (!$pdo) {
       throw new Exception("Database connection failed.");
     }
 
-    $stmt = $pdo->prepare("SELECT COUNT(*) FROM `$table` WHERE id = :id");
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    // Extract table, entity, and param using list() and unpacking
+    list($table, $entity, $param) = $data;
+
+    
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM `$table` WHERE `$entity` = :entity");
+    $stmt->bindValue(':entity', $value, $param);
     $stmt->execute();
 
-    return $stmt->fetchColumn() > 0;
+    return $stmt->fetchColumn() === 0; // Returns true if the value is unique
   }
+
+
 
 
   // Validátor hibaüzenetek frissítése
@@ -239,7 +301,7 @@ class Validator
         'hu' => 'A mező csak megengedett karaktereket tartalmazhat (betűk, számok, szóköz, -, &).',
         'en' => 'The field can only contain allowed characters (letters, numbers, space, -, &).',
       ],
-      'uniqueUser' => [
+      'unique' => [
         'hu' => 'Ezekkel az adatokkal nem tud már regisztrálni, kérjük próbálkozzon más adatokkal.',
         'en' => 'You cannot register with these details, please try using different information.',
       ],
