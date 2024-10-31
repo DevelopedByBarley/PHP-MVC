@@ -246,7 +246,7 @@ class Validator
   // Validátor hibaüzenetek frissítése
   public function errorMessages($validator, $field = '', $param = '')
   {
-    $lang = $_COOKIE['lang'] ?? null;
+    $lang = strtolower($_COOKIE['lang']) ?? null;
 
     $messages = [
       'required' => [

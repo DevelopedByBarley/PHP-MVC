@@ -16,8 +16,6 @@ import { getCookie } from '/public/js/getCookie.js';
  *    </div>
  */
 
-console.log(getCookie('lang'));
-
 const lang = getCookie('lang') ? getCookie('lang') : 'en'
 
 function checkValidators(options, inputValue, targetElement) {

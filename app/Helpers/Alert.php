@@ -12,7 +12,7 @@ class Alert
       session_start();
     }
 
-    $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
+    $lang = isset($_COOKIE["lang"]) ? strtolower($_COOKIE["lang"]) : null;
 
     if ($lang === "hu") {
       $_SESSION["alert"] = [

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Helpers;
 
 
@@ -12,7 +13,7 @@ class Toast
       session_start();
     }
 
-    $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
+    $lang = isset($_COOKIE["lang"]) ? strtolower($_COOKIE["lang"]) : null;
 
     if ($lang === "hu") {
       $_SESSION["toast"] = [
@@ -28,8 +29,6 @@ class Toast
         "bg" => $bg,
         "expires" => time() + 2
       ];
-
-
     } else {
       // Hibakezelés, ha a nyelv nem "Hu" vagy "En"
       echo "Hiba: Ismeretlen nyelv!";

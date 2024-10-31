@@ -14,7 +14,7 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link btn-dark dropdown-toggle " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <?= $_COOKIE['lang'] ?>
+            <?= strtolower($_COOKIE['lang']) ?>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li>

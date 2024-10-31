@@ -66,7 +66,7 @@ class Controller
       "title" => "Welcome",
       "meta_tags" => WELCOME_META_TAGS,
       "content" => $this->Render->write("public/pages/Welcome.php", [
-        "lang" => $_COOKIE['lang']
+        "lang" => strtolower($_COOKIE['lang'])
       ])
     ]);
   }
