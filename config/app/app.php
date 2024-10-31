@@ -4,6 +4,7 @@
 define('APP_URL', 'http://localhost:8080');
 define('APP_NAME', 'PHP-MVC');
 define('APP_ADMIN_NAME', 'PHP-MVC-ADMIN');
+define('CSRF_SAFE_ORIGINS', ['http://localhost:8080']);
 
 // USER
 
