@@ -54,7 +54,6 @@ class Controller
   public function home(): void
   {
     $visitor = new Visitor();
-
     $is_admin_url = strpos($_SERVER['REQUEST_URI'], '/admin') !== false;
 
     if (defined('SAVING_VISITOR_PERM') && SAVING_VISITOR_PERM && !$is_admin_url) {
