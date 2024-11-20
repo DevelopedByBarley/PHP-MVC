@@ -1,4 +1,3 @@
-import { uuid } from '/public/js/uuid.js';
 import { getCookie } from '/public/js/getCookie.js';
 
 /**
@@ -16,12 +15,15 @@ import { getCookie } from '/public/js/getCookie.js';
  *    </div>
  */
 
-console.log(getCookie('lang'));
 
 const lang = getCookie('lang') ? getCookie('lang') : 'en';
 
+
 function checkValidators(options, inputValue, targetElement) {
     let errors = [];
+    console.log(lang)
+
+
     Object.keys(options).forEach(key => {
         let value = options[key];
 
@@ -50,10 +52,7 @@ function checkValidators(options, inputValue, targetElement) {
                     // Csak akkor ad hibát, ha bármilyen nem szám karakter található
                     if (!/^\d+$/.test(inputValue)) {
                         errors.push("A mező értéke csak szám lehet!");
-                        targetElement.setCustomValidity("A mező értéke csak szám lehet!");
-                    } else {
-                        targetElement.setCustomValidity("");
-                    }
+                    } 
                 }
                 break;
 

@@ -5,7 +5,7 @@ $toast = $_SESSION["toast"] ?? null;
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <div id="toast-root" style="position: fixed; right: 0; top: 100px">
+      <div id="toast-root" style="position: fixed; right: 0; top: 100px; cursor: pointer">
         <?php if (isset($toast)) : ?>
           <div id="toast-data" data-toast='{
             "content": {
