@@ -36,20 +36,14 @@ class FeedbackController extends Controller
     public function storeFeedback()
     {
         try {
-            // Elérjük a POST adatokat php://input segítségével
             $inputJSON = file_get_contents('php://input');
-            // Dekódoljuk a JSON adatot asszociatív tömbbé
             $body = json_decode($inputJSON, true);
 
-            // Ellenőrizzük, hogy sikerült-e a dekódolás és hogy megvannak-e a szükséges adatok
             if (json_last_error() !== JSON_ERROR_NONE || !isset($body['feedback'])) {
                 throw new Exception('Invalid JSON data');
             }
 
-            // További adatok feldolgozása
             $ip = $this->getIpByUser();
-
-
 
             $feedback = isset($body["feedback"]) && filter_var($body["feedback"], FILTER_VALIDATE_INT) !== false
                 ? filter_var($body["feedback"], FILTER_VALIDATE_INT)
