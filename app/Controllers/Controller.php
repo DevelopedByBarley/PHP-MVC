@@ -40,8 +40,11 @@ class Controller
 
   public function home(): void
   {
-    $userId = $this->Auth->checkUserIsLoggedInOrRedirect('userId', '/user/login');
+    session_start();
+    $userId =  $_SESSION['userId'] ?? null;
     $user = $this->Model->show('users', $userId);
+
+
 
     echo $this->Render->write("public/Layout.php", [
       "title" => "Welcome",
