@@ -27,7 +27,7 @@
           <a class="nav-link btn-dark disabled " href="#" tabindex="-1" aria-disabled="true">Disabled</a>
         </li>
       </ul>
-      <?php if (isset($user)) : ?>
+      <?php if ($user) : ?>
         <div class="btn-group dropstart d-none d-lg-block">
           <div class="dropdown">
             <button class="btn  dropdown-toggle p-1 " type="button" data-bs-toggle="dropdown" aria-expanded="false">

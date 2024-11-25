@@ -24,15 +24,16 @@ class UserAuthController extends Controller
         session_start();
 
 
-        $user = $_SESSION["userId"] ?? null;
-
-        if ($user) {
+        $userId = $_SESSION["userId"] ?? null;
+     
+        if ($userId) {
             header("Location: /user/dashboard");
             exit;
         }
 
 
         echo $this->Render->write("public/Layout.php", [
+            "user" => $this->Model->show('users', $userId),
             "content" => $this->Render->write("public/pages/user/Register.php", [
                 "csrf" => $this->CSRFToken,
                 "errors" => $_SESSION['errors'] ?? null,
@@ -45,15 +46,16 @@ class UserAuthController extends Controller
     {
         session_start();
 
-        $user = $_SESSION["userId"] ?? null;
+        $userId = $_SESSION["userId"] ?? null;
 
-        if ($user) {
+        if ($userId) {
             header("Location: /user/dashboard");
             exit;
         }
 
 
         echo $this->Render->write("public/Layout.php", [
+            "user" => $this->Model->show('users', $userId),
             "content" => $this->Render->write("public/pages/user/Login.php", [
                 "csrf" => $this->CSRFToken
             ])
