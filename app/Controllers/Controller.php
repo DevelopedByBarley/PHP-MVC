@@ -3,9 +3,8 @@
 namespace App\Controllers;
 
 use App\Helpers\{Alert, Authenticate, CSRFToken, FileSaver, Mailer, Render, Toast, UUID, Validator, XLSX};
-use App\Models\{Model, Visitor};
-use chillerlan\QRCode\QRCode;
-use chillerlan\QRCode\QROptions;
+use App\Models\{Model};
+
 
 class Controller
 {
@@ -37,32 +36,19 @@ class Controller
     $this->FileSaver = new FileSaver();
   }
 
-  public function qrCode(): void {
-    $qr_id = str_pad(mt_rand(1, 99999999), 8, '0', STR_PAD_LEFT); // 8 számjegy
 
-    $qr_code_path = 'public/assets/images/qr_codes/qr_code_' . $qr_id . '.svg';
-    $options = new QROptions();
-    $options->outputBase64 = false;
-    $options->cachefile = $qr_code_path;
-
-    $qrcode = new QRCode($options);
-    $qrcode->render($qr_id);
-  }
 
   public function home(): void
   {
-    $visitor = new Visitor();
-    $is_admin_url = strpos($_SERVER['REQUEST_URI'], '/admin') !== false;
-
-    if (defined('SAVING_VISITOR_PERM') && SAVING_VISITOR_PERM && !$is_admin_url) {
-      $visitor->addVisitor();
-    }
-
+    $userId = $this->Auth->checkUserIsLoggedInOrRedirect('userId', '/user/login');
+    $user = $this->Model->show('users', $userId);
 
     echo $this->Render->write("public/Layout.php", [
       "title" => "Welcome",
+      "csrf" => $this->CSRFToken,
+      "user" => $user,
       "meta_tags" => WELCOME_META_TAGS,
-      "content" => $this->Render->write("public/pages/Welcome.php", [
+      "content" => $this->Render->write("public/pages/Main.php", [
         "lang" => strtolower($_COOKIE['lang'])
       ])
     ]);

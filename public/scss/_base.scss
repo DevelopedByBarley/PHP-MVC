@@ -168,7 +168,7 @@
 // SET color  by $colors IN _vars.scss
 
 @each $name, $color in $colors {
-  .#{$name} {
+  .text-#{$name} {
     color: $color;
   }
 }
@@ -189,7 +189,7 @@
 // SET hover-color  by $colors IN _vars.scss
 
 @each $name, $color in $colors {
-  .hover-#{$name} {
+  .hover-text-#{$name} {
     &:hover {
       color: $color; // Vagy más hover effektus
     }

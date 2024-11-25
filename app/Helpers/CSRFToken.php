@@ -141,9 +141,8 @@ class CSRFToken
 
   private function isSafeOrigin()
   {
-    if(empty(CSRF_SAFE_ORIGINS)) return false;
 
-    $safeOrigins = CSRF_SAFE_ORIGINS;
+    $safeOrigins = ['http://localhost:8080', 'http://localhost:9090'];
 
     // Ellenőrizzük az Origin fejlécet
     if (isset($_SERVER['HTTP_ORIGIN'])) {
