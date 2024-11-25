@@ -6,6 +6,16 @@ use PDO;
 use PDOException;
 use Exception;
 
+/**
+ *    $visitor = new Visitor();
+    $is_admin_url = strpos($_SERVER['REQUEST_URI'], '/admin') !== false;
+
+    if (defined('SAVING_VISITOR_PERM') && SAVING_VISITOR_PERM && !$is_admin_url) {
+      $visitor->addVisitor();
+    }
+ 
+ */
+
 class Visitor extends Model
 {
 
