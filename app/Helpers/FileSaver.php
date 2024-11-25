@@ -66,15 +66,11 @@ class FileSaver
 
   private function save($file, $path, $whiteList, $prevImages)
   {
-
-
     $fileType = mime_content_type($file["tmp_name"]);
 
     if (!in_array($fileType, $whiteList)) {
       return false;
     }
-
-
 
     $rand = uniqid(rand(), true);
     $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
@@ -88,6 +84,28 @@ class FileSaver
 
     setcookie("prevContent", "", time() - 1, "/");
     return $originalFileName;
+  }
+
+  public function unLinkImagesForFail($path, $images)
+  {
+
+    try {
+      if (!$images) {
+        return false;
+      }
+
+      if (is_array($images)) {
+        foreach ($images as $image) {
+          unlink("./public/assets/$path/" . $image);
+        }
+      } else {
+        unlink("./public/assets/$path/" . $images);
+      }
+
+    } catch (\Throwable $th) {
+      echo $th;
+      exit;
+    }
   }
 
   private function unlinkPrevImages($prevImages, $path)

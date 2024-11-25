@@ -42,9 +42,11 @@ class Admin extends Model
 
       // Execute the statement
       $stmt->execute();
+      $lastInsertedId = $this->Pdo->lastInsertId();
+      return $lastInsertedId;
 
       return [
-        'status' => true,
+        'status' => $lastInsertedId,
         'message' => 'Admin sikeresen hozzáadva.'
       ];
     } catch (PDOException $e) {

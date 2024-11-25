@@ -54,7 +54,7 @@
 
                 <div class="mb-3">
                   <label for="formFileMultiple" class="form-label">File Upload</label>
-                  <input class="form-control" type="file" id="formFileMultiple" name="file" required>
+                  <input class="form-control" type="file" id="formFileMultiple" name="file">
                 </div>
 
                 <button class="btn bg-slate-900 text-white btn-lg px-5 mt-4" type="submit">Register</button>

@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Helpers\{Alert, Authenticate, CSRFToken, Debug, FileSaver, Mailer, Render, Toast, UUID, Validator, XLSX};
+use App\Helpers\{Alert, Authenticate, CSRFToken, FileSaver, Mailer, Render, Toast, UUID, Validator, XLSX};
 use App\Models\{Model, Visitor};
 use chillerlan\QRCode\QRCode;
 use chillerlan\QRCode\QROptions;
@@ -10,7 +10,6 @@ use chillerlan\QRCode\QROptions;
 class Controller
 {
   protected $Model;
-  protected $Debug;
   protected $Auth;
   protected $Render;
   protected $XLSX;
@@ -26,7 +25,6 @@ class Controller
   public function __construct()
   {
     $this->Model = new Model();
-    $this->Debug = new Debug();
     $this->Auth = new Authenticate();
     $this->Render = new Render();
     $this->XLSX = new XLSX();
@@ -84,30 +82,6 @@ class Controller
   }
 
 
-  public function createResetUrl($tokenData)
-  {
-    return APP_URL . '/reset?token=' . urlencode($tokenData['token']) . '&expires=' . urlencode($tokenData['expires']);
-  }
-
-  public function generateExpiresTokenByDays($days)
-  {
-    $token = bin2hex(random_bytes(16));
-    $expires = time() + ($days * 24 * 60 * 60);
-    return [
-      'token' => $token,
-      'expires' => $expires,
-    ];
-  }
-
-  public function generateExpiresTokenByHours($hours)
-  {
-    $token = bin2hex(random_bytes(16));
-    $expires = time() + ($hours * 60 * 60);
-    return [
-      'token' => $token,
-      'expires' => $expires,
-    ];
-  }
 
   public function redirectByState($isSuccess, $success_url, $failed_url)
   {

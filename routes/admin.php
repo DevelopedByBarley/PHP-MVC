@@ -1,8 +1,15 @@
 <?php
+
 use App\Controllers\AdminController;
-use App\Controllers\AdminRender;
+use App\Controllers\Auth\AdminAuthController;
 
 // route_group -> /admin
+
+// AUTH
+$r->addRoute('POST', '/login', [AdminAuthController::class, 'login']);
+$r->addRoute('POST', '/logout', [AdminAuthController::class, 'logout']);
+$r->addRoute('POST', '/store', [AdminAuthController::class, 'store']);
+
 
 
 //Renders
@@ -16,8 +23,5 @@ $r->addRoute('GET', '/mailbox', [AdminController::class, 'mailbox']);
 
 // Operations
 
-$r->addRoute('POST', '/login', [AdminController::class, 'login']);
-$r->addRoute('POST', '/logout', [AdminController::class, 'logout']);
-$r->addRoute('POST', '/store', [AdminController::class, 'store']);
 $r->addRoute('POST', '/update', [AdminController::class, 'update']);
 $r->addRoute('POST', '/delete/{id}', [AdminController::class, 'delete']);

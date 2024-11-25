@@ -16,9 +16,7 @@ class User extends Model
     $pw = password_hash(filter_var($body["password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS), PASSWORD_DEFAULT);;
 
 
-
     try {
-
       $stmt = $this->Pdo->prepare("INSERT INTO `users` (`id`, `name`, `email`, `password`,  `fileName`, `created_at`) VALUES (NULL, :name, :email, :password, :fileName, current_timestamp())");
       $stmt->bindParam(":name", $name, PDO::PARAM_STR);
       $stmt->bindParam(":email", $email, PDO::PARAM_STR);
@@ -26,7 +24,8 @@ class User extends Model
       $stmt->bindParam(":fileName", $fileName, PDO::PARAM_STR);
       $stmt->execute();
 
-      return true;
+      $lastInsertedId = $this->Pdo->lastInsertId();
+      return $lastInsertedId;
 
     } catch (PDOException $e) {
       throw new  Exception("An error occurred during the database operation in storeUser method: " . $e->getMessage(), 1);
@@ -55,7 +54,6 @@ class User extends Model
 
 
       return $user['id'];
-
     } catch (PDOException $e) {
       throw new  Exception("An error occurred during the database operation in loginUser method: " . $e->getMessage(), 1);
       exit;
