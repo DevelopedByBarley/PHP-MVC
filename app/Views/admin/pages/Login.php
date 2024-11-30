@@ -14,12 +14,12 @@
 
                 <div class="form-outline form-white mb-4">
                   <label class="form-label" for="typeEmailX">Username</label>
-                  <input class="form-control py-2" id="inputEmailAddress" type="text" placeholder="Enter username" name="name">
+                  <input class="form-control py-2" id="inputEmailAddress" type="text" placeholder="Enter username" name="name" value="<?= isset($prev) ? $prev->name : '' ?>" />
                 </div>
 
                 <div class="form-outline form-white mb-4">
                   <label class="form-label" for="typePasswordX">Password</label>
-                  <input class="form-control py-2" id="inputPassword" type="password" placeholder="Enter password" name="password">
+                  <input class="form-control py-2" id="inputPassword" type="password" placeholder="Enter password" name="password" />
                 </div>
 
                 <button class="btn bg-slate-900 text-white btn-lg px-5" type="submit">Login</button>

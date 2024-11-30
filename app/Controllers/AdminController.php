@@ -14,12 +14,12 @@ class AdminController extends Controller
   private $Admin;
   private $Activity;
 
- 
+
   public function __construct()
   {
-      $this->Admin = new Admin();
-      $this->Activity = new AdminActivity();
-      parent::__construct();
+    $this->Admin = new Admin();
+    $this->Activity = new AdminActivity();
+    parent::__construct();
   }
 
 
@@ -157,10 +157,13 @@ class AdminController extends Controller
       exit;
     }
 
+
     echo $this->Render->write("admin/Layout.php", [
       "csrf" => $this->CSRFToken,
       "content" => $this->Render->write("admin/pages/Login.php", [
-        "csrf" => $this->CSRFToken
+        "csrf" => $this->CSRFToken,
+        "prev" => isset($_SESSION['login_admin_prev']) ? (object)$_SESSION['login_admin_prev'] : null,
+        "errors" => isset($_SESSION['login_admin_errors']) ? (object)$_SESSION['login_admin_errors'] : null
       ])
     ]);
   }
@@ -213,12 +216,6 @@ class AdminController extends Controller
       }
     });
 
-
-
-
-
-
-
     echo $this->Render->write("admin/Layout.php", [
       "csrf" => $this->CSRFToken,
       'admin' => $admin,
@@ -226,7 +223,13 @@ class AdminController extends Controller
         "csrf" => $this->CSRFToken,
         'data' => $data,
         'admin' => $admin,
-        'data' => $data
+        'data' => $data,
+        "prev" => (object)[
+          'add_admin_modal' => isset($_SESSION['add_admin_prev']) ? (object)$_SESSION['add_admin_prev'] : null,
+        ],
+        "errors" => (object)[
+          'add_admin_modal' => isset($_SESSION['add_admin_errors']) ? (object)$_SESSION['add_admin_errors'] : null
+        ]
       ])
     ]);
   }

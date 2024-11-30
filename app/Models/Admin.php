@@ -19,20 +19,11 @@ class Admin extends Model
       $avatar = filter_var($body["avatar-radio"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
       $level = filter_var($body["level"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
 
-      $adminId = uniqid(); // Generálunk egy egyedi adminId-t
+      $adminId = uniqid();
 
-      if ($this->checkIsAdminExist($name, $email)) {
-        return [
-          'status' => false,
-          'message' => 'Ez az admin ezzel a névvel vagy e-maillel már létezik.'
-        ];
-      }
-
-      // Prepare the SQL statement
       $stmt = $this->Pdo->prepare("INSERT INTO `admins` (`id`, `adminId`, `level`, `name`, `email`, `password`, `avatar`, `created_at`) 
                                         VALUES (NULL, :adminId, :level, :name, :email, :password, :avatar, current_timestamp())");
 
-      // Bind parameters to the statement
       $stmt->bindParam(":adminId", $adminId, PDO::PARAM_STR);
       $stmt->bindParam(":level", $level, PDO::PARAM_INT);
       $stmt->bindParam(":name", $name, PDO::PARAM_STR);
@@ -40,15 +31,11 @@ class Admin extends Model
       $stmt->bindParam(":password", $password, PDO::PARAM_STR);
       $stmt->bindParam(":avatar", $avatar, PDO::PARAM_STR);
 
-      // Execute the statement
       $stmt->execute();
       $lastInsertedId = $this->Pdo->lastInsertId();
+      
       return $lastInsertedId;
 
-      return [
-        'status' => $lastInsertedId,
-        'message' => 'Admin sikeresen hozzáadva.'
-      ];
     } catch (PDOException $e) {
       throw new Exception("An error occurred during the database operation in storeAdmin: " . $e->getMessage());
     }

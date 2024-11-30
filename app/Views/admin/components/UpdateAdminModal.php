@@ -41,19 +41,16 @@
 
                         <div class="form-group my-2">
                             <label for="exampleInputEmail1">Password</label>
-                            <input type="text" id="password" name="password" class="password form-control" data-password-compare=1 disabled validators='{
-        "name": "password",
-        "required": true
-    }' />
+                            <input type="text" id="password" name="password" class="password form-control" match disabled
+                                validators='{"name": "password","required": true, "password": true, "match": "repeat"}' />
                             <button type="button" class="d-inline btn border pw-generator">Generate</button>
+
                         </div>
 
                         <div class="form-group my-2">
                             <label for="exampleInputEmail1">Repeat password</label>
-                            <input type="text" id="repeat" name="repeat" class="form-control" disabled validators='{
-        "name": "repeat",
-        "comparePw": true
-    }' />
+                            <input type="text" id="repeat" name="repeat" class="form-control" disabled
+                                validators='{"name": "repeat","match": "password"}' />
                         </div>
                     </div>
 

@@ -33,7 +33,7 @@ define('UUID_PERM', 0);
 define('TOAST_PERM', 1);
 define('IMG_LOADER_PERM', 1);
 define('SKELETON_PERM', 0);
-define('PW_GENERATOR_PERM', 0);
+define('PW_GENERATOR_PERM', 1);
 
 
 

@@ -35,14 +35,17 @@
                             <label for="exampleInputEmail1">Prev password</label>
                             <input type="text" id="prev_password" name="prev_password" class="form-control" disabled validators='{
                                 "name": "prev_password",
-                                "required": true
+                                "required": true,
+                                "password": true
                             }' />
                         </div>
                         <div class="form-group my-2">
                             <label for="exampleInputEmail1">Password</label>
                             <input type="text" id="password" name="password" class="password form-control" data-password-compare=1 disabled validators='{
                                 "name": "password",
-                                "required": true
+                                "required": true,
+                                "password": true,
+                                "match": "repeat"
                             }' />
                             <button type="button" class="d-inline btn border pw-generator">Generate</button>
                         </div>
@@ -51,7 +54,9 @@
                             <label for="exampleInputEmail1">Repeat password</label>
                             <input type="text" id="repeat" name="repeat" class="form-control" disabled validators='{
                                 "name": "repeat",
-                                "comparePw": true
+                                "required": true,
+                                "password": true,
+                                "match": "password"
                             }' />
                         </div>
                     </div>

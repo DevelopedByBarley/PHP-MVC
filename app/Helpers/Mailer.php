@@ -18,6 +18,14 @@ use PHPMailer\PHPMailer\PHPMailer;
         'subject'
     )
 
+
+    	
+				$this->Mailer->renderAndSend('NewAdmin', [
+					'admin_name' => $admin['name'] ?? 'problem',
+					'site_url' => 'http://localhost:8080' ?? 'problem',
+					'admin_password' => $_POST['password'] ?? 'problem'
+				], $admin['email'], 'Hello');
+				
 */
 
 class Mailer

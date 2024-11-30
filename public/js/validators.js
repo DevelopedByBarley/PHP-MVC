@@ -21,8 +21,6 @@ const lang = getCookie('lang') ? getCookie('lang') : 'en';
 
 function checkValidators(options, inputValue, targetElement) {
     let errors = [];
-    console.log(lang)
-
 
     Object.keys(options).forEach(key => {
         let value = options[key];
@@ -52,7 +50,7 @@ function checkValidators(options, inputValue, targetElement) {
                     // Csak akkor ad hibát, ha bármilyen nem szám karakter található
                     if (!/^\d+$/.test(inputValue)) {
                         errors.push("A mező értéke csak szám lehet!");
-                    } 
+                    }
                 }
                 break;
 
@@ -128,11 +126,22 @@ function checkValidators(options, inputValue, targetElement) {
                 }
                 break;
 
-            case "comparePw":
-                if (value === true) {
-                    const password = targetElement.parentElement.parentElement.querySelector('[data-password-compare]');
-                    if (inputValue !== password.value) {
+            case "match":
+                if (value) {
+                    const match = targetElement.parentElement.parentElement.querySelector(`[name="${value}"]`);
+
+                    
+                    if (inputValue !== match.value && inputValue !== '') {
+                        console.log(match);
                         errors.push("A 2 jelszó nem megegyező!");
+                    } else {
+                        match.setCustomValidity("");
+                        match.style.border = "2px solid lightgreen";
+                        const alert =  targetElement.parentElement.parentElement.querySelector(`#${value}-validator-alert`)
+                        if(alert) {
+                            alert.remove();
+                        }
+                        
                     }
                 }
                 break;
@@ -169,7 +178,7 @@ function checkValidators(options, inputValue, targetElement) {
 
     // Set custom validity and border color based on errors
     if (errors.length > 0) {
-        console.log(errors[0]);
+        console.log(errors);
         targetElement.setCustomValidity(errors[0]); // Set only the first error as custom validity
         targetElement.style.border = "2px solid salmon";
     } else {
@@ -190,7 +199,7 @@ forms.forEach(form => {
         let targetElement = inputElement.parentElement.querySelector(`[name="${name}"]`);
 
         let inputAlert = document.createElement("div");
-        inputAlert.id = `${name}Alert`;
+        inputAlert.id = `${name}-validator-alert`;
         inputAlert.style.color = "red";
         inputAlert.style.marginTop = ".5rem";
         targetElement.parentNode.insertBefore(inputAlert, inputElement.nextSibling);
@@ -198,7 +207,6 @@ forms.forEach(form => {
         inputElement.addEventListener("input", function (e) {
             let errors = checkValidators(options, e.target.value, targetElement);
             inputAlert.innerHTML = ""; // Clear previous error messages
-
             errors.forEach(error => {
                 let errorElement = document.createElement("div");
                 errorElement.textContent = error;
