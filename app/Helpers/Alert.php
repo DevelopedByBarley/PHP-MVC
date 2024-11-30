@@ -5,7 +5,7 @@ namespace App\Helpers;
 class Alert
 {
   // SET ALERT
-  public function set($message, $bg, $location, $messageInEng = null)
+  public static function set($message, $bg, $location, $messageInEng = null)
   {
 
     if (session_id() == '') {

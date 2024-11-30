@@ -4,6 +4,7 @@ namespace App\Controllers\Auth;
 
 
 use App\Controllers\Controller;
+use App\Helpers\Alert;
 use App\Helpers\Toast;
 use App\Models\User;
 use Exception;
@@ -82,7 +83,7 @@ class UserAuthController extends Controller
             if (isset($_POST['csrf'])) unset($_POST['csrf']);
             $_SESSION['prev'] = $_POST;
             $_SESSION['errors'] = $errors;
-            $this->Alert->set('Hibás adatok, kérjük próbálja meg más adatokkal', 'danger', $_SERVER['REQUEST_URI'], null);
+            Alert::set('Hibás adatok, kérjük próbálja meg más adatokkal', 'danger', $_SERVER['REQUEST_URI'], null);
             exit;
         }
 
@@ -95,12 +96,12 @@ class UserAuthController extends Controller
 
         if (!$isSuccess) {
             $this->FileSaver->unLinkImagesForFail('/uploads/images/', $fileName);
-            $this->Alert->set('Regisztráció sikertelen, próbálja meg más adatokkal!', 'danger', '/user/register', null);
+            Alert::set('Regisztráció sikertelen, próbálja meg más adatokkal!', 'danger', '/user/register', null);
         }
 
         if (isset($_SESSION['prev'])) unset($_SESSION['prev']);
         if (isset($_SESSION['errors'])) unset($_SESSION['errors']);
-        $this->Alert->set('Regisztráció sikeres!', 'success', '/user/login', null);
+        Alert::set('Regisztráció sikeres!', 'success', '/user/login', null);
     }
 
     public function login()
