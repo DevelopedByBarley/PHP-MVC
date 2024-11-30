@@ -3,6 +3,7 @@
 namespace App\Controllers\Auth;
 
 use App\Controllers\Controller;
+use App\Helpers\Toast;
 use App\Models\Admin;
 use App\Models\AdminActivity;
 use Exception;
@@ -24,6 +25,7 @@ class AdminAuthController extends Controller
 	{
 		$this->CSRFToken->check();
 		$this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
+
 		try {
 			$validators  = [
 				'name' => ['required' => true, 'maxLength' => 50, 'unique' => ['admins', 'name', PDO::PARAM_STR]],
@@ -39,7 +41,7 @@ class AdminAuthController extends Controller
 				if (isset($_POST['csrf'])) unset($_POST['csrf']);
 				$_SESSION['add_admin_prev'] = $_POST;
 				$_SESSION['add_admin_errors'] = $errors;
-				$this->Toast->set('Az űrlap hibásan lett kitöltve, vagy már létezik ilyen névvel vagy e-mail címmel admin.', 'danger', '/admin/settings', null);
+				Toast::set('Az űrlap hibásan lett kitöltve, vagy már létezik ilyen névvel vagy e-mail címmel admin.', 'danger', '/admin/settings', null);
 				exit;
 			}
 
@@ -47,7 +49,7 @@ class AdminAuthController extends Controller
 			$is_success = $this->Admin->storeAdmin($_POST);
 
 			if (!$is_success) {
-				return $this->Toast->set('Admin hozzáadása sikertelen, kérjük próbálja meg más adatokkal!', 'danger', '/admin/settings', null);
+				return Toast::set('Admin hozzáadása sikertelen, kérjük próbálja meg más adatokkal!', 'danger', '/admin/settings', null);
 			}
 
 			$this->Activity->store([
@@ -59,11 +61,10 @@ class AdminAuthController extends Controller
 			if (isset($_SESSION['add_admin_prev'])) unset($_SESSION['add_admin_prev']);
 			if (isset($_SESSION['add_admin_errors'])) unset($_SESSION['add_admin_errors']);
 
-			return $this->Toast->set('Admin sikeresen hozzáadva', 'success', '/admin/settings', null);
+			return Toast::set('Admin sikeresen hozzáadva', 'success', '/admin/settings', null);
 		} catch (Exception $e) {
-			// Log the exception instead of echoing it
 			error_log($e->getMessage());
-			$this->Toast->set('Hiba történt az admin hozzáadásakor. Általános szerver hiba...', 'danger', '/admin/settings', null);
+			Toast::set('Hiba történt az admin hozzáadásakor. Általános szerver hiba...', 'danger', '/admin/settings', null);
 		}
 	}
 
@@ -92,6 +93,9 @@ class AdminAuthController extends Controller
 	{
 		session_start();
 		$this->CSRFToken->check();
+		$name = isset($_POST["name"]) ? filter_var($_POST["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS) : null;
+		$pw = isset($_POST["password"]) ? filter_var($_POST["password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS) : null;
+
 		try {
 			$validators  = [
 				'name' => ['required' => true, 'maxLength' => 50],
@@ -104,29 +108,34 @@ class AdminAuthController extends Controller
 				if (isset($_POST['csrf'])) unset($_POST['csrf']);
 				$_SESSION['login_admin_prev'] = $_POST;
 				$_SESSION['login_admin_errors'] = $errors;
-				$this->Toast->set('Az űrlap hibásan lett kitöltve, vagy már létezik ilyen névvel vagy e-mail címmel admin.', 'danger', '/admin', null);
-				exit;
+				return Toast::set('Az űrlap hibásan lett kitöltve, vagy már létezik ilyen névvel vagy e-mail címmel admin.', 'danger', '/admin', null);
 			}
 
-			$adminId = $this->Admin->loginAdmin($_POST);
+			$admin = $this->Model->selectByRecord('admins', 'name', $name, PDO::PARAM_STR);
 
-			if ($adminId) {
-				session_write_close(); // Bezárjuk a sessiont
+			if (!$admin || !password_verify($pw, $admin->password)) {
+				$_SESSION['login_admin_prev'] = $_POST;
+				return Toast::set('Hibás e-mail cím vagy jelszó, kérjük próblja újra.', 'danger', '/admin', null);
+			}
+
+
+			if ($admin->id) {
+				session_write_close();
 				$session_timeout = 6000;
-				session_set_cookie_params($session_timeout, '/', '', true, true); // secure és httponly flag beállítása
+				session_set_cookie_params($session_timeout, '/', '', true, true);
 				session_start();
 				session_regenerate_id(true);
-				$_SESSION['adminId'] = $adminId;
+				$_SESSION['adminId'] = $admin->id;
 
 				if (isset($_SESSION['add_admin_prev'])) unset($_SESSION['add_admin_prev']);
 				if (isset($_SESSION['add_admin_errors'])) unset($_SESSION['add_admin_errors']);
 
-				return $this->Toast->set('Bejelentkezés sikeres!', 'teal-500', '/admin/dashboard', null);
+				return Toast::set('Bejelentkezés sikeres!', 'teal-500', '/admin/dashboard', null);
 			} else {
-				$this->Toast->set('Sikertelen belépés, hibás felhasználónév vagy jelszó', 'rose-500', '/admin', null);
+				Toast::set('Sikertelen belépés, hibás felhasználónév vagy jelszó', 'rose-500', '/admin', null);
 			}
 		} catch (Exception $e) {
-			echo $e->getMessage();
+			error_log($e->getMessage());
 		}
 	}
 }

@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Helpers\{Alert, Authenticate, CSRFToken, FileSaver, Mailer, Render, Toast, UUID, Validator, XLSX};
+use App\Helpers\{Alert, Authenticate, CSRFToken, FileSaver, Mailer, Render, UUID, Validator, XLSX};
 use App\Models\{Model};
 
 
@@ -14,7 +14,6 @@ class Controller
   protected $XLSX;
   protected $UUID;
   protected $Alert;
-  protected $Toast;
   protected $CSRFToken;
   protected $Mailer;
   protected $Validator;
@@ -29,7 +28,6 @@ class Controller
     $this->XLSX = new XLSX();
     $this->UUID = new UUID();
     $this->Alert = new Alert();
-    $this->Toast = new Toast();
     $this->CSRFToken = new CSRFToken();
     $this->Mailer = new Mailer();
     $this->Validator = new Validator();

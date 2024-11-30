@@ -6,7 +6,7 @@ namespace App\Helpers;
 class Toast
 {
   // SET ALERT
-  public function set($message, $bg, $location, $messageInEng = null)
+  public static function set($message, $bg, $location, $messageInEng = null)
   {
 
     if (session_id() == '') {

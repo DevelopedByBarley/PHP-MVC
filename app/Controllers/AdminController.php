@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\Controller;
+use App\Helpers\Toast;
 use App\Models\Admin;
 use App\Models\AdminActivity;
 use DateTime;
@@ -28,28 +29,94 @@ class AdminController extends Controller
   {
 
     $this->CSRFToken->check();
-    $child_admin_id = isset($_POST['current_admin_id']) ? $_POST['current_admin_id']  : null;
-    $loggedAdmin =  $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');;
-    $adminId = $child_admin_id ?? $loggedAdmin;
+    $validators  = [];
+
+    $loggedAdmin =  $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');; // Megnézzük hogy be van e logolva.
+    $child_admin_id = isset($_POST['current_admin_id']) ? $_POST['current_admin_id']  : null; // Ha nem profilt frissítünk akkor ez feltöltődik az id-val.
+    $adminId = $child_admin_id ?? $loggedAdmin; // Az admin Id ha létezik a current_admin akkor az ha nem akkor a profilba bejelentkezett id-ja
+
+
+    // Lekérjük hogy van-e már mentve ez az admin az adatbázisba id alapján
+    $prev_admin = $this->Model->selectByRecord('admins', 'id', $adminId, PDO::PARAM_INT);
+
+    // Ki kérjük a POST-ból a kívánt adatokat!
+    $name = filter_var($_POST["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS) ?? null;
+    $password = isset($_POST["password"]) ? filter_var($_POST["password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS) : null;
+    $level = isset($_POST["level"]) ? filter_var($_POST["level"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS) : null;
+    $email = isset($_POST["email"]) ? filter_var($_POST["email"] ?? '', FILTER_SANITIZE_EMAIL) : null;
+    $prev_password = filter_var($_POST["prev_password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS) ?? null;
+
+    if (($password && !password_verify($prev_password, $prev_admin->password)) && !$child_admin_id) {
+      if (isset($_POST['csrf'])) unset($_POST['csrf']);
+
+      if ($child_admin_id) {
+        $_SESSION['update_current_admin_prev'] = $_POST;
+        return Toast::set('Rosszul adta meg előző jelszavát', 'red-500', '/admin/settings', null);
+      }
+
+      $_SESSION['update_admin_profile_prev'] = $_POST;
+      return Toast::set('Rosszul adta meg előző jelszavát', 'red-500', '/admin/settings', null);
+    }
+
+
+
+    if ($email) {
+      $validators['email'] = ['maxLength' => 150, 'email' => true, 'unique' => ['admins', 'email', PDO::PARAM_STR]];
+    }
+
+    if ($password) {
+      $validators['password'] = ['password' => true, 'minLength' => 5, 'maxLength' => 500];
+    }
+
+    if ($level) {
+      $validators['level'] = ['required' => true, 'num' => true];
+    }
+
+    if ($prev_admin->name !== $name) {
+      $validators['name'] = ['required' => true, 'maxLength' => 50, 'unique' => ['admins', 'name', PDO::PARAM_STR]];
+    }
+
+    $errors = $this->Validator->validate($validators);
+
+    if (!empty($errors)) {
+      if (isset($_POST['csrf'])) unset($_POST['csrf']);
+
+      if ($child_admin_id) {
+        $_SESSION['update_current_admin_prev'] = $_POST;
+        $_SESSION['update_current_admin_errors'] = $errors;
+        return Toast::set('Az űrlap hibásan lett kitöltve, vagy már létezik ilyen névvel vagy e-mail címmel admin.', 'danger', '/admin/settings', null);
+      }
+
+      $_SESSION['update_admin_profile_prev'] = $_POST;
+      $_SESSION['update_admin_profile_errors'] = $errors;
+      return Toast::set('Az űrlap hibásan lett kitöltve, vagy már létezik ilyen névvel vagy e-mail címmel admin.', 'danger', '/admin/settings', null);
+    }
 
 
     try {
-      $admin = $this->Admin->updateAdmin($adminId, $_POST, $child_admin_id);
+      $is_success = $this->Admin->updateAdmin($adminId, $_POST, $prev_admin, $child_admin_id);
 
-      if (!isset($admin['status']) && $admin['status'] !== false) {
+      if ($is_success) {
         $this->Activity->store([
           'content' => "Frissítette a profilját.",
           'contentInEn' => null,
           'adminRefId' => $_SESSION['adminId']
         ],  $_SESSION['adminId']);
-        $this->Toast->set('Admin sikeresen frissítve', 'cyan-500', '/admin/settings', null);
+
+        if (isset($_SESSION['update_admin_profile_prev'])) unset($_SESSION['update_admin_profile_prev']);
+        if (isset($_SESSION['update_admin_profile_errors'])) unset($_SESSION['update_admin_profile_errors']);
+        return Toast::set('Admin sikeresen frissítve!', 'cyan-500', '/admin/settings', null);
       } else {
-        $this->Toast->set($admin['message'], 'rose-500', '/admin/settings', null);
+        return Toast::set('Admin frissítése sikertelen!', 'rose-500', '/admin/settings', null);
       }
     } catch (Exception $e) {
-      echo $e->getMessage();
+      error_log($e->getMessage());
+      return Toast::set('Admin frissítése sikertelen!', 'rose-500', '/admin/settings', null);
     }
   }
+
+
+
 
   public function delete($vars)
   {
@@ -67,7 +134,7 @@ class AdminController extends Controller
         'adminRefId' => $adminId
       ], $adminId);
 
-      $this->Toast->set('Admin törlése sikeres volt', 'green-500', '/admin/settings', null);
+      Toast::set('Admin törlése sikeres volt', 'green-500', '/admin/settings', null);
     } catch (Exception $e) {
       http_response_code(500);
       echo "Internal Server Error" . $e->getMessage();

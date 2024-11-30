@@ -4,6 +4,7 @@ namespace App\Controllers\Auth;
 
 
 use App\Controllers\Controller;
+use App\Helpers\Toast;
 use App\Models\User;
 use Exception;
 use PDO;
@@ -121,7 +122,7 @@ class UserAuthController extends Controller
                 header('Location: /user/dashboard');
                 exit;
             } else {
-                $this->Toast->set('Hibás e-mail cím vagy jelszó!', 'danger', '/user/login', null);
+                Toast::set('Hibás e-mail cím vagy jelszó!', 'danger', '/user/login', null);
             }
         } catch (Exception $e) {
             http_response_code(500);
