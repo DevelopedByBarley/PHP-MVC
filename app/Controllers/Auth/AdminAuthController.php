@@ -3,6 +3,7 @@
 namespace App\Controllers\Auth;
 
 use App\Controllers\Controller;
+use App\Helpers\Log;
 use App\Helpers\Toast;
 use App\Helpers\Validator;
 use App\Models\Admin;
@@ -28,29 +29,31 @@ class AdminAuthController extends Controller
 		$this->CSRFToken->check();
 		Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
 
+		$validators  = [
+			'name' => ['required' => true, 'maxLength' => 50, 'unique' => ['admins', 'name', PDO::PARAM_STR]],
+			'level' => ['required' => true, 'num' => true],
+			'email' => ['required' => true, 'maxLength' => 150, 'email' => true, 'unique' => ['admins', 'email', PDO::PARAM_STR]],
+			'password' => ['required' => true, 'password' => true, 'minLength' => 5, 'maxLength' => 500],
+		];
+
+		$errors = Validator::validate($validators);
+
+
+		if (!empty($errors)) {
+			if (isset($_POST['csrf'])) unset($_POST['csrf']);
+			$_SESSION['add_admin_prev'] = $_POST;
+			$_SESSION['add_admin_errors'] = $errors;
+			Log::info('admin', "Admin Register validation fail: " . json_encode($errors, JSON_UNESCAPED_UNICODE));
+			Toast::set('Hibás adatok, kérjük próbálja meg más adatokkal', 'danger', '/admin/settings', null);
+			exit;
+		}
+
+
 		try {
-			$validators  = [
-				'name' => ['required' => true, 'maxLength' => 50, 'unique' => ['admins', 'name', PDO::PARAM_STR]],
-				'level' => ['required' => true, 'num' => true],
-				'email' => ['required' => true, 'maxLength' => 150, 'email' => true, 'unique' => ['admins', 'email', PDO::PARAM_STR]],
-				'password' => ['required' => true, 'password' => true, 'minLength' => 5, 'maxLength' => 500],
-			];
+			$adminId = $this->Admin->storeAdmin($_POST);
 
-			$errors = Validator::validate($validators);
-
-
-			if (!empty($errors)) {
-				if (isset($_POST['csrf'])) unset($_POST['csrf']);
-				$_SESSION['add_admin_prev'] = $_POST;
-				$_SESSION['add_admin_errors'] = $errors;
-				Toast::set('Az űrlap hibásan lett kitöltve, vagy már létezik ilyen névvel vagy e-mail címmel admin.', 'danger', '/admin/settings', null);
-				exit;
-			}
-
-
-			$is_success = $this->Admin->storeAdmin($_POST);
-
-			if (!$is_success) {
+			if (!$adminId) {
+				Log::info('admin', "Admin Registraion is failed with email: " . $_POST['name']);
 				return Toast::set('Admin hozzáadása sikertelen, kérjük próbálja meg más adatokkal!', 'danger', '/admin/settings', null);
 			}
 
@@ -63,10 +66,11 @@ class AdminAuthController extends Controller
 			if (isset($_SESSION['add_admin_prev'])) unset($_SESSION['add_admin_prev']);
 			if (isset($_SESSION['add_admin_errors'])) unset($_SESSION['add_admin_errors']);
 
-			return Toast::set('Admin sikeresen hozzáadva', 'success', '/admin/settings', null);
+			Log::info('admin', "Admin registered succesfully with name: " . $_POST['name'] . " id: $adminId");
+			return Toast::set('Admin sikeresen hozzáadva', 'teal-500', '/admin/settings', null);
 		} catch (Exception $e) {
-			error_log($e->getMessage());
-			Toast::set('Hiba történt az admin hozzáadásakor. Általános szerver hiba...', 'danger', '/admin/settings', null);
+			Log::error('admin', "Internal Server Error", $e->getMessage() . "\n" . $e->getTraceAsString());
+			Toast::set('Regisztráció sikertelen, általános szerver hiba', 'red-500', '/user/register', null);
 		}
 	}
 
@@ -86,8 +90,8 @@ class AdminAuthController extends Controller
 			exit();
 		} catch (Exception $e) {
 			http_response_code(500);
-			echo "Internal Server Error" . $e->getMessage();
-			return;
+			Log::error('admin', "Internal Server Error", $e->getMessage() . "\n" . $e->getTraceAsString());
+			exit;
 		}
 	}
 
@@ -110,6 +114,7 @@ class AdminAuthController extends Controller
 				if (isset($_POST['csrf'])) unset($_POST['csrf']);
 				$_SESSION['login_admin_prev'] = $_POST;
 				$_SESSION['login_admin_errors'] = $errors;
+				Log::info('admin', "Admin Login validation fail: " . json_encode($errors, JSON_UNESCAPED_UNICODE));
 				return Toast::set('Az űrlap hibásan lett kitöltve, vagy már létezik ilyen névvel vagy e-mail címmel admin.', 'danger', '/admin', null);
 			}
 
@@ -117,6 +122,7 @@ class AdminAuthController extends Controller
 
 			if (!$admin || !password_verify($pw, $admin->password)) {
 				$_SESSION['login_admin_prev'] = $_POST;
+				Log::info('admin', "Admin login failed with name: " . $_POST['name']);
 				return Toast::set('Hibás e-mail cím vagy jelszó, kérjük próblja újra.', 'danger', '/admin', null);
 			}
 
@@ -132,12 +138,15 @@ class AdminAuthController extends Controller
 				if (isset($_SESSION['add_admin_prev'])) unset($_SESSION['add_admin_prev']);
 				if (isset($_SESSION['add_admin_errors'])) unset($_SESSION['add_admin_errors']);
 
+				Log::info('admin', "Admin logged in successfully with email: $admin->name, id: $admin->id");
 				return Toast::set('Bejelentkezés sikeres!', 'teal-500', '/admin/dashboard', null);
 			} else {
+				Log::info('admin', "Admin login failed with name: " . $_POST['name']);
 				Toast::set('Sikertelen belépés, hibás felhasználónév vagy jelszó', 'rose-500', '/admin', null);
 			}
 		} catch (Exception $e) {
-			error_log($e->getMessage());
+			Log::error("Internal Server Error", $e->getMessage() . "\n" . $e->getTraceAsString());
+			Toast::set('Bejelentkezés sikertelen, általános szerver hiba', 'red-500', '/user/register', null);
 		}
 	}
 }

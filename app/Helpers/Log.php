@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 class Log
 {
-  public static function log($level, $message, $dev, $logFile = 'storage/logs/app.log')
+  public static function log($level, $logFile, $message, $dev)
   {
     $timestamp = date('Y-m-d H:i:s');
     $logMessage = "[{$timestamp}] {$level}: {$message}" . PHP_EOL;
@@ -13,22 +13,22 @@ class Log
       $logMessage .= "[DEV] {$dev}" . PHP_EOL;
     }
 
-    file_put_contents($logFile, $logMessage, FILE_APPEND);
+    file_put_contents("storage/logs/$logFile.log", $logMessage, FILE_APPEND);
   }
 
 
-  public static function info($message, $dev = null)
+  public static function info($logFile = 'app', $message, $dev = null)
   {
-    self::log('INFO', $message, $dev);
+    self::log('INFO', $logFile, $message, $dev);
   }
 
-  public static function error($message,  $dev = null)
+  public static function error($logFile = 'app', $message,  $dev = null)
   {
-    self::log('ERROR', $message, $dev);
+    self::log('ERROR', $logFile, $message, $dev);
   }
 
-  public static function warning($message,  $dev = null)
+  public static function warning($logFile = 'app', $message,  $dev = null)
   {
-    self::log('WARNING', $message, $dev);
+    self::log('WARNING', $logFile, $message, $dev);
   }
 }

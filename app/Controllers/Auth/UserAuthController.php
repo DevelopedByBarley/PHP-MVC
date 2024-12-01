@@ -86,7 +86,7 @@ class UserAuthController extends Controller
             if (isset($_POST['csrf'])) unset($_POST['csrf']);
             $_SESSION['prev'] = $_POST;
             $_SESSION['errors'] = $errors;
-            Log::info("Register validation fail: " . json_encode($errors, JSON_UNESCAPED_UNICODE));
+            Log::info("user", "Register validation fail: " . json_encode($errors, JSON_UNESCAPED_UNICODE));
             Toast::set('Hibás adatok, kérjük próbálja meg más adatokkal', 'danger', '/user/register', null);
             exit;
         }
@@ -101,17 +101,17 @@ class UserAuthController extends Controller
             $userId = $this->User->storeUser($_POST, $fileName);
             if (!$userId) {
                 FileSaver::unLinkImagesForFail('/uploads/images/', $fileName);
-                Log::info("Registraion is failed with email: " . $_POST['email']);
+                Log::info("user", "Registraion is failed with email: " . $_POST['email']);
                 return Toast::set('Regisztráció sikertelen, próbálja meg más adatokkal!', 'danger', '/user/register', null);
             }
 
             if (isset($_SESSION['prev'])) unset($_SESSION['prev']);
             if (isset($_SESSION['errors'])) unset($_SESSION['errors']);
-            Log::info("User registered successfully with email: " . $_POST['email'] . ", id: $userId");
+            Log::info("user", "User registered successfully with email: " . $_POST['email'] . ", id: $userId");
             return Alert::set('Regisztráció sikeres!', 'Regisztráció sikeresen megtörtént, mostmár bejelentkezhet', 'teal-500', '/user/login', null);
         } catch (Exception $e) {
+            Log::error("user", "Internal Server Error", $e->getMessage() . "\n" . $e->getTraceAsString());
             Toast::set('Regisztráció sikertelen, általános szerver hiba', 'red-500', '/user/register', null);
-            Log::error("Internal Server Error", $e->getMessage() . "\n" . $e->getTraceAsString());
         }
     }
 
@@ -126,7 +126,7 @@ class UserAuthController extends Controller
             $user = $this->Model->selectByRecord('users', 'email', $email, PDO::PARAM_STR);
 
             if (!$user || !password_verify($pw, $user->password)) {
-                Log::info($email . " User login failed, e-mail or password problem");
+                Log::info("user", $email . " User login failed, e-mail or password problem");
                 return Toast::set('Bejelentkezés sikertelen, e-mail vagy jelszó hibás', 'red-500', '/user/login', null);
             }
 
@@ -137,7 +137,7 @@ class UserAuthController extends Controller
                 session_start();
                 session_regenerate_id(true);
                 $_SESSION['userId'] = $user->id;
-                Log::info("$email  user width id: $user->id logged in successfully!");
+                Log::info("user", "$email  user width id: $user->id logged in successfully!");
                 return Toast::set('Bejelentkezés sikertelen, e-mail vagy jelszó hibás', 'teal-500', '/user/dashboard', null);
                 exit;
             } else {
@@ -145,7 +145,7 @@ class UserAuthController extends Controller
             }
         } catch (Exception $e) {
             http_response_code(500);
-            Log::error("Internal Server Error", $e->getMessage() . "\n" . $e->getTraceAsString());
+            Log::error("user", "Internal Server Error", $e->getMessage() . "\n" . $e->getTraceAsString());
             Toast::set('Általános szerver hiba.', 'danger', '/user/login', null);
         }
     }
@@ -164,7 +164,7 @@ class UserAuthController extends Controller
             header("Location: /user/login");
             exit;
         } catch (Exception $e) {
-            Log::error("Internal Server Error", $e->getMessage() . "\n" . $e->getTraceAsString());
+            Log::error("user", "Internal Server Error", $e->getMessage() . "\n" . $e->getTraceAsString());
             Toast::set('Általános szerver hiba.', 'danger', '/', null);
         }
     }
