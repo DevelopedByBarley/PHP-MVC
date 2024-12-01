@@ -5,7 +5,10 @@ namespace App\Controllers\Auth;
 
 use App\Controllers\Controller;
 use App\Helpers\Alert;
+use App\Helpers\FileSaver;
+use App\Helpers\Render;
 use App\Helpers\Toast;
+use App\Helpers\Validator;
 use App\Models\User;
 use Exception;
 use PDO;
@@ -34,9 +37,9 @@ class UserAuthController extends Controller
         }
 
 
-        echo $this->Render->write("public/Layout.php", [
+        echo Render::write("public/Layout.php", [
             "user" => $this->Model->show('users', $userId),
-            "content" => $this->Render->write("public/pages/user/Register.php", [
+            "content" => Render::write("public/pages/user/Register.php", [
                 "csrf" => $this->CSRFToken,
                 "errors" => $_SESSION['errors'] ?? null,
                 "prev" => $_SESSION['prev'] ?? null
@@ -56,9 +59,9 @@ class UserAuthController extends Controller
         }
 
 
-        echo $this->Render->write("public/Layout.php", [
+        echo Render::write("public/Layout.php", [
             "user" => $this->Model->show('users', $userId),
-            "content" => $this->Render->write("public/pages/user/Login.php", [
+            "content" => Render::write("public/pages/user/Login.php", [
                 "csrf" => $this->CSRFToken
             ])
         ]);
@@ -76,7 +79,7 @@ class UserAuthController extends Controller
             'password' => ['required' => true, 'password' => true, 'minLength' => 5, 'maxLength' => 50]
         ];
 
-        $errors = $this->Validator->validate($validators);
+        $errors = Validator::validate($validators);
 
 
         if (!empty($errors)) {
@@ -89,13 +92,13 @@ class UserAuthController extends Controller
 
 
         if (!empty($_FILES['file']['name'])) {
-            $fileName = $this->FileSaver->saver($_FILES['file'], '/uploads/images/', ['1688134460671231c4eae175.49361389.png'], null);
+            $fileName = FileSaver::saver($_FILES['file'], '/uploads/images/', ['1688134460671231c4eae175.49361389.png'], null);
         }
 
         $isSuccess = $this->User->storeUser($_POST, $fileName);
 
         if (!$isSuccess) {
-            $this->FileSaver->unLinkImagesForFail('/uploads/images/', $fileName);
+            FileSaver::unLinkImagesForFail('/uploads/images/', $fileName);
             Alert::set('Regisztráció sikertelen, próbálja meg más adatokkal!', 'danger', '/user/register', null);
         }
 

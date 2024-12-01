@@ -30,7 +30,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 class Mailer
 {
-    function renderAndSend($file, $data, $address, $subject)
+    public static function renderAndSend($file, $data, $address, $subject)
     {
         ob_start();
 
@@ -59,13 +59,13 @@ class Mailer
     }
 
 
-    public function send($address, $body, $subject)
+    public static function send($address, $body, $subject)
     {
 
         try {
             $mail = new PHPMailer();
             $mail->isSMTP();
-           //$mail->SMTPDebug = 3;
+            //$mail->SMTPDebug = 3;
             $mail->setFrom($_SERVER['MAILER_SET_FROM'], $_SERVER['MAILER_SET_TO']);
             $mail->addAddress($address);
             $mail->Username = $_SERVER['MAILER_USERNAME'];

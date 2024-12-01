@@ -4,8 +4,10 @@ namespace App\Controllers\Auth;
 
 use App\Controllers\Controller;
 use App\Helpers\Toast;
+use App\Helpers\Validator;
 use App\Models\Admin;
 use App\Models\AdminActivity;
+use App\Services\Auth;
 use Exception;
 use PDO;
 
@@ -24,7 +26,7 @@ class AdminAuthController extends Controller
 	public function store()
 	{
 		$this->CSRFToken->check();
-		$this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
+		Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
 
 		try {
 			$validators  = [
@@ -34,7 +36,7 @@ class AdminAuthController extends Controller
 				'password' => ['required' => true, 'password' => true, 'minLength' => 5, 'maxLength' => 500],
 			];
 
-			$errors = $this->Validator->validate($validators);
+			$errors = Validator::validate($validators);
 
 
 			if (!empty($errors)) {
@@ -102,7 +104,7 @@ class AdminAuthController extends Controller
 				'password' => ['required' => true, 'password' => true, 'minLength' => 5],
 			];
 
-			$errors = $this->Validator->validate($validators);
+			$errors = Validator::validate($validators);
 
 			if (!empty($errors)) {
 				if (isset($_POST['csrf'])) unset($_POST['csrf']);

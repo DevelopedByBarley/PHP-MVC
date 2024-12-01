@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services;
 
 use Exception;
@@ -6,8 +7,28 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
 
-class AuthService
+class Auth
 {
+  private static function isLoggedIn($entity)
+  {
+    if (!isset($_COOKIE[session_name()])) return false;
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+      session_start();
+    }
+    if (!isset($_SESSION[$entity])) return false;
+    return true;
+  }
+
+  public static function checkUserIsLoggedInOrRedirect($entity, $redirect)
+  {
+    if (self::isLoggedIn($entity)) {
+      return $_SESSION[$entity];
+    }
+
+    header("Location: $redirect");
+    exit;
+  }
+
   public function generateAccessToken($user)
   {
     $key = $_SERVER["JWT_TOKEN_SECRET"];

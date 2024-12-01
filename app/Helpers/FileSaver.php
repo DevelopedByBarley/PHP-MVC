@@ -12,7 +12,7 @@ namespace App\Helpers;
 class FileSaver
 {
 
-  public function saver($files, $path, $prevImages, $whiteList = null)
+  public static function saver($files, $path, $prevImages, $whiteList = null)
   {
 
     $whiteList = $whiteList ?? [
@@ -26,7 +26,7 @@ class FileSaver
     if (empty($files["name"])) return false;
 
     if (is_array($files["name"])) {
-      $files = $this->saveMultipleFiles($files, $path, $whiteList, $prevImages);
+      $files = self::saveMultipleFiles($files, $path, $whiteList, $prevImages);
       if (in_array(false, $files)) {
         foreach ($files as $file) {
           if (!is_bool($file)) {
@@ -39,7 +39,7 @@ class FileSaver
       return $files;
     }
 
-    return $this->save($files, $path, $whiteList, $prevImages);
+    return self::save($files, $path, $whiteList, $prevImages);
   }
 
   private function saveMultipleFiles($files, $path, $whiteList, $prevImages)
@@ -64,7 +64,7 @@ class FileSaver
     return $fileNames;
   }
 
-  private function save($file, $path, $whiteList, $prevImages)
+  private static function save($file, $path, $whiteList, $prevImages)
   {
     $fileType = mime_content_type($file["tmp_name"]);
 
@@ -80,13 +80,13 @@ class FileSaver
     $destination = $directoryPath . $originalFileName;
     move_uploaded_file($file["tmp_name"], $destination);
 
-    $this->unlinkPrevImages($prevImages, $path);
+    self::unlinkPrevImages($prevImages, $path);
 
     setcookie("prevContent", "", time() - 1, "/");
     return $originalFileName;
   }
 
-  public function unLinkImagesForFail($path, $images)
+  public static function unLinkImagesForFail($path, $images)
   {
 
     try {
@@ -108,7 +108,7 @@ class FileSaver
     }
   }
 
-  private function unlinkPrevImages($prevImages, $path)
+  private static function unlinkPrevImages($prevImages, $path)
   {
     if (isset($prevImages)) {
       if (is_array($prevImages)) {

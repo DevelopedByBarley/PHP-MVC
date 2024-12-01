@@ -3,9 +3,12 @@
 namespace App\Controllers;
 
 use App\Controllers\Controller;
+use App\Helpers\Render;
 use App\Helpers\Toast;
+use App\Helpers\Validator;
 use App\Models\Admin;
 use App\Models\AdminActivity;
+use App\Services\Auth;
 use DateTime;
 use Exception;
 use PDO;
@@ -31,7 +34,7 @@ class AdminController extends Controller
     $this->CSRFToken->check();
     $validators  = [];
 
-    $loggedAdmin =  $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');; // Megnézzük hogy be van e logolva.
+    $loggedAdmin =  Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');; // Megnézzük hogy be van e logolva.
     $child_admin_id = isset($_POST['current_admin_id']) ? $_POST['current_admin_id']  : null; // Ha nem profilt frissítünk akkor ez feltöltődik az id-val.
     $adminId = $child_admin_id ?? $loggedAdmin; // Az admin Id ha létezik a current_admin akkor az ha nem akkor a profilba bejelentkezett id-ja
 
@@ -76,7 +79,7 @@ class AdminController extends Controller
       $validators['name'] = ['required' => true, 'maxLength' => 50, 'unique' => ['admins', 'name', PDO::PARAM_STR]];
     }
 
-    $errors = $this->Validator->validate($validators);
+    $errors = Validator::validate($validators);
 
     if (!empty($errors)) {
       if (isset($_POST['csrf'])) unset($_POST['csrf']);
@@ -121,7 +124,7 @@ class AdminController extends Controller
   public function delete($vars)
   {
     try {
-      $adminId = $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
+      $adminId = Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
 
       $id  = filter_var($vars["id"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
       $admin = $this->Model->selectByRecord('admins', 'id', $id, PDO::PARAM_INT);
@@ -179,7 +182,7 @@ class AdminController extends Controller
 
   public function index()
   {
-    $adminId = $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
+    $adminId = Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
     $admin = $this->Model->selectByRecord('admins', 'id', $adminId, PDO::PARAM_INT);
     $visitors = SAVING_VISITOR_PERM ? $this->Model->all('visits') : '';
     $admin_list = ADMIN_SERVICE_PERM ? $this->Model->all('admins') : [];
@@ -193,10 +196,10 @@ class AdminController extends Controller
       'numOfPage' => 10,
     ];
 
-    echo $this->Render->write("admin/Layout.php", [
+    echo Render::write("admin/Layout.php", [
       "admin" => $admin,
       "csrf" => $this->CSRFToken,
-      "content" => $this->Render->write("admin/pages/Dashboard.php", [
+      "content" => Render::write("admin/pages/Dashboard.php", [
         'admin_list' => $admin_list,
         'admin' => $admin,
         'admin_activities' => $admin_activities,
@@ -225,9 +228,9 @@ class AdminController extends Controller
     }
 
 
-    echo $this->Render->write("admin/Layout.php", [
+    echo Render::write("admin/Layout.php", [
       "csrf" => $this->CSRFToken,
-      "content" => $this->Render->write("admin/pages/Login.php", [
+      "content" => Render::write("admin/pages/Login.php", [
         "csrf" => $this->CSRFToken,
         "prev" => isset($_SESSION['login_admin_prev']) ? (object)$_SESSION['login_admin_prev'] : null,
         "errors" => isset($_SESSION['login_admin_errors']) ? (object)$_SESSION['login_admin_errors'] : null
@@ -238,16 +241,16 @@ class AdminController extends Controller
 
   public function table()
   {
-    $adminId = $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
+    $adminId = Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
     $admin = $this->Model->selectByRecord('admins', 'id', $adminId, PDO::PARAM_INT);
     $users = $this->Model->all('users');
     $data = $this->Model->paginate($users, 4, '', null);
 
 
-    echo $this->Render->write("admin/Layout.php", [
+    echo Render::write("admin/Layout.php", [
       "csrf" => $this->CSRFToken,
       "admin" => $admin,
-      "content" => $this->Render->write("admin/pages/Table.php", [
+      "content" => Render::write("admin/pages/Table.php", [
         'data' => $data,
         'users' => $data->pages
       ])
@@ -255,23 +258,23 @@ class AdminController extends Controller
   }
   public function form()
   {
-    $adminId = $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
+    $adminId = Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
     $admin = $this->Model->selectByRecord('admins', 'id', $adminId, PDO::PARAM_INT);
     $data = [
       'numOfPage' => 10,
     ];
 
-    echo $this->Render->write("admin/Layout.php", [
+    echo Render::write("admin/Layout.php", [
       "csrf" => $this->CSRFToken,
       "admin" => $admin,
-      "content" => $this->Render->write("admin/pages/Form.php", [
+      "content" => Render::write("admin/pages/Form.php", [
         'data' => $data
       ])
     ]);
   }
   public function settings()
   {
-    $adminId = $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
+    $adminId = Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
 
     $admin = $this->Model->selectByRecord('admins', 'id', $adminId, PDO::PARAM_STR);
     $admin_list = $this->Model->all('admins', $adminId, PDO::PARAM_STR);
@@ -283,10 +286,10 @@ class AdminController extends Controller
       }
     });
 
-    echo $this->Render->write("admin/Layout.php", [
+    echo Render::write("admin/Layout.php", [
       "csrf" => $this->CSRFToken,
       'admin' => $admin,
-      "content" => $this->Render->write("admin/pages/Settings.php", [
+      "content" => Render::write("admin/pages/Settings.php", [
         "csrf" => $this->CSRFToken,
         'data' => $data,
         'admin' => $admin,
@@ -302,17 +305,17 @@ class AdminController extends Controller
   }
   public function mailbox()
   {
-    $adminId = $this->Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
+    $adminId = Auth::checkUserIsLoggedInOrRedirect('adminId', '/admin');
     $admin = $this->Model->selectByRecord('admins', 'id', $adminId, PDO::PARAM_STR);
 
     $data = [
       'numOfPage' => 10,
     ];
 
-    echo $this->Render->write("admin/Layout.php", [
+    echo Render::write("admin/Layout.php", [
       "csrf" => $this->CSRFToken,
       'admin' => $admin,
-      "content" => $this->Render->write("admin/pages/MailBox.php", [
+      "content" => Render::write("admin/pages/MailBox.php", [
         'data' => $data
       ])
     ]);

@@ -7,7 +7,7 @@ class XLSX
 
   public function __construct() {}
 
-  public function write($data, $headers = ["id", "name", "email", "pw", "created_at"])
+  public static function write($data, $headers = ["id", "name", "email", "pw", "created_at"])
   {
     // Ellenőrzés, hogy az adatok üresek-e vagy nem tömb típusúak
     if (empty($data) || !is_array($data)) {

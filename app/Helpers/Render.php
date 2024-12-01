@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 class Render
 {
-  public function write($path, $params = [], $rewriteURL = false): string
+  public static function write($path, $params = [], $rewriteURL = false): string
   {
     ob_start();
 

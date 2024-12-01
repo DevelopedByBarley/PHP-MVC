@@ -3,7 +3,9 @@
 namespace App\Controllers;
 
 use App\Controllers\Controller;
+use App\Helpers\Render;
 use App\Models\User;
+use App\Services\Auth;
 use Exception;
 use PDO;
 
@@ -20,13 +22,13 @@ class UserController extends Controller
 
   public function index()
   {
-    $userId = $this->Auth->checkUserIsLoggedInOrRedirect('userId', '/user/login');
+    $userId = Auth::checkUserIsLoggedInOrRedirect('userId', '/user/login');
     $user = $this->Model->show('users', $userId);
 
-    echo $this->Render->write("public/Layout.php", [
+    echo Render::write("public/Layout.php", [
       "csrf" => $this->CSRFToken,
       "user" => $user,
-      "content" => $this->Render->write("public/pages/user/Dashboard.php", [
+      "content" => Render::write("public/pages/user/Dashboard.php", [
         "user" => $user,
       ])
     ]);

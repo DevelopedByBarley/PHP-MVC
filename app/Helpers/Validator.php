@@ -81,7 +81,7 @@ class Validator
 {
 
 
-  private function structureValidators($validators)
+  private static function structureValidators($validators)
   {
     $ret = [];
     foreach ($validators as $key => $validator) {
@@ -91,7 +91,7 @@ class Validator
     return $ret;
   }
 
-  public function validate($validators)
+  public static function validate($validators)
   {
     $ret = [];
     $data = self::structureValidators($validators);
@@ -102,8 +102,8 @@ class Validator
       $value = filter_var($_POST[$name], FILTER_SANITIZE_SPECIAL_CHARS);
       foreach ($validatorsData as $validatorName => $validatorValue) {
         $ret[$name][$validatorName] = [
-          'status' => $this->{$validatorName}($value, $validatorValue),
-          'errorMessage' => !$this->{$validatorName}($value, $validatorValue) ? self::errorMessages($validatorName, $name, $validatorValue) : ''
+          'status' => self::{$validatorName}($value, $validatorValue), // `self` helyettesíti a `$this`-t
+          'errorMessage' => !self::{$validatorName}($value, $validatorValue) ? self::errorMessages($validatorName, $name, $validatorValue) : ''
         ];
       }
     }
@@ -112,7 +112,7 @@ class Validator
   }
 
 
-  public function getRecordsWithErrors($validated)
+  public static function getRecordsWithErrors($validated)
   {
     $ret = [];
     foreach ($validated as $key => $record) {
@@ -138,25 +138,25 @@ class Validator
     return false;
   }
 
-  public function required($value)
+  public static function required($value)
   {
     if (!$value || $value === '') return false;
     return true;
   }
 
-  public function minLength($value, $minLength)
+  public static function minLength($value, $minLength)
   {
     if (strlen($value) < $minLength) return false;
     return true;
   }
 
-  public function maxLength($value, $maxLength)
+  public static function maxLength($value, $maxLength)
   {
     if (strlen($value) > $maxLength) return false;
     return true;
   }
 
-  public function phone($value)
+  public static function phone($value)
   {
     $cleanValue = preg_replace('/[\s\-]/', '', $value);
     $pattern = '/^(?:\+36|06)\d{9}$/';
@@ -164,42 +164,42 @@ class Validator
     return preg_match($pattern, $cleanValue);
   }
 
-  public function email($value)
+  public static function email($value)
   {
     return filter_var($value, FILTER_VALIDATE_EMAIL) !== false;
   }
 
 
 
-  public function noSpaces($value)
+  public static function noSpaces($value)
   {
     if (strpos($value, ' ') !== false) return false;
     return true;
   }
 
-  public function num($value)
+  public static function num($value)
   {
     if (!is_numeric($value)) return false;
     return true;
   }
 
-  public function hasNum($value)
+  public static function hasNum($value)
   {
     return preg_match('/\d/', $value);
   }
 
-  public function hasUppercase($value)
+  public static function hasUppercase($value)
   {
     return preg_match('/[A-Z]/', $value);
   }
 
-  public function split($value)
+  public static function split($value)
   {
     $words = explode(' ', trim($value));
     return count($words) >= 2 && strlen($words[1]) > 0;
   }
 
-  public function password($value)
+  public static function password($value)
   {
     $hasUpperCase = preg_match('/[A-Z]/', $value);
     $hasLowerCase = preg_match('/[a-z]/', $value);
@@ -210,43 +210,53 @@ class Validator
     return $hasUpperCase && $hasLowerCase && $hasNumber && $hasSpecialChar && $isLengthValid;
   }
 
-  public function comparePw($password, $confirmPassword)
+  public static function comparePw($password, $confirmPassword)
   {
     return $password === $confirmPassword;
   }
 
 
 
-  public function allowedCharacters($value)
+  public static function allowedCharacters($value)
   {
     return preg_match('/^[A-Za-z0-9áéíóöőúüűÁÉÍÓÖŐÚÜŰ\-&\s]+$/u', $value);
   }
 
-  public function unique($value, $data)
+  public static function unique($value, $data)
   {
     $pdo = Database::getInstance();
     if (!$pdo) {
       throw new Exception("Database connection failed.");
     }
 
-    // Extract table, entity, and param using list() and unpacking
     list($table, $entity, $param) = $data;
 
-    
-    $stmt = $pdo->prepare("SELECT COUNT(*) FROM `$table` WHERE `$entity` = :entity");
-    $stmt->bindValue(':entity', $value, $param);
-    $stmt->execute();
+    try {
+      $stmt = $pdo->prepare("SELECT COUNT(*) FROM `$table` WHERE `$entity` = :entity");
+      $stmt->bindValue(':entity', $value, $param);
+      $stmt->execute();
 
-    return $stmt->fetchColumn() === 0; // Returns true if the value is unique
+      return (int)$stmt->fetchColumn() === 0;
+    } catch (\Throwable $th) {
+      // Handle the exception properly (e.g., log the error, show a generic error message, etc.)
+      error_log($th->getMessage()); // Log the exception message
+      throw new Exception("An error occurred while checking uniqueness."); // Throw a generic error
+    }
   }
 
 
 
 
+
   // Validátor hibaüzenetek frissítése
-  public function errorMessages($validator, $field = '', $param = '')
+  public static function errorMessages($validator, $field = '', $param = '')
   {
     $lang = strtolower($_COOKIE['lang']) ?? null;
+
+    if (is_array($param)) {
+      $param = end($param);
+    }
+
 
     $messages = [
       'required' => [
