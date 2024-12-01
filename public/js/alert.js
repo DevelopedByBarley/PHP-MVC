@@ -1,4 +1,7 @@
-const toast = document.querySelector("#alert-modal");
-setTimeout(() => {
-  toast.style.display = "none";
-}, 3000)
+
+(() => {
+  const alert = document.querySelector("#alert-modal");
+  setTimeout(() => {
+    alert.style.display = "none";
+  }, 3000)
+})();
