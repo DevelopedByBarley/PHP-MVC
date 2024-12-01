@@ -1,1 +1,7 @@
 [2024-12-01 14:52:08] INFO: Admin logged in successfully with email: barley_admin, id: 65
+[2024-12-01 15:46:38] INFO: Admin Login validation fail: {"password":["A jelszónak tartalmaznia kell legalább egy nagybetűt, egy kisbetűt, egy számot és egy speciális karaktert, valamint legalább 8 karakter hosszúnak kell lennie!"]}
+[2024-12-01 15:46:40] INFO: Admin Login validation fail: {"password":["A jelszónak tartalmaznia kell legalább egy nagybetűt, egy kisbetűt, egy számot és egy speciális karaktert, valamint legalább 8 karakter hosszúnak kell lennie!"]}
+[2024-12-01 15:46:43] INFO: Admin Login validation fail: {"password":["A jelszónak tartalmaznia kell legalább egy nagybetűt, egy kisbetűt, egy számot és egy speciális karaktert, valamint legalább 8 karakter hosszúnak kell lennie!"]}
+[2024-12-01 15:46:45] INFO: Admin Login validation fail: {"password":["A jelszónak tartalmaznia kell legalább egy nagybetűt, egy kisbetűt, egy számot és egy speciális karaktert, valamint legalább 8 karakter hosszúnak kell lennie!"]}
+[2024-12-01 15:46:48] INFO: Admin Login validation fail: {"password":["A jelszónak tartalmaznia kell legalább egy nagybetűt, egy kisbetűt, egy számot és egy speciális karaktert, valamint legalább 8 karakter hosszúnak kell lennie!"]}
+[2024-12-01 15:46:50] INFO: Admin Login validation fail: {"password":["A jelszónak tartalmaznia kell legalább egy nagybetűt, egy kisbetűt, egy számot és egy speciális karaktert, valamint legalább 8 karakter hosszúnak kell lennie!"]}
