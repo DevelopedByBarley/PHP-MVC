@@ -5,7 +5,7 @@ namespace App\Helpers;
 class Alert
 {
   // SET ALERT
-  public static function set($message, $bg, $location, $messageInEng = null)
+  public static function set($header, $message, $bg, $location, $messageInEng = null)
   {
 
     if (session_id() == '') {
@@ -16,6 +16,7 @@ class Alert
 
     if ($lang === "hu") {
       $_SESSION["alert"] = [
+        "header" => $header,
         "message" => $message,
         "bg" => $bg,
         "expires" => time() + 2

@@ -6,13 +6,13 @@ namespace App\Controllers\Auth;
 use App\Controllers\Controller;
 use App\Helpers\Alert;
 use App\Helpers\FileSaver;
+use App\Helpers\Log;
 use App\Helpers\Render;
 use App\Helpers\Toast;
 use App\Helpers\Validator;
 use App\Models\User;
 use Exception;
 use PDO;
-
 
 class UserAuthController extends Controller
 {
@@ -30,7 +30,7 @@ class UserAuthController extends Controller
 
 
         $userId = $_SESSION["userId"] ?? null;
-     
+
         if ($userId) {
             header("Location: /user/dashboard");
             exit;
@@ -86,7 +86,8 @@ class UserAuthController extends Controller
             if (isset($_POST['csrf'])) unset($_POST['csrf']);
             $_SESSION['prev'] = $_POST;
             $_SESSION['errors'] = $errors;
-            Alert::set('Hibás adatok, kérjük próbálja meg más adatokkal', 'danger', $_SERVER['REQUEST_URI'], null);
+            Log::info("Register validation fail:  $errors");
+            Toast::set('Hibás adatok, kérjük próbálja meg más adatokkal', 'danger', '/user/register', null);
             exit;
         }
 
@@ -95,16 +96,23 @@ class UserAuthController extends Controller
             $fileName = FileSaver::saver($_FILES['file'], '/uploads/images/', ['1688134460671231c4eae175.49361389.png'], null);
         }
 
-        $isSuccess = $this->User->storeUser($_POST, $fileName);
 
-        if (!$isSuccess) {
-            FileSaver::unLinkImagesForFail('/uploads/images/', $fileName);
-            Alert::set('Regisztráció sikertelen, próbálja meg más adatokkal!', 'danger', '/user/register', null);
+        try {
+            $userId = $this->User->storeUser($_POST, $fileName);
+            if (!$userId) {
+                FileSaver::unLinkImagesForFail('/uploads/images/', $fileName);
+                Log::info("Registraion is failed with email: " . $_POST['email']);
+                return Toast::set('Regisztráció sikertelen, próbálja meg más adatokkal!', 'danger', '/user/register', null);
+            }
+
+            if (isset($_SESSION['prev'])) unset($_SESSION['prev']);
+            if (isset($_SESSION['errors'])) unset($_SESSION['errors']);
+            Log::info("User registered successfully with email: " . $_POST['email'] . ", id: $userId");
+            return Alert::set('Regisztráció sikeres!', 'Regisztráció sikeresen megtörtént, mostmár bejelentkezhet', 'teal-500', '/user/login', null);
+        } catch (Exception $e) {
+            Toast::set('Regisztráció sikertelen, általános szerver hiba', 'red-500', '/user/register', null);
+            Log::error("Internal Server Error", $e->getMessage() . "\n" . $e->getTraceAsString());
         }
-
-        if (isset($_SESSION['prev'])) unset($_SESSION['prev']);
-        if (isset($_SESSION['errors'])) unset($_SESSION['errors']);
-        Alert::set('Regisztráció sikeres!', 'success', '/user/login', null);
     }
 
     public function login()
@@ -112,26 +120,33 @@ class UserAuthController extends Controller
         try {
             $this->CSRFToken->check();
 
+            $email = filter_var($_POST["email"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+            $pw = filter_var($_POST["password"] ?? '', FILTER_SANITIZE_EMAIL);
 
-            $userId = $this->User->loginUser($_POST);
+            $user = $this->Model->selectByRecord('users', 'email', $email, PDO::PARAM_STR);
 
+            if (!$user || !password_verify($pw, $user->password)) {
+                Log::info($email . " User login failed, e-mail or password problem");
+                return Toast::set('Bejelentkezés sikertelen, e-mail vagy jelszó hibás', 'red-500', '/user/login', null);
+            }
 
-            if ($userId) {
+            if ($user->id) {
                 session_write_close(); // Bezárjuk a sessiont
                 $session_timeout = 6000;
                 session_set_cookie_params($session_timeout, '/', '', true, true); // secure és httponly flag beállítása
                 session_start();
                 session_regenerate_id(true);
-                $_SESSION['userId'] = $userId;
-                header('Location: /user/dashboard');
+                $_SESSION['userId'] = $user->id;
+                Log::info("$email  user width id: $user->id logged in successfully!");
+                return Toast::set('Bejelentkezés sikertelen, e-mail vagy jelszó hibás', 'teal-500', '/user/dashboard', null);
                 exit;
             } else {
                 Toast::set('Hibás e-mail cím vagy jelszó!', 'danger', '/user/login', null);
             }
         } catch (Exception $e) {
             http_response_code(500);
-            echo "Internal Server Error" . $e->getMessage();
-            exit;
+            Log::error("Internal Server Error", $e->getMessage() . "\n" . $e->getTraceAsString());
+            Toast::set('Általános szerver hiba.', 'danger', '/user/login', null);
         }
     }
 
@@ -149,9 +164,8 @@ class UserAuthController extends Controller
             header("Location: /user/login");
             exit;
         } catch (Exception $e) {
-            http_response_code(500);
-            echo "Internal Server Error" . $e->getMessage();
-            exit;
+            Log::error("Internal Server Error", $e->getMessage() . "\n" . $e->getTraceAsString());
+            Toast::set('Általános szerver hiba.', 'danger', '/', null);
         }
     }
 }
