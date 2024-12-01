@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\Log;
 use Database;
 use Exception;
 use PDO;
@@ -30,6 +31,7 @@ class Model
 
       return $link;
     } catch (PDOException $e) {
+      Log::error('app', "Internal Server Error", $e->getMessage() . "\n" . $e->getTraceAsString());
       throw new Exception("An error occurred during the database operation in the storeToken method: " . $e->getMessage());
     }
   }
@@ -58,8 +60,7 @@ class Model
         return false;
       }
     } catch (PDOException $e) {
-      error_log("Adatbázis hiba: " . $e->getMessage());
-      http_response_code(500);
+      Log::error('app', "Internal Server Error", $e->getMessage() . "\n" . $e->getTraceAsString());
       throw new Exception("An error occurred during the database operation in the checkResetToken method: " . $e->getMessage());
     }
   }
@@ -74,12 +75,11 @@ class Model
       if ($stmt->rowCount() > 0) {
         return true;
       } else {
-        return false; 
+        return false;
       }
     } catch (PDOException $e) {
-      error_log("Adatbázis hiba: " . $e->getMessage());
-      http_response_code(500); // Belső szerver hiba
-      throw new Exception("Adatbázis hiba történt a deactivateResetToken metódusban: " . $e->getMessage());
+      Log::error('app', "Internal Server Error", $e->getMessage() . "\n" . $e->getTraceAsString());
+      throw new Exception("An error occurred during the database operation in the deactivateResetToken method: " . $e->getMessage());
     }
   }
 
@@ -100,6 +100,7 @@ class Model
 
       return $data;
     } catch (PDOException $e) {
+      Log::error('app', "Internal Server Error", $e->getMessage() . "\n" . $e->getTraceAsString());
       throw new Exception("An error occurred during the database operation in the searchBySingleEntity method: " . $e->getMessage());
     }
   }
@@ -171,9 +172,8 @@ class Model
       $result = $stmt->fetch(PDO::FETCH_OBJ);
       return $result;
     } catch (PDOException $e) {
-
-      echo "An error occurred during the database operation:: " . $e->getMessage();
-      return false;
+      Log::error('app', "Internal Server Error", $e->getMessage() . "\n" . $e->getTraceAsString());
+      throw new Exception("An error occurred during the database operation in show method: " . $e->getMessage());
     }
   }
 
@@ -189,9 +189,8 @@ class Model
 
       return $results;
     } catch (PDOException  $e) {
-
+      Log::error("Internal Server Error", $e->getMessage() . "\n" . $e->getTraceAsString());
       throw new Exception("An error occurred during the database operation in the all method: " . $e->getMessage());
-      return false;
     }
   }
 
@@ -206,6 +205,7 @@ class Model
 
       return $result;
     } catch (PDOException $e) {
+      Log::error('app', "Internal Server Error", $e->getMessage() . "\n" . $e->getTraceAsString());
       throw new Exception("An error occurred during the database operation in the selectByRecord method: " . $e->getMessage());
     }
   }
@@ -219,6 +219,7 @@ class Model
       $result = $stmt->fetchAll(PDO::FETCH_OBJ);
       return $result;
     } catch (PDOException $e) {
+      Log::error('app', "Internal Server Error", $e->getMessage() . "\n" . $e->getTraceAsString());
       throw new Exception("An error occurred during the database operation in the selectAllByRecord method: " . $e->getMessage());
     }
   }
@@ -231,6 +232,7 @@ class Model
       $stmt->bindParam(":id", $id, PDO::PARAM_INT);
       $stmt->execute();
     } catch (PDOException $e) {
+      Log::error('app', "Internal Server Error", $e->getMessage() . "\n" . $e->getTraceAsString());
       throw new Exception("An error occurred during the database operation in the deleteRecordById method: " . $e->getMessage());
     }
   }

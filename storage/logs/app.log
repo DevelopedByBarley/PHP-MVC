@@ -7,3 +7,24 @@
 [2024-12-01 12:50:15] INFO: Register validation fail: {"email":["Ezekkel az adatokkal nem tud már regisztrálni, kérjük próbálkozzon más adatokkal."]}
 [2024-12-01 12:51:34] INFO: Register validation fail: {"email":["Ezekkel az adatokkal nem tud már regisztrálni, kérjük próbálkozzon más adatokkal."]}
 [2024-12-01 12:51:45] INFO: User registered successfully with email: developedbybarlyey@gmail.com, id: 52
+[2024-12-01 15:07:23] ERROR: Internal Server Error
+[DEV] SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+#0 /Applications/XAMPP/xamppfiles/htdocs/PHP-MVC/app/Models/Model.php(172): PDOStatement->execute()
+#1 /Applications/XAMPP/xamppfiles/htdocs/PHP-MVC/app/Controllers/Controller.php(27): App\Models\Model->show('users', NULL)
+#2 /Applications/XAMPP/xamppfiles/htdocs/PHP-MVC/config/app/router.php(57): App\Controllers\Controller->home(Array)
+#3 /Applications/XAMPP/xamppfiles/htdocs/PHP-MVC/index.php(26): require_once('/Applications/X...')
+#4 {main}
+[2024-12-01 15:07:24] ERROR: Internal Server Error
+[DEV] SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+#0 /Applications/XAMPP/xamppfiles/htdocs/PHP-MVC/app/Models/Model.php(172): PDOStatement->execute()
+#1 /Applications/XAMPP/xamppfiles/htdocs/PHP-MVC/app/Controllers/Controller.php(27): App\Models\Model->show('users', NULL)
+#2 /Applications/XAMPP/xamppfiles/htdocs/PHP-MVC/config/app/router.php(57): App\Controllers\Controller->home(Array)
+#3 /Applications/XAMPP/xamppfiles/htdocs/PHP-MVC/index.php(26): require_once('/Applications/X...')
+#4 {main}
+[2024-12-01 15:07:24] ERROR: Internal Server Error
+[DEV] SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+#0 /Applications/XAMPP/xamppfiles/htdocs/PHP-MVC/app/Models/Model.php(172): PDOStatement->execute()
+#1 /Applications/XAMPP/xamppfiles/htdocs/PHP-MVC/app/Controllers/Controller.php(27): App\Models\Model->show('users', NULL)
+#2 /Applications/XAMPP/xamppfiles/htdocs/PHP-MVC/config/app/router.php(57): App\Controllers\Controller->home(Array)
+#3 /Applications/XAMPP/xamppfiles/htdocs/PHP-MVC/index.php(26): require_once('/Applications/X...')
+#4 {main}

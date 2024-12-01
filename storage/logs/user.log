@@ -1,2 +1,4 @@
 [2024-12-01 14:52:45] INFO: developedbybarley@gmail.com User login failed, e-mail or password problem
 [2024-12-01 14:52:48] INFO: developedbybarley@gmail.com  user width id: 45 logged in successfully!
+[2024-12-01 15:08:05] INFO: developedbybarley@gmail.com  user width id: 45 logged in successfully!
+[2024-12-01 15:08:43] INFO: Register validation fail: {"email":["Ezekkel az adatokkal nem tud már regisztrálni, kérjük próbálkozzon más adatokkal."]}
