@@ -86,7 +86,7 @@ class UserAuthController extends Controller
             if (isset($_POST['csrf'])) unset($_POST['csrf']);
             $_SESSION['prev'] = $_POST;
             $_SESSION['errors'] = $errors;
-            Log::info("Register validation fail:  $errors");
+            Log::info("Register validation fail: " . json_encode($errors, JSON_UNESCAPED_UNICODE));
             Toast::set('Hibás adatok, kérjük próbálja meg más adatokkal', 'danger', '/user/register', null);
             exit;
         }

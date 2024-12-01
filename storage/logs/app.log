@@ -1,1 +1,7 @@
 
+[2024-12-01 12:47:16] INFO: Register validation fail:  Array
+[2024-12-01 12:48:19] INFO: Register validation fail: Array
+[2024-12-01 12:49:11] INFO: Register validation fail: {"email":["Ezekkel az adatokkal nem tud m\u00e1r regisztr\u00e1lni, k\u00e9rj\u00fck pr\u00f3b\u00e1lkozzon m\u00e1s adatokkal."]}
+[2024-12-01 12:49:46] INFO: Register validation fail
+[DEV] {"email":["Ezekkel az adatokkal nem tud m\u00e1r regisztr\u00e1lni, k\u00e9rj\u00fck pr\u00f3b\u00e1lkozzon m\u00e1s adatokkal."]}
+[2024-12-01 12:50:15] INFO: Register validation fail: {"email":["Ezekkel az adatokkal nem tud már regisztrálni, kérjük próbálkozzon más adatokkal."]}
